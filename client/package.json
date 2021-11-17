@@ -26,11 +26,6 @@
     "lint": "eslint .",
     "fix-lint": "eslint . --fix"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit\""
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -52,7 +47,6 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "husky": "^7.0.4",
     "prettier": "^2.4.1"
   }
 }
