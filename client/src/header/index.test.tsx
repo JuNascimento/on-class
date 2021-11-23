@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import HeaderContainer from './index'
 import { act } from 'react-dom/test-utils'
 
-describe('HeaderContainer component', () => {
+describe('HeaderContainer', () => {
   let wrapper: any
   let container: any
 
@@ -13,13 +13,13 @@ describe('HeaderContainer component', () => {
     })
   })
 
-  test('should has title in the document', () => {
+  test('should have title in the document', () => {
     const expectedTitle = screen.getByText(/on-class app/i)
 
     expect(expectedTitle).toBeInTheDocument()
   })
 
-  test('should has menu in the document', () => {
+  test('should have menu in the document', () => {
     const expectedMenu = container.querySelector('#menu-icon')
 
     expect(expectedMenu).toBeTruthy()
