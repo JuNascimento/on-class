@@ -13,14 +13,16 @@ describe('OnGoingClassContainer', () => {
     })
   })
 
-  test('should have OnGoingClass in the document', () => {
-    const expectedOnGoingClass = screen.getByTestId('on-going-class-container')
-
-    expect(expectedOnGoingClass).toBeTruthy()
-  })
-
   test('should have `Tempo restante: 57:14` text in the document', () => {
     const expectedRemainingClassTime = screen.getByText('Tempo restante: 57:14')
+
+    expect(expectedRemainingClassTime).toBeInTheDocument()
+  })
+
+  test('should have StudantInformationContainer in the document', () => {
+    const expectedRemainingClassTime = screen.getByTestId(
+      'studant-information-container'
+    )
 
     expect(expectedRemainingClassTime).toBeInTheDocument()
   })
