@@ -26,4 +26,10 @@ describe('OnGoingClassContainer', () => {
 
     expect(expectedRemainingClassTime).toBeInTheDocument()
   })
+
+  test('should have ReactionsContainer in the document', () => {
+    const expectedReactions = screen.getByTestId('reactions-container')
+
+    expect(expectedReactions).toBeInTheDocument()
+  })
 })

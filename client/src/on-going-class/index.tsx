@@ -1,6 +1,7 @@
 import React from 'react'
 import { OnGoingClass, ClassInfo, RemainingClassTime } from './index.style'
 import StudantInformationContainer from '../studantInformation/index'
+import ReactionsContainer from '../reactions/index'
 
 const OnGoingClassContainer: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const OnGoingClassContainer: React.FC = () => {
         <RemainingClassTime data-testid='remaining-class-time'>
           Tempo restante: 57:14
         </RemainingClassTime>
+        <ReactionsContainer />
       </ClassInfo>
     </OnGoingClass>
   )
