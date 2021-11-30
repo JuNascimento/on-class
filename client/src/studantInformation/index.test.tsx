@@ -1,15 +1,12 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import StudantInformationContainer from './index'
 
 describe('StudantInformationContainer', () => {
-  let wrapper: any
-  let container: any
-
   beforeEach(async () => {
     await act(async () => {
-      wrapper = render(<StudantInformationContainer />)
-      container = wrapper.container
+      render(<StudantInformationContainer />)
     })
   })
 

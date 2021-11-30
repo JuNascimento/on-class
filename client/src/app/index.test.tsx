@@ -3,11 +3,8 @@ import { render, screen } from '@testing-library/react'
 import App from '.'
 
 describe('App', () => {
-  let wrapper, container
-
   beforeEach(() => {
-    wrapper = render(<App />)
-    container = wrapper.container
+    render(<App />)
   })
 
   test('should has HeaderContainer in the document', () => {
