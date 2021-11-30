@@ -1,7 +1,13 @@
 import React from 'react'
-import { OnGoingClass, ClassInfo, RemainingClassTime } from './index.style'
+import {
+  OnGoingClass,
+  ClassInfo,
+  Class,
+  RemainingClassTime,
+} from './index.style'
 import StudantInformationContainer from '../studantInformation/index'
 import ReactionsContainer from '../reactions/index'
+import StudantVideoContainer from '../studantVideo/index'
 
 const OnGoingClassContainer: React.FC = () => {
   return (
@@ -13,6 +19,9 @@ const OnGoingClassContainer: React.FC = () => {
         </RemainingClassTime>
         <ReactionsContainer />
       </ClassInfo>
+      <Class>
+        <StudantVideoContainer />
+      </Class>
     </OnGoingClass>
   )
 }

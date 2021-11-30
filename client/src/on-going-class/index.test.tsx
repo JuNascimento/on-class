@@ -32,4 +32,10 @@ describe('OnGoingClassContainer', () => {
 
     expect(expectedReactions).toBeInTheDocument()
   })
+
+  test('should have StudantVideoContainer in the document', () => {
+    const expectedStudantVideo = screen.getByTestId('studant-video-container')
+
+    expect(expectedStudantVideo).toBeInTheDocument()
+  })
 })
