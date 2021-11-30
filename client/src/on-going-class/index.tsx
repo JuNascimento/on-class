@@ -8,6 +8,7 @@ import {
 import StudantInformationContainer from '../studantInformation/index'
 import ReactionsContainer from '../reactions/index'
 import StudantVideoContainer from '../studantVideo/index'
+import SupportMaterialContainer from '../supportMaterial'
 
 const OnGoingClassContainer: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const OnGoingClassContainer: React.FC = () => {
       </ClassInfo>
       <Class>
         <StudantVideoContainer />
+        <SupportMaterialContainer />
       </Class>
     </OnGoingClass>
   )

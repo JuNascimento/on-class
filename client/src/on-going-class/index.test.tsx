@@ -1,15 +1,12 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import OnGoingClassContainer from './index'
 
 describe('OnGoingClassContainer', () => {
-  let wrapper: any
-  let container: any
-
   beforeEach(async () => {
     await act(async () => {
-      wrapper = render(<OnGoingClassContainer />)
-      container = wrapper.container
+      render(<OnGoingClassContainer />)
     })
   })
 
@@ -37,5 +34,13 @@ describe('OnGoingClassContainer', () => {
     const expectedStudantVideo = screen.getByTestId('studant-video-container')
 
     expect(expectedStudantVideo).toBeInTheDocument()
+  })
+
+  test('should have SupportMaterialContainer in the document', () => {
+    const expectedSupportMaterial = screen.getByTestId(
+      'support-material-container'
+    )
+
+    expect(expectedSupportMaterial).toBeInTheDocument()
   })
 })
