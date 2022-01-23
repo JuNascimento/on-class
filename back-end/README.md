@@ -1,5 +1,5 @@
-- Executar no docker:
-  ```
-    docker build -t onclassbackend .
-    docker run -it --rm -p 25100:25100 --name onclasscsharp onclassbackend
-  ```
+<h1><strong>Ainda não funciona</strong></h1>
+
+```
+docker-compose up --build -d
+```

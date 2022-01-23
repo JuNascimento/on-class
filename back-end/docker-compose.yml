@@ -1,0 +1,30 @@
+services: 
+    mysql:
+        build: 
+            dockerfile: ./db/dockerfile.mysql
+        container_name: onclass-db-mysql
+        env_file:
+            - ./db/configmap-dev.env
+        ports:
+            - "3306"
+        networks: 
+            - onclass-network
+
+    dotnet:
+        build: 
+            dockerfile: src/OnClass/Dockerfile
+            context: .
+        image: onclass-backend
+        container_name: onclass-back1
+        env_file:
+            - src/configmap-dev.env
+        ports:
+            - "25100"
+        networks: 
+            - onclass-network
+        depends_on:
+            - "mysql"    
+
+networks: 
+    onclass-network:
+        driver: bridge

@@ -341,3 +341,5 @@ healthchecksdb
 /back-end/OnClassAPI/bin
 /back-end/OnClassAPI/obj
 configmap-docker.env
+back-end/src/configmap-dev.env
+back-end/db/configmap-dev.env
