@@ -1,23 +1,22 @@
 services: 
     mysql:
-        build: 
-            dockerfile: ./db/dockerfile.mysql
+        image: mysql:8.0.27
         container_name: onclass-db-mysql
         env_file:
             - ./db/configmap-dev.env
         ports:
-            - "3306"
+            - "3306:3306"
         networks: 
             - onclass-network
 
     dotnet:
         build: 
-            dockerfile: src/OnClass/Dockerfile
+            dockerfile: ./src/OnClass.API/Dockerfile
             context: .
         image: onclass-backend
-        container_name: onclass-back1
+        container_name: onclass-back
         env_file:
-            - src/configmap-dev.env
+            - ./src/OnClass.API/configmap-dev.env
         ports:
             - "25100"
         networks: 

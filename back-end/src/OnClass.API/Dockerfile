@@ -5,14 +5,14 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["./OnClass.csproj", "."]
-RUN dotnet restore "./OnClass.csproj"
-COPY . .
-WORKDIR "/src/."
-RUN dotnet build "OnClass.csproj" -c Release -o /app/build
+COPY ./src .
+COPY ["./src/OnClass.API/OnClass.API.csproj", "."]
+RUN dotnet restore "./OnClass.API.csproj"
+WORKDIR "/src/OnClass.API"
+RUN dotnet build "OnClass.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "OnClass.csproj" -c Release -o /app/publish
+RUN dotnet publish "OnClass.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 
@@ -24,4 +24,4 @@ EXPOSE ${PORT}
 
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "OnClass.dll"]
+ENTRYPOINT ["dotnet", "OnClass.API.dll"]
