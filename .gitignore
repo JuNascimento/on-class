@@ -344,3 +344,4 @@ configmap-docker.env
 back-end/src/configmap-dev.env
 back-end/db/configmap-dev.env
 back-end/src/OnClass.API/configmap-dev.env
+back-end/flyway-docker/config/flyway.conf

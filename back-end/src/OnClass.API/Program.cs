@@ -1,9 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using OnClass.API.Setup;
+using OnClass.Infra.ApplicationContext;
+
+
+#if DEBUG
+var root = Directory.GetCurrentDirectory();
+var parent = Directory.GetParent(root);
+var dotenv = Path.Combine(parent.FullName, @"OnClass.API\configmap-dev.env");
+DotEnv.Load(dotenv);
+
+#endif
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<ApplicationContext>
+    (options => options.UseMySql(ConnectionStringBuilder.Build(), Microsoft.EntityFrameworkCore.ServerVersion.Parse(@"8.0.27-mysql")));
 
 var app = builder.Build();
 

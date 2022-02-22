@@ -9,6 +9,17 @@ services:
         networks: 
             - onclass-network
 
+    flyway:
+        image: flyway/flyway
+        command: -connectRetries=60 migrate
+        volumes:
+            - ./flyway-docker/sql:/flyway/sql
+            - ./flyway-docker/config:/flyway/conf
+        depends_on:
+            - mysql
+        networks: 
+            - onclass-network
+
     dotnet:
         build: 
             dockerfile: ./src/OnClass.API/Dockerfile
