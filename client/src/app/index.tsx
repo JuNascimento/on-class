@@ -1,12 +1,12 @@
 import React from 'react'
 import HeaderContainer from '../header'
-import OnGoingClassContainer from '../on-going-class'
+import HomePageContainer from '../homePage'
 
 const App: React.FC = () => {
   return (
     <>
       <HeaderContainer />
-      <OnGoingClassContainer />
+      <HomePageContainer />
     </>
   )
 }

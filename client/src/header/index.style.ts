@@ -2,8 +2,6 @@ import styled from 'styled-components'
 
 export const Header = styled.header`
   background-color: #ff5757;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,6 +23,16 @@ export const Menu = styled.span`
   cursor: pointer;
 
   &:hover {
-    opacity: 0.5;
+    background-color: rgba(255, 87, 87, 0.7);
   }
+`
+
+export const Container = styled.section`
+  width: 25vw;
+  height: 80vh;
+  border: 1px solid red;
+  left: 0;
+  position: fixed;
+  background-color: #fff;
+  z-index: 99999999;
 `

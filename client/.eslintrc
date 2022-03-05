@@ -26,11 +26,15 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "import/no-unresolved": "error"
+    "import/no-unresolved": "error",
+    "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "import/resolver": {
       "typescript": {}
+    },
+    "react": {
+      "version": "detect"
     }
   }
 }

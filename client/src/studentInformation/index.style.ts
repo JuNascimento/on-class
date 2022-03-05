@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const StudantInformation = styled.div`
+export const StudentInformation = styled.div`
   display: flex;
   width: 40vw;
 `
@@ -15,8 +15,6 @@ export const Photo = styled.div`
 `
 
 export const Info = styled.section`
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 20px;
   font-weight: lighter;
   margin-top: 5px;

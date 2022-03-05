@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { SupportMaterial, Menu, Tab, Content, Iframe } from './index.style'
 
-const SupportMaterialContainer: React.FC = () => {
-  const [activeTabIndex, setActiveTabIndex] = useState(1)
+interface Props {
+  type: string
+  toggleSupportMaterial: boolean
+}
 
-  const handleChange = (index: number) => {
-    setActiveTabIndex(index)
-  }
+const SupportMaterialContainer: React.FC<Props> = ({
+  type,
+  toggleSupportMaterial,
+}) => {
+  const [activeTabIndex, setActiveTabIndex] = useState(1)
 
   const tab1Content = () => {
     return (
@@ -41,49 +45,78 @@ const SupportMaterialContainer: React.FC = () => {
     )
   }
 
-  const defineContent = () => {
+  const defineContentStudent = () => {
     let content
-    if (activeTabIndex === 1) {
-      content = tab1Content()
-    } else if (activeTabIndex === 2) {
-      content = tab2Content()
-    } else {
-      content = tab3Content()
+
+    switch (activeTabIndex) {
+      case 1:
+        content = tab2Content()
+        break
+
+      case 2:
+        content = tab3Content()
+        break
     }
 
     return content
   }
 
+  const defineContentTeacher = () => {
+    let content
+
+    switch (activeTabIndex) {
+      case 1:
+        content = tab1Content()
+        break
+
+      case 2:
+        content = tab2Content()
+        break
+
+      case 3:
+        content = tab3Content()
+        break
+    }
+
+    return content
+  }
+
+  const generateTabs = () => {
+    const numberOfTabs = type === 'teacher' ? 3 : 2
+    const tabsLabel = ['Material da aula', 'Links úteis', 'Projeto de revisão']
+    const tabs = []
+
+    for (let i = 0; i < numberOfTabs; i++) {
+      tabs.push(
+        <Tab
+          key={`tab-${i + 1}`}
+          data-testid='tabs'
+          id={`tab${i + 1}`}
+          isActive={i + 1 === activeTabIndex}
+          onClick={() => setActiveTabIndex(i + 1)}
+        >
+          {type === 'teacher' ? tabsLabel[i] : tabsLabel[i + 1]}
+        </Tab>
+      )
+    }
+
+    return tabs
+  }
+
   return (
-    <SupportMaterial data-testid='support-material-container'>
-      <Menu>
-        <Tab
-          data-testid='tabs'
-          id='tab1'
-          isActive={1 === activeTabIndex}
-          onClick={() => handleChange(1)}
-        >
-          Material da aula
-        </Tab>
-        <Tab
-          data-testid='tabs'
-          id='tab2'
-          isActive={2 === activeTabIndex}
-          onClick={() => handleChange(2)}
-        >
-          Links úteis
-        </Tab>
-        <Tab
-          data-testid='tabs'
-          id='tab3'
-          isActive={3 === activeTabIndex}
-          onClick={() => handleChange(3)}
-        >
-          Projeto de revisão
-        </Tab>
-      </Menu>
-      <Content>{defineContent()}</Content>
-    </SupportMaterial>
+    <>
+      <SupportMaterial
+        toggleSupportMaterial={
+          type === 'teacher' ? true : toggleSupportMaterial
+        }
+        data-testid='support-material-container'
+      >
+        <Menu>{generateTabs()}</Menu>
+        <Content>
+          {type === 'teacher' ? defineContentTeacher() : defineContentStudent()}
+        </Content>
+      </SupportMaterial>
+    </>
   )
 }
 
