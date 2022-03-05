@@ -24,7 +24,7 @@ export const Reaction = styled.div`
   }
 
   &:hover {
-    opacity: 0.5;
+    background-color: rgba(255, 87, 87, 0.3);
   }
 `
 

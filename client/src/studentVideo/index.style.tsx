@@ -1,25 +1,32 @@
 import styled from 'styled-components'
 
-export const StudantVideo = styled.article`
-  width: 60vw;
+export const StudentVideo = styled.section`
+  width: 100%;
   background-color: black;
+  position: relative;
 `
 
-export const VideoControls = styled.div`
+interface VideoControlsProps {
+  direction: string
+}
+
+export const VideoControls = styled.section<VideoControlsProps>`
   z-index: 99;
-  bottom: 10px;
-  position: fixed;
+  bottom: ${p => (p.direction === 'bottom' ? `30px` : `unset`)};
+  top: ${p => (p.direction === 'bottom' ? `unset` : `30px`)};
+  position: absolute;
   width: inherit;
   height: 50px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${p =>
+    p.direction === 'bottom' ? `space-between` : `flex-end`};
 `
 
-export const IconsGroup = styled.div`
+export const IconsGroup = styled.article`
   display: flex;
   align-items: center;
-  margin: 0 30px 20px 30px;
+  margin: 0 20px;
 `
 
 interface IconProps {
@@ -36,12 +43,10 @@ export const Icon = styled.div<IconProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: lighter;
 
   &:hover {
-    opacity: 0.6;
+    background-color: rgba(255, 87, 87, 0.7);
   }
 `
 

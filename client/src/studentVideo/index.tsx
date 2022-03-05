@@ -6,16 +6,28 @@ import {
   FullScreenSvg,
   ChatSvg,
   SupportSvg,
-} from '../icons/svg-icons'
+  ArrowSvg,
+} from '../icons'
 import {
-  StudantVideo,
+  StudentVideo,
   VideoControls,
   IconsGroup,
   Icon,
   ChatLabel,
 } from './index.style'
 
-const StudantVideoContainer: React.FC = () => {
+interface Props {
+  // eslint-disable-next-line
+  setToggleSupportMaterial: any
+  toggleSupportMaterial: boolean
+  type: string
+}
+
+const StudentVideoContainer: React.FC<Props> = ({
+  setToggleSupportMaterial,
+  toggleSupportMaterial,
+  type,
+}) => {
   const [toggleChat, setToggleChat] = useState(false)
 
   const chatOpened = () => {
@@ -44,15 +56,46 @@ const StudantVideoContainer: React.FC = () => {
     )
   }
 
+  // const la = async () => {
+  //   const stream = await window.navigator.mediaDevices.getUserMedia({
+  //     video: true,
+  //     audio: true,
+  //   })
+
+  //   const video = document.getElementById('video-source')
+  //   console.log('aaa', video)
+  //   if (video) {
+  //     video.src = stream
+  //     // video.play()
+  //   } else {
+  //     console.log('deu erro')
+  //   }
+  // }
+
+  // la()
+
   return (
-    <StudantVideo data-testid='studant-video-container'>
+    <StudentVideo data-testid='student-video-container'>
       <video width='100%' height='100%' controls={true} autoPlay={true} loop>
         <source
           src='http://techslides.com/demos/sample-videos/small.mp4'
           type='video/mp4'
         />
       </video>
-      <VideoControls>
+      {type === 'student' && (
+        <VideoControls data-testid='video-controls-top' direction='top'>
+          <IconsGroup data-testid='icons-group'>
+            <Icon
+              data-testid='icons'
+              id='arrow-icon'
+              onClick={() => setToggleSupportMaterial(!toggleSupportMaterial)}
+            >
+              <ArrowSvg isOpen={toggleSupportMaterial} />
+            </Icon>
+          </IconsGroup>
+        </VideoControls>
+      )}
+      <VideoControls data-testid='video-controls-bottom' direction='bottom'>
         <IconsGroup data-testid='icons-group'>
           <Icon data-testid='icons'>
             <CameraSvg />
@@ -74,8 +117,8 @@ const StudantVideoContainer: React.FC = () => {
           </Icon>
         </IconsGroup>
       </VideoControls>
-    </StudantVideo>
+    </StudentVideo>
   )
 }
 
-export default StudantVideoContainer
+export default StudentVideoContainer

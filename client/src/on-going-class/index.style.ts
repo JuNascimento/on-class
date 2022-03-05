@@ -16,8 +16,6 @@ export const RemainingClassTime = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: lighter;
 `
 
@@ -26,7 +24,7 @@ export const Class = styled.article`
   height: 80vh;
 `
 
-export const StudantVideo = styled.article`
+export const StudentVideo = styled.article`
   width: 60vw;
   background-color: black;
 `

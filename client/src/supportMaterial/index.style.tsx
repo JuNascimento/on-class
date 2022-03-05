@@ -1,8 +1,14 @@
 import styled from 'styled-components'
 
-export const SupportMaterial = styled.article`
+interface SupportMaterialProps {
+  toggleSupportMaterial: boolean
+}
+
+export const SupportMaterial = styled.article<SupportMaterialProps>`
+  display: ${p => (p.toggleSupportMaterial ? `block` : `none`)};
   width: 40vw;
-  max-height: 70.8vh;
+  height: 72.8vh;
+  min-width: 40vw;
 `
 
 export const Menu = styled.div`
@@ -12,8 +18,6 @@ export const Menu = styled.div`
   justify-content: space-evenly;
   background-color: white;
   padding: 5px 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: lighter;
 `
 
@@ -31,10 +35,11 @@ export const Tab = styled.div<TabProps>`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  background-color: ${p => (p.isActive ? `#ff5757` : `#f88888`)};
+  background-color: ${p =>
+    p.isActive ? `rgb(255, 87, 87)` : `rgba(248, 210, 210, 0.9);`};
 
   &:hover {
-    opacity: 0.5;
+    background-color: rgba(255, 87, 87, 0.7);
   }
 `
 

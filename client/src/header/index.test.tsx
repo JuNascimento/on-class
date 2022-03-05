@@ -1,17 +1,14 @@
-import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import HeaderContainer from './index'
-import { act } from 'react-dom/test-utils'
+import { MemoryRouter } from 'react-router-dom'
 
 describe('HeaderContainer', () => {
-  let wrapper: any
-  let container: any
-
-  beforeEach(async () => {
-    await act(async () => {
-      wrapper = render(<HeaderContainer />)
-      container = wrapper.container
-    })
+  beforeEach(() => {
+    render(
+      <MemoryRouter>
+        <HeaderContainer />
+      </MemoryRouter>
+    )
   })
 
   test('should have title in the document', () => {
@@ -21,22 +18,12 @@ describe('HeaderContainer', () => {
   })
 
   test('should have menu in the document', () => {
-    const expectedMenu = container.querySelector('#menu-icon')
+    const expectedMenu = screen.getByTestId('menu-icon')
 
     expect(expectedMenu).toBeTruthy()
   })
 
-  test('should alert `abrir menu` when click on menu icon', async () => {
-    jest.spyOn(window, 'alert').mockImplementation(() => {})
-
-    await act(async () => {
-      fireEvent.click(container.querySelector('#menu-icon'))
-    })
-
-    expect(window.alert).toHaveBeenCalledWith('abrir menu')
-  })
-
-  test('should render svg element correctly', async () => {
+  test('should render svg element correctly', () => {
     const expectedSvgElement = screen.getByTestId('menu-svg')
 
     expect(expectedSvgElement).toBeInTheDocument()

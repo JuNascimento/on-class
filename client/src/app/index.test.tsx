@@ -1,21 +1,25 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import App from '.'
 
 describe('App', () => {
   beforeEach(() => {
-    render(<App />)
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    )
   })
 
-  test('should has HeaderContainer in the document', () => {
-    const expectedHeader = screen.getByTestId('header-container')
+  test('should have HeaderContainer in the document', () => {
+    const expectedHeader = screen.getByText('on-class app')
 
     expect(expectedHeader).toBeTruthy()
   })
 
-  test('should has OnGoingClassContainer in the document', () => {
-    const expectedOnGoingClass = screen.getByTestId('on-going-class-container')
+  test('should have HomePageContainer in the document', () => {
+    const expectedHeader = screen.getByTestId('login-screen-container')
 
-    expect(expectedOnGoingClass).toBeTruthy()
+    expect(expectedHeader).toBeTruthy()
   })
 })
