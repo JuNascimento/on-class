@@ -9,10 +9,15 @@ namespace OnClass.Infra.Mappings
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("USER");
-            builder.HasKey(k => new { k.Id }).HasName("ID_USER");
+            builder.HasKey(k => new { k.Id }).HasName("ID");
             builder.Property(p => p.Id).HasColumnName("ID");
 
+            builder.Property(p => p.RoleId).HasColumnName("ROLE_ID");
+            
             builder.Property(p => p.UserName).HasColumnName("USER_NAME");
+            builder.Property(p => p.Password).HasColumnName("PASSWORD");
+
+            builder.HasOne<Role>().WithMany().HasForeignKey(f => f.RoleId);
         }
     }
 }

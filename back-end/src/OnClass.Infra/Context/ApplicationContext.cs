@@ -2,7 +2,7 @@
 using OnClass.Domain.Models;
 using System.Reflection;
 
-namespace OnClass.Infra.ApplicationContext
+namespace OnClass.Infra.Context
 {
     public class ApplicationContext : DbContext
     {
@@ -15,6 +15,7 @@ namespace OnClass.Infra.ApplicationContext
         }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

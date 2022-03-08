@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnClass.Domain\OnClass.Domain.csproj" />
+    <ProjectReference Include="..\OnClass.Exceptions\OnClass.Exceptions.csproj" />
   </ItemGroup>
 
 </Project>

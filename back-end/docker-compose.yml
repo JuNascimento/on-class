@@ -11,6 +11,7 @@ services:
 
     flyway:
         image: flyway/flyway
+        container_name: flyway-onclass
         command: -connectRetries=60 migrate
         volumes:
             - ./flyway-docker/sql:/flyway/sql
@@ -33,7 +34,7 @@ services:
         networks: 
             - onclass-network
         depends_on:
-            - "mysql"    
+            - mysql    
 
 networks: 
     onclass-network:
