@@ -1,10 +1,10 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import StudentInformationContainer from './index'
+import PersonInformationContainer from './index'
 
-describe('StudentInformationContainer', () => {
+describe('PersonInformationContainer', () => {
   beforeEach(() => {
-    render(<StudentInformationContainer type='teacher' />)
+    render(<PersonInformationContainer type='teacher' />)
   })
 
   test('should render svg element correctly', () => {
@@ -21,7 +21,7 @@ describe('StudentInformationContainer', () => {
 
   describe('when type is `teacher`', () => {
     test.skip('should have `Julia Nascimento` text in the document', () => {
-      render(<StudentInformationContainer type='teacher' />)
+      render(<PersonInformationContainer type='teacher' />)
 
       const expectedText = screen.getByText('Julia Nascimento')
 
@@ -31,7 +31,7 @@ describe('StudentInformationContainer', () => {
 
   describe('when type is `student`', () => {
     test('should have `Pedro Furtado` text in the document', () => {
-      render(<StudentInformationContainer type='student' />)
+      render(<PersonInformationContainer type='student' />)
 
       const expectedText = screen.getByText('Pedro Furtado')
 

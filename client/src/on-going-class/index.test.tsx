@@ -6,12 +6,12 @@ describe('OnGoingClassContainer', () => {
     render(<OnGoingClassContainer type='teacher' />)
   })
 
-  test('should have StudentInformationContainer in the document', () => {
-    const expectedstudentVideo = screen.getByTestId(
-      'student-information-container'
+  test('should have PersonInformationContainer in the document', () => {
+    const expectedPersonInformationContainer = screen.getByTestId(
+      'person-information-container'
     )
 
-    expect(expectedstudentVideo).toBeInTheDocument()
+    expect(expectedPersonInformationContainer).toBeInTheDocument()
   })
 
   test('should have `Tempo restante: 57:14` text in the document', () => {
@@ -26,10 +26,10 @@ describe('OnGoingClassContainer', () => {
     expect(expectedReactions).toBeInTheDocument()
   })
 
-  test('should have StudentVideoContainer in the document', () => {
-    const expectedstudentVideo = screen.getByTestId('student-video-container')
+  test('should have VideoContainer in the document', () => {
+    const expectedVideoContainer = screen.getByTestId('video-container')
 
-    expect(expectedstudentVideo).toBeInTheDocument()
+    expect(expectedVideoContainer).toBeInTheDocument()
   })
 
   test('should have SupportMaterialContainer in the document', () => {

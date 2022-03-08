@@ -12,7 +12,7 @@ describe('HomePageContainer', () => {
   })
 
   test('should have Title in the document', () => {
-    const expectedTitle = screen.getByText('Bem vindo(a) ao on-class app!')
+    const expectedTitle = screen.getByText('Bem vinda(o) ao on-class app!')
 
     expect(expectedTitle).toBeTruthy()
   })

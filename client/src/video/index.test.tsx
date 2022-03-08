@@ -1,15 +1,15 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
-import StudentVideoContainer from './index'
+import VideoContainer from './index'
 
-describe('StudentVideoContainer', () => {
+describe('VideoContainer', () => {
   let wrapper: any
   let container: any
 
   describe('when type is `teacher`', () => {
     beforeEach(() => {
       wrapper = render(
-        <StudentVideoContainer
+        <VideoContainer
           setToggleSupportMaterial={jest.fn()}
           toggleSupportMaterial={false}
           type='teacher'
@@ -87,7 +87,7 @@ describe('StudentVideoContainer', () => {
   describe('when type is `student`', () => {
     beforeEach(() => {
       wrapper = render(
-        <StudentVideoContainer
+        <VideoContainer
           setToggleSupportMaterial={jest.fn()}
           toggleSupportMaterial={false}
           type='student'

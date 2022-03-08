@@ -7,13 +7,31 @@ import {
   Roles,
   Role,
   LoginButton,
-  InputFields,
+  InputFieldsColumn,
   Input,
   Label,
   Password,
   ShowPasswordToggle,
+  InputFieldsRow,
 } from '../homePage/index.style'
-import { ClosedEyeSvg, ManTeacherSvg, OpenedEyeSvg, PersonSvg } from '../icons'
+import {
+  ClosedEyeSvg,
+  ManTeacherSvg,
+  OpenedEyeSvg,
+  PersonSvg,
+  QuestionMarkSvg,
+} from '../icons'
+
+const NewUser: React.FC = () => {
+  return (
+    <>
+      <Label>Nome: </Label>
+      <Input type='text' />
+      <Label>Tipo de usuário: </Label>
+      <Input type='text' />
+    </>
+  )
+}
 
 interface Props {
   type: string
@@ -26,32 +44,71 @@ export const Login: React.FC<Props> = ({ type }) => {
     setShowPassword(!showPassword)
   }
 
+  const title = type !== 'new-user' ? 'Entre na sua conta' : 'Faça seu cadastro'
+
   return (
     <>
       <HeaderContainer />
       <HomePage data-testid='login-screen-container'>
-        <Title>Entre na sua conta</Title>
+        <Title>{title}</Title>
         <Roles>
           <Role direction='column'>
-            {type === 'teacher' ? (
-              <ManTeacherSvg />
+            {type === 'new-user' ? (
+              <>
+                <QuestionMarkSvg />
+                <InputFieldsColumn>
+                  <InputFieldsRow>
+                    <Label>Nome: </Label>
+                    <Input type='text' />
+                    <Label>Email: </Label>
+                    <Input type='text' />
+                  </InputFieldsRow>
+                  <InputFieldsRow>
+                    <Label>Data de nascimento: </Label>
+                    <Input type='date' />
+                    <Label>Telefone: </Label>
+                    <Input type='text' />
+                  </InputFieldsRow>
+                  <InputFieldsRow>
+                    <Label>Tipo de usuário: </Label>
+                    <Input type='radio' name='role' value='teacher' />
+                    <Input type='radio' name='role' value='student' />
+                    <Label>Senha: </Label>
+                    <Password>
+                      <Input type={showPassword ? 'text' : 'password'} />
+                      <ShowPasswordToggle onClick={() => handleChange()}>
+                        {showPassword ? <ClosedEyeSvg /> : <OpenedEyeSvg />}
+                      </ShowPasswordToggle>
+                    </Password>
+                  </InputFieldsRow>
+                </InputFieldsColumn>
+                <Link to={'/'}>
+                  <LoginButton>Cadastrar</LoginButton>
+                </Link>
+              </>
             ) : (
-              <PersonSvg width={'100px'} />
+              <>
+                {type === 'teacher' ? (
+                  <ManTeacherSvg />
+                ) : (
+                  <PersonSvg width={'100px'} />
+                )}
+                <InputFieldsColumn>
+                  <Label>Email: </Label>
+                  <Input type='text' />
+                  <Label>Senha: </Label>
+                  <Password>
+                    <Input type={showPassword ? 'text' : 'password'} />
+                    <ShowPasswordToggle onClick={() => handleChange()}>
+                      {showPassword ? <ClosedEyeSvg /> : <OpenedEyeSvg />}
+                    </ShowPasswordToggle>
+                  </Password>
+                </InputFieldsColumn>
+                <Link to={`/${type}/class`}>
+                  <LoginButton>Entrar</LoginButton>
+                </Link>
+              </>
             )}
-            <InputFields>
-              <Label>Email: </Label>
-              <Input type='text' />
-              <Label>Senha: </Label>
-              <Password>
-                <Input type={showPassword ? 'text' : 'password'} />
-                <ShowPasswordToggle onClick={() => handleChange()}>
-                  {showPassword ? <ClosedEyeSvg /> : <OpenedEyeSvg />}
-                </ShowPasswordToggle>
-              </Password>
-            </InputFields>
-            <Link to={`/${type}/class`}>
-              <LoginButton>Entrar</LoginButton>
-            </Link>
           </Role>
         </Roles>
       </HomePage>

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const StudentVideo = styled.section`
+export const Video = styled.section`
   width: 100%;
   background-color: black;
   position: relative;

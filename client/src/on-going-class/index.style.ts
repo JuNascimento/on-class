@@ -23,8 +23,3 @@ export const Class = styled.article`
   display: flex;
   height: 80vh;
 `
-
-export const StudentVideo = styled.article`
-  width: 60vw;
-  background-color: black;
-`

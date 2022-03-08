@@ -13,8 +13,8 @@ import { ManTeacherSvg, PersonSvg, QuestionMarkSvg } from '../icons'
 const HomePageContainer: React.FC = () => {
   return (
     <HomePage data-testid='login-screen-container'>
-      <Title>Bem vindo(a) ao on-class app!</Title>
-      <Subtitle>Faça seu login abaixo</Subtitle>
+      <Title>Bem vinda(o) ao on-class app!</Title>
+      <Subtitle>Faça seu login abaixo ou se cadastre</Subtitle>
       <Roles>
         <Role direction='row'>
           <ManTeacherSvg />
@@ -37,10 +37,8 @@ const HomePageContainer: React.FC = () => {
         <Role direction='row'>
           <QuestionMarkSvg />
           <div>
-            <Subtitle data-testid='login-student'>
-              Não tem cadastro ainda?
-            </Subtitle>
-            <Link to='/student/login'>
+            <Subtitle data-testid='new-user'>Não tem cadastro ainda?</Subtitle>
+            <Link to='/new-user'>
               <LoginButton>Cadastre-se aqui!</LoginButton>
             </Link>
           </div>

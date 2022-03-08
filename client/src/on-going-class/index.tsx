@@ -5,9 +5,9 @@ import {
   Class,
   RemainingClassTime,
 } from './index.style'
-import StudentInformationContainer from '../studentInformation/index'
+import PersonInformationContainer from '../personInformation/index'
 import ReactionsContainer from '../reactions/index'
-import StudentVideoContainer from '../studentVideo/index'
+import VideoContainer from '../video/index'
 import SupportMaterialContainer from '../supportMaterial'
 
 interface Props {
@@ -20,14 +20,14 @@ const OnGoingClassContainer: React.FC<Props> = ({ type }) => {
   return (
     <OnGoingClass data-testid='on-going-class-container'>
       <ClassInfo>
-        <StudentInformationContainer type={type} />
+        <PersonInformationContainer type={type} />
         <RemainingClassTime data-testid='remaining-class-time'>
           Tempo restante: 57:14
         </RemainingClassTime>
         <ReactionsContainer />
       </ClassInfo>
       <Class>
-        <StudentVideoContainer
+        <VideoContainer
           setToggleSupportMaterial={setToggleSupportMaterial}
           toggleSupportMaterial={toggleSupportMaterial}
           type={type}

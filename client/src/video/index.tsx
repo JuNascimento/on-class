@@ -9,7 +9,7 @@ import {
   ArrowSvg,
 } from '../icons'
 import {
-  StudentVideo,
+  Video,
   VideoControls,
   IconsGroup,
   Icon,
@@ -23,7 +23,7 @@ interface Props {
   type: string
 }
 
-const StudentVideoContainer: React.FC<Props> = ({
+const VideoContainer: React.FC<Props> = ({
   setToggleSupportMaterial,
   toggleSupportMaterial,
   type,
@@ -74,9 +74,19 @@ const StudentVideoContainer: React.FC<Props> = ({
 
   // la()
 
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen()
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen()
+      }
+    }
+  }
+
   return (
-    <StudentVideo data-testid='student-video-container'>
-      <video width='100%' height='100%' controls={true} autoPlay={true} loop>
+    <Video data-testid='video-container'>
+      <video width='100%' height='100%' controls={false} autoPlay={true} loop>
         <source
           src='http://techslides.com/demos/sample-videos/small.mp4'
           type='video/mp4'
@@ -106,7 +116,7 @@ const StudentVideoContainer: React.FC<Props> = ({
           <Icon data-testid='icons'>
             <ShareScreenSvg />
           </Icon>
-          <Icon data-testid='icons'>
+          <Icon data-testid='icons' onClick={() => toggleFullScreen()}>
             <FullScreenSvg />
           </Icon>
         </IconsGroup>
@@ -117,8 +127,8 @@ const StudentVideoContainer: React.FC<Props> = ({
           </Icon>
         </IconsGroup>
       </VideoControls>
-    </StudentVideo>
+    </Video>
   )
 }
 
-export default StudentVideoContainer
+export default VideoContainer

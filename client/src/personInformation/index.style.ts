@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const StudentInformation = styled.div`
+export const PersonInformation = styled.div`
   display: flex;
   width: 40vw;
 `

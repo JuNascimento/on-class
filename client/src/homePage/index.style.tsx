@@ -58,9 +58,17 @@ export const LoginButton = styled.button`
   }
 `
 
-export const InputFields = styled.div`
+export const InputFieldsColumn = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+`
+
+export const InputFieldsRow = styled.div`
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-around;
   width: 100%;
@@ -95,4 +103,10 @@ export const ShowPasswordToggle = styled.span`
   position: relative;
   z-index: 999;
   right: 33px;
+`
+
+export const Category = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
