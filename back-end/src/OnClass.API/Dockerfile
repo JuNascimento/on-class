@@ -22,6 +22,8 @@ ENV PORT=${PORT}
 ENV ASPNETCORE_URLS=http://+:${PORT}
 EXPOSE ${PORT}
 
+ENV CURRENT_ENV=CONTAINER
+
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "OnClass.API.dll"]

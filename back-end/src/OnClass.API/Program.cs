@@ -23,7 +23,7 @@ builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title =
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationContext>
-    (options => options.UseMySql(ConnectionStringBuilder.Build(), Microsoft.EntityFrameworkCore.ServerVersion.Parse(@"8.0.27-mysql")));
+    (options => options.UseMySql(ConnectionStringBuilder.Build(), Microsoft.EntityFrameworkCore.ServerVersion.Parse(@"8.0.27-mysql")), ServiceLifetime.Transient);
 
 builder.Services.RegisterServices();
 

@@ -30,7 +30,7 @@ services:
         env_file:
             - ./src/OnClass.API/configmap-dev.env
         ports:
-            - "25100"
+            - "25100:25100"
         networks: 
             - onclass-network
         depends_on:
