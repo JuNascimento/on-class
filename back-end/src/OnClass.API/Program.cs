@@ -1,18 +1,35 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using OnClass.API.Controllers;
 using OnClass.API.Setup;
+using OnClass.API.VideoHub;
 using OnClass.Infra.Context;
+
 
 
 #if DEBUG
 var root = Directory.GetCurrentDirectory();
 var parent = Directory.GetParent(root);
-var dotenv = Path.Combine(parent.FullName, @"OnClass.API\configmap-dev.env");
+var dotenv = Path.Combine(parent.FullName, @"OnClass.API\configmap-local.env");
 DotEnv.Load(dotenv);
 #endif
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("OnClass",
+                      builder =>
+                      {
+                          builder
+                            .WithOrigins("*")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin();
+                      });
+});
+
+builder.Services.AddSignalR();
 
 // Add services to the container.
 
@@ -53,6 +70,7 @@ app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
+    app.MapHub<VideoChat>("/videoroom");
 });
 
 app.Run();

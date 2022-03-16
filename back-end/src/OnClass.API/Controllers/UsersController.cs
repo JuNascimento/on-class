@@ -23,13 +23,14 @@ namespace OnClass.API.Controllers
             return Ok(new { message = "Ok"});
         }
 
-        // POST: TipoServicos/Create
+        // POST: Users/Create
         [HttpPost]
         public async Task<ActionResult<UserDTO>> Create(UserDTO userDTO)
         {
             try
             {
                 var userNovo = await _userService.CreateDTO(userDTO);
+                userNovo.Password = string.Empty;
                 return CreatedAtAction("Get", new { name = userNovo.UserName }, userNovo);
             }
             catch (DuplicatedEntryException e)

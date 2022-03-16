@@ -351,3 +351,5 @@ back-end/flyway-docker/sql/V0.0.3__DML.sql
 
 .DS_Store
 */coverage
+back-end/src/OnClass.API/configmap-local.env
+back-end/src/OnClass.API/Controllers/EnvController.cs

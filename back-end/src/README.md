@@ -1,5 +1,5 @@
 - Executar no docker:
   ```
-    docker build -t onclassbackend .
-    docker run -it --rm -p 25100:25100 --name onclasscsharp onclassbackend
+    docker build -f dockerfile-local.dockerfile -t onclassbackend .
+    docker run --network oneclassnetwork -it --rm --env-file "./OnClass.API/configmap-dev.env" -p 25100:25100 --name onclasscsharp onclassbackend
   ```
