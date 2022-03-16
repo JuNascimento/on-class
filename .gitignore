@@ -346,3 +346,7 @@ back-end/db/configmap-dev.env
 back-end/src/OnClass.API/configmap-dev.env
 back-end/flyway-docker/config/flyway.conf
 back-end/flyway-docker/sql/V0.0.3__DML.sql
+
+
+.DS_Store
+*/coverage
