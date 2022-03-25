@@ -30,11 +30,9 @@ namespace OnClass.API.Controllers
             var currentUser = user.FirstOrDefault(e => e.UserName.Equals(userDTO.UserName) && e.Password.Equals(HashGenerator.HashString(userDTO.Password, salt)));
             if(currentUser is not null)
             {
-                var roleDB = await _uow.RoleRepository.Get(currentUser.RoleId);
                 return Ok(new UserDTO
                 {
-                    UserName = userDTO.UserName,
-                    Role = roleDB.RoleName
+                    UserName = userDTO.UserName
                 });
             }
             return BadRequest(new { message = "Usuário não encontrado!"});

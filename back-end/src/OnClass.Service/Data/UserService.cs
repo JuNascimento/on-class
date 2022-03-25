@@ -28,9 +28,9 @@ namespace OnClass.Service.Data
             var salt = Environment.GetEnvironmentVariable("HASH_SALT");
             var user = _mapper.Map<User>(dto);
             user.Password = HashGenerator.HashString(dto.Password, salt);
-            user.RoleId = 1;
+            
             var userDB = await _uow.UserRepository.Create(user);
-            var role = await _uow.RoleRepository.Get(userDB.RoleId);
+            
             return _mapper.Map<UserDTO>(userDB);
         }
 

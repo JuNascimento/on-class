@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using SignalRSwaggerGen.Attributes;
+﻿using Microsoft.AspNetCore.SignalR;
 
 namespace OnClass.API.VideoHub
 {

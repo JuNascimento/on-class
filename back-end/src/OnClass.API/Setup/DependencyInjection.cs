@@ -11,6 +11,22 @@ namespace OnClass.API.Setup
     {
         public static void RegisterServices(this IServiceCollection services)
         {
+            services.AddScoped<IAulaRepository, AulaRepository>();
+
+            services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
+
+            services.AddScoped<IDocumentoAulaRepository, DocumentoAulaRepository>();
+
+            services.AddScoped<IEstudanteRepository, EstudanteRepository>();
+
+            services.AddScoped<IEstudanteDisciplinaRepository, EstudanteDisciplinaRepository>();
+
+            services.AddScoped<IFrequenciaAulaRepository, FrequenciaAulaRepository>();
+
+            services.AddScoped<IInstrutorRepository, InstrutorRepository>();
+
+            services.AddScoped<IInstrutorDisciplinaRepository, InstrutorDisciplinaRepository>();
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
 
