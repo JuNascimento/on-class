@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace OnClass.Domain.Models
 {
-    public class User : BaseModel
+    public class EstudanteDisciplina : BaseModel
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public long EstudanteId { get; set; }
+        public long DisciplinaId { get; set; }
+
     }
 }

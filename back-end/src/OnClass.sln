@@ -9,20 +9,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.Infra", "OnClass.In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.Domain", "OnClass.Domain\OnClass.Domain.csproj", "{3344D01E-7A08-4ED7-8728-8262A8DEB258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnClass.Exceptions", "OnClass.Exceptions\OnClass.Exceptions.csproj", "{288A1450-FE9A-4D83-A94E-4A589A3CC6C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.Exceptions", "OnClass.Exceptions\OnClass.Exceptions.csproj", "{288A1450-FE9A-4D83-A94E-4A589A3CC6C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnClass.DTO", "OnClass.DTO\OnClass.DTO.csproj", "{252E1DF0-32F8-414F-B7A9-91F20A186D15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.DTO", "OnClass.DTO\OnClass.DTO.csproj", "{252E1DF0-32F8-414F-B7A9-91F20A186D15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnClass.Mapper", "OnClass.Mapper\OnClass.Mapper.csproj", "{A31A3183-60DE-4082-87CD-3BF6ED10B184}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.Mapper", "OnClass.Mapper\OnClass.Mapper.csproj", "{A31A3183-60DE-4082-87CD-3BF6ED10B184}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4A12ABB-DFB8-4DC4-8CD5-E3D8837C9CE3}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnClass.Service", "OnClass.Service\OnClass.Service.csproj", "{A0FE1A29-4AAE-4D51-8207-4699C307CE23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.Service", "OnClass.Service\OnClass.Service.csproj", "{A0FE1A29-4AAE-4D51-8207-4699C307CE23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnClass.Helpers", "OnClass.Helpers\OnClass.Helpers.csproj", "{4AF8FF78-E88B-47D1-855A-86A725CEE43B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.Helpers", "OnClass.Helpers\OnClass.Helpers.csproj", "{4AF8FF78-E88B-47D1-855A-86A725CEE43B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnClass.Test.Unit", "OnClass.Test.Unit\OnClass.Test.Unit.csproj", "{065B71C5-154B-4F02-8AFF-19A4EA5AC797}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +64,10 @@ Global
 		{4AF8FF78-E88B-47D1-855A-86A725CEE43B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AF8FF78-E88B-47D1-855A-86A725CEE43B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AF8FF78-E88B-47D1-855A-86A725CEE43B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{065B71C5-154B-4F02-8AFF-19A4EA5AC797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{065B71C5-154B-4F02-8AFF-19A4EA5AC797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{065B71C5-154B-4F02-8AFF-19A4EA5AC797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{065B71C5-154B-4F02-8AFF-19A4EA5AC797}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

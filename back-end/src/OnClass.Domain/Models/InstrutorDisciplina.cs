@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace OnClass.Domain.Models
 {
-    public class Role : BaseModel
+    public class InstrutorDisciplina : BaseModel
     {
-        public string RoleName { get; set; }
+        public long InstrutorId { get; set; }
+        public long DisciplinaId { get; set; }
     }
 }

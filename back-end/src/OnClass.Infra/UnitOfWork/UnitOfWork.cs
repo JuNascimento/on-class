@@ -9,11 +9,7 @@ namespace OnClass.Infra.UnitOfWork
         private readonly ApplicationContext applicationContext;
         private bool disposed;
 
-        private RoleRepository roleRepository;
         private UserRepository userRepository;
-
-        public virtual RoleRepository RoleRepository =>
-            roleRepository ??= new RoleRepository(applicationContext);
 
         public virtual UserRepository UserRepository =>
             userRepository ??= new UserRepository(applicationContext);
