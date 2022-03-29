@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace OnClass.DTO
 {
     public class EstudanteDTO : UserDTO
     {
+
+        [Required]
+        [JsonPropertyName("nome_mae")]
+        public string? NomeMae { get; set; }
     }
 }

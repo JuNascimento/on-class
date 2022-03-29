@@ -13,7 +13,7 @@ namespace OnClass.Infra.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
     {
-        private readonly ApplicationContext _context;
+        protected readonly ApplicationContext _context;
 
         public BaseRepository()
         {
@@ -35,12 +35,17 @@ namespace OnClass.Infra.Repositories
             }
             catch (DbUpdateException e)
             {
-                if (e.Message.Contains("unique") || e.InnerException.Message.Contains("unique") || e.InnerException.Message.Contains("restrição exclusiva"))
+                if (e.InnerException.Message.Contains("Duplicate entry"))
                 {
                     throw new DuplicatedEntryException($"Já existe um registro com o mesmo valor.");
                 }
                 throw new Exception($"{e.Message}\nStackTrace:{e.StackTrace}");
             }
+            catch (Exception e)
+            {
+                throw new Exception($"{e.Message}\nStackTrace:{e.StackTrace}");
+            }
+
         }
 
         public virtual async Task<T> Update(T obj)

@@ -7,14 +7,18 @@ namespace OnClass.DTO
     {
         [Required]
         [JsonPropertyName("username")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         [Required]
-        [JsonPropertyName("password")]
-        public string Password { get; set; }
+        [JsonPropertyName("nome")]
+        public string? NomeCompleto { get; set; }
 
-        [JsonPropertyName("role")]
-        public string? Role { get; set; }
+        [Required]
+        [JsonPropertyName("senha")]
+        public string? Password { get; set; }
 
+        [Required] 
+        [JsonPropertyName("data_nascimento")]
+        public DateTime DataNascimento { get; set; }
     }
 }

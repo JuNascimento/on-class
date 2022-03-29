@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using OnClass.Domain.Models;
 using OnClass.DTO;
+using OnClass.Exceptions;
 using OnClass.Helpers;
 using OnClass.Infra.UnitOfWork;
 using OnClass.Service.Data.Interfaces;
@@ -16,6 +17,7 @@ namespace OnClass.Service.Data
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _uow;
+        private readonly string salt = Environment.GetEnvironmentVariable("HASH_SALT");
 
         public UserService(IMapper mapper, IUnitOfWork uow)
         {
@@ -23,33 +25,53 @@ namespace OnClass.Service.Data
             _uow = uow;
         }
 
-        public async Task<UserDTO> CreateDTO(UserDTO dto)
+        private async Task<User> CreateUser(User user)
         {
-            var salt = Environment.GetEnvironmentVariable("HASH_SALT");
-            var user = _mapper.Map<User>(dto);
-            user.Password = HashGenerator.HashString(dto.Password, salt);
-            
+            user.Password = HashGenerator.HashString(user.Password, salt);
+
             var userDB = await _uow.UserRepository.Create(user);
+            return userDB;
+        }
+
+        public async Task<EstudanteDTO> CreateEstudante(EstudanteDTO estudanteDTO)
+        {
+            var user = _mapper.Map<User>(estudanteDTO);
+            var userDB = await CreateUser(user);
             
-            return _mapper.Map<UserDTO>(userDB);
+            var estudante = _mapper.Map<Estudante>(estudanteDTO);
+            estudante.UserId = userDB.Id;
+            
+            var estudanteDB = await _uow.EstudanteRepository.Create(estudante);
+
+            var estudanteDTONovo = _mapper.Map<EstudanteDTO>(estudanteDB);
+            estudanteDTONovo.UserName = userDB.UserName;
+
+            return estudanteDTONovo;
+
         }
 
-        public Task<bool> DeleteDTO(long id)
+        public async Task<InstrutorDTO> CreateInstrutor(InstrutorDTO instrutorDTO)
+        {
+            var user = _mapper.Map<User>(instrutorDTO);
+            var userDB = await CreateUser(user);
+            
+            var instrutor = _mapper.Map<Instrutor>(instrutorDTO);
+            instrutor.UserId = userDB.Id;
+            
+            var instrutorDB = await _uow.InstrutorRepository.Create(instrutor);
+
+            var instrutorDTONovo = _mapper.Map<InstrutorDTO>(instrutorDB);
+            instrutorDTONovo.UserName = userDB.UserName;
+
+            return instrutorDTONovo;
+        }
+
+        public Task<IList<EstudanteDTO>> GetEstudantes()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IList<UserDTO>> GetDTO()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserDTO> GetDTO(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserDTO> UpdateDTO(long id, UserDTO dto)
+        public Task<IList<EstudanteDTO>> GetInstrutor()
         {
             throw new NotImplementedException();
         }

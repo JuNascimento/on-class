@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnClass.API.Controllers;
 using OnClass.API.Setup;
 using OnClass.API.VideoHub;
 using OnClass.Infra.Context;
+using System.Text;
 
 
 
@@ -35,7 +38,28 @@ builder.Services.AddSignalR();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "ROS.API", Version = "v1" }));
+builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnClass.API", Version = "v1" }));
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}
+            ).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable($"JWT_API_KEY").ToString())),
+                    ClockSkew = TimeSpan.FromMinutes(5),
+                    ValidIssuer = "Onclass.API",
+                    ValidAudience = "onclass"
+                };
+            });
+
 
 builder.Services.AddControllers();
 
@@ -62,11 +86,17 @@ app.UseSwagger(c =>
 });
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ROS.API v1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "OnClass.API v1");
 }
 );
 
 app.UseRouting();
+
+app.UseCors("OnClass");
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();

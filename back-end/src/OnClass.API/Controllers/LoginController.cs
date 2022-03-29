@@ -19,7 +19,7 @@ namespace OnClass.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> Login([FromBody]UserDTO userDTO)
+        public async Task<ActionResult<UserDTO>> Login([FromBody] LoginRequestDTO userDTO)
         {
             if (userDTO is null)
             {
