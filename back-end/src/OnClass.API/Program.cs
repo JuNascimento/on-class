@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnClass.API.Controllers;
+using OnClass.API.Hubs;
 using OnClass.API.Setup;
 using OnClass.API.VideoHub;
 using OnClass.Infra.Context;
@@ -100,7 +101,8 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
-    app.MapHub<VideoChat>("/videoroom");
+    app.MapHub<ChatHub>("/chat");
+    app.MapHub<VideoHub>("/videohub");
 });
 
 app.Run();
