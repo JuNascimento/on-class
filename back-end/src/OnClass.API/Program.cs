@@ -33,7 +33,11 @@ builder.Services.AddCors(options =>
                       });
 });
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR(o => {
+    o.EnableDetailedErrors = true;
+    o.MaximumReceiveMessageSize = 655360;
+    o.MaximumParallelInvocationsPerClient = 1000;
+});
 
 // Add services to the container.
 

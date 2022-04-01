@@ -35,11 +35,6 @@ namespace OnClass.Test.Unit.Controllers.Users
             var fixture = new Fixture().Customize(new AutoMoqCustomization());
             var estudante = fixture.Create<EstudanteDTO>();
 
-            //DuplicatedEntryException
-
-            /* mockService.Setup(x => x.CreateDTO(It.IsAny<EstudanteDTO>()))
-                .Throws(new DuplicatedEntryException());
-            */
             mockService.Setup(x => x.CreateEstudante(It.IsAny<EstudanteDTO>()))
                 
                 .ReturnsAsync(estudante);
@@ -47,7 +42,7 @@ namespace OnClass.Test.Unit.Controllers.Users
 
             //Act
             var response = await _sut.CreateEstudante(estudante);
-            var createdResult = response.Result as CreatedAtActionResult;
+            var createdResult = response.Result as CreatedResult;
             var userRecebido = createdResult.Value as UserDTO;
 
             //Assert
