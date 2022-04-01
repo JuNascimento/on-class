@@ -1,0 +1,4 @@
+flyway.url=jdbc:mysql://onclass-db-mysql:3306/onclass?useSSL=false&allowPublicKeyRetrieval=true
+flyway.user=
+flyway.schemas=
+flyway.password=
