@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnClass.DTO;
 using OnClass.Exceptions;
-using OnClass.Service.Data.Interfaces;
+using OnClass.Service.Authentication.Interfaces;
+
 
 namespace OnClass.API.Controllers
 {
@@ -9,12 +11,14 @@ namespace OnClass.API.Controllers
     [ApiController]
     public class UsersController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IAuthenticationService _authenticationService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IAuthenticationService authenticationService)
         {
-            _userService = userService;
+            _authenticationService = authenticationService;
         }
+
+
 
         // POST: Users/CreateEstudante
         [HttpPost]
@@ -22,7 +26,7 @@ namespace OnClass.API.Controllers
         {
             try
             {
-                var userNovo = await _userService.CreateEstudante(estudanteDTO);
+                var userNovo = await _authenticationService.CreateEstudante(estudanteDTO);
                 userNovo.Password = string.Empty;
                 return Created("CreateEstudante", userNovo);
             }
@@ -33,12 +37,14 @@ namespace OnClass.API.Controllers
             }
         }
 
+
+        // POST: Users/CreateInstrutor
         [HttpPost]
         public async Task<ActionResult<UserDTO>> CreateInstrutor(InstrutorDTO instrutorDTO)
         {
             try
             {
-                var userNovo = await _userService.CreateInstrutor(instrutorDTO);
+                var userNovo = await _authenticationService.CreateInstrutor(instrutorDTO);
                 userNovo.Password = string.Empty;
                 return Created("CreateInstrutor", userNovo);
             }

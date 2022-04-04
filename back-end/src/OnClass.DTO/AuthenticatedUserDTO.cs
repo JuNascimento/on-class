@@ -11,7 +11,10 @@ namespace OnClass.DTO
         [JsonPropertyName("nome")]
         public string? Nome { get; set; }
 
-        [JsonPropertyName("authentication")]
-        public TokenDTO? TokenDTO { get; set; }
+        [JsonPropertyName("role")]
+        public string? Role { get; set; }
+
+        [JsonPropertyName("token")]
+        public string? Token { get; set; }
     }
 }

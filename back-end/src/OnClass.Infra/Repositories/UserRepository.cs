@@ -16,10 +16,27 @@ namespace OnClass.Infra.Repositories
 
         }
 
-        public async Task<bool> FindUserToLoginAsync(string username, string pass)
+        public async Task<bool> VerificaUserNameDisponivel(string username)
         {
-            var userDB = await _context.Users.FromSqlRaw("SELECT * FROM USER WHERE USER_NAME = @username AND PASSWORD = @password", new SqlParameter(username, pass)).FirstAsync();
-            return userDB is not null;
+            var userDB = await _context.Users.AnyAsync(e => e.UserName.Equals(username));
+            return userDB;
+        }
+
+        public async Task<User> GetByUserName (string username)
+        {
+            var userDB = await _context.Users.SingleOrDefaultAsync(e => e.UserName.Equals(username));
+            return userDB;
+        }
+
+        public async Task<dynamic> GetInfoByUserId(long id)
+        {
+            var estudante = await _context.Estudantes.SingleOrDefaultAsync(e => e.UserId == id);
+            if(estudante is not null)
+            {
+                return estudante;
+            }
+            var instrutor = await _context.Instrutores.SingleOrDefaultAsync(e => e.UserId == id);
+            return instrutor;
         }
     }
 }

@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnClass.Domain\OnClass.Domain.csproj" />
+    <ProjectReference Include="..\OnClass.DTO\OnClass.DTO.csproj" />
+  </ItemGroup>
+
 </Project>
