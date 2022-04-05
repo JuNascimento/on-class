@@ -23,6 +23,7 @@ namespace OnClass.Service.Authentication
         private async Task<User> CreateUser(User user)
         {
             user.GenerateHash();
+            user.PrimeiroLogin = true;
             var userDB = await _uow.UserRepository.Create(user);
             return userDB;
         }
@@ -86,10 +87,13 @@ namespace OnClass.Service.Authentication
                     Id = userDB.Id,
                     UserName = userDB.UserName,
                     Nome = usuario.NomeCompleto,
-                    Role = usuario.GetType().Name
+                    Role = usuario.GetType().Name,
+                    PrimeiroLogin = userDB.PrimeiroLogin,
                 };
 
                 authenticatedUser.GenerateToken();
+                userDB.PrimeiroLogin = false;
+                await _uow.UserRepository.Update(userDB.Id, userDB);
                 return authenticatedUser;
             }
             return null;

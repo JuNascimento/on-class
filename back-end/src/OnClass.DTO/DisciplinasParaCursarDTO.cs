@@ -1,8 +1,8 @@
 ﻿namespace OnClass.DTO
 {
-    public class DisciplinasParaLecionarDTO
+    public class DisciplinasParaCursarDTO
     {
-        public InstrutorBasicDTO InstrutorDTO { get; set; }
+        public EstudanteBasicDTO EstudanteDTO { get; set; }
         public List<DisciplinaDTO> DisciplinasDTO { get; set; }
     }
 }

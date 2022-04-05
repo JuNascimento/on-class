@@ -17,7 +17,37 @@ namespace OnClass.Service.Data
             _mapper = mapper;
         }
 
-        public async Task<DisciplinasParaLecionarDTO> CriarDisciplinasInstrutor(DisciplinasParaLecionarDTO disciplinasParaLecionarDTO)
+        public async Task<DisciplinasParaCursarDTO> EditarDisciplinasEstudante(DisciplinasParaCursarDTO disciplinasParaCursarDTO)
+        {
+            var estudanteDisciplinasList = new List<EstudanteDisciplina>();
+
+            var disciplinasParaDeletar = (await _uow.EstudanteDisciplinaRepository.Get())
+               .Where(e => e.EstudanteId == disciplinasParaCursarDTO.EstudanteDTO.Id).ToList();
+
+            foreach (var disciplina in disciplinasParaDeletar)
+            {
+                await _uow.EstudanteDisciplinaRepository.Delete(disciplina.Id);
+            }
+
+            foreach (var disciplina in disciplinasParaCursarDTO.DisciplinasDTO.DistinctBy(e => e.Id))
+            {
+                estudanteDisciplinasList.Add(new EstudanteDisciplina
+                {
+                    EstudanteId = disciplinasParaCursarDTO.EstudanteDTO.Id,
+                    DisciplinaId = disciplina.Id,
+                });
+            }
+
+
+            var result = await _uow.EstudanteDisciplinaRepository.InserirDisplicinasDoEstudante(estudanteDisciplinasList);
+            if (result)
+            {
+                return disciplinasParaCursarDTO;
+            }
+            return null;
+        }
+
+        public async Task<DisciplinasParaLecionarDTO> EditarDisciplinasInstrutor(DisciplinasParaLecionarDTO disciplinasParaLecionarDTO)
         {
             var instrutorDisciplinasList = new List<InstrutorDisciplina>();
 
@@ -53,10 +83,19 @@ namespace OnClass.Service.Data
             return _mapper.Map<List<DisciplinaDTO>>(disciplinasDB);
         }
 
-        public List<DisciplinaDTO> GetDisciplinasPorInstrutor(long instrutorId)
+        public async Task<List<DisciplinaDTO>> GetDisciplinasPorEstudante(long estudanteId)
         {
+            var estudante = await _uow.EstudanteRepository.Get();
+            var disciplinasDB = _uow.DisciplinaRepository.GetDisciplinasPorEstudante(estudanteId);
+            return _mapper.Map<List<DisciplinaDTO>>(disciplinasDB);
+        }
+
+        public async Task<List<DisciplinaDTO>> GetDisciplinasPorInstrutor(long instrutorId)
+        {
+            var instrutor = await _uow.InstrutorRepository.Get();
             var disciplinasDB = _uow.DisciplinaRepository.GetDisciplinasPorInstrutor(instrutorId);
             return _mapper.Map<List<DisciplinaDTO>>(disciplinasDB);
         }
+
     }
 }

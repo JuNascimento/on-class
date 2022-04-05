@@ -19,7 +19,7 @@ namespace OnClass.API.Controllers
 
         // Disciplinas/GetDisciplinas
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<ActionResult<List<DisciplinaDTO>>> GetDisciplinas()
         {
             return Ok(await _disciplinaService.GetDisciplinaDTOs());
@@ -33,19 +33,51 @@ namespace OnClass.API.Controllers
             return Ok(_disciplinaService.GetDisciplinasPorInstrutor(instrutorId));
         }
 
-        // Disciplinas/CriarDisciplinasInstrutor
+        // Disciplinas/GetDisciplinasPorEstudante/5
+        [HttpGet("{instrutorId:long}")]
+        [Authorize(Roles = "Estudante")]
+        public ActionResult<List<DisciplinaDTO>> GetDisciplinasPorEstudante(long estudanteId)
+        {
+            return Ok(_disciplinaService.GetDisciplinasPorEstudante(estudanteId));
+        }
+
+        // Disciplinas/EditarDisciplinasEstudante
         [HttpPost]
-        [Authorize(Roles = "Instrutor")]
-        public async Task<ActionResult<DisciplinasParaLecionarDTO>> CriarDisciplinasInstrutor(DisciplinasParaLecionarDTO disciplinasParaLecionarDTO)
+        [Authorize(Roles = "Estudante")]
+        public async Task<ActionResult<DisciplinasParaCursarDTO>> EditarDisciplinasEstudante(DisciplinasParaCursarDTO disciplinasParaCursarDTO)
         {
             try
             {
-                var disciplinasParaLecionarNovo = await _disciplinaService.CriarDisciplinasInstrutor(disciplinasParaLecionarDTO);
+                DisciplinasParaCursarDTO disciplinasParaCursarNovo = await _disciplinaService.EditarDisciplinasEstudante(disciplinasParaCursarDTO);
+                if (disciplinasParaCursarNovo is null)
+                {
+                    return NoContent();
+                }
+                return Created("EditarDisciplinasEstudante", disciplinasParaCursarNovo);
+            }
+            catch (DuplicatedEntryException e)
+            {
+                return UnprocessableEntity(new { message = e.Message, disciplinasParaCursarDTO });
+            }
+            catch (Exception e)
+            {
+                return UnprocessableEntity(new { message = e.Message, disciplinasParaCursarDTO });
+            }
+        }
+
+        // Disciplinas/EditarDisciplinasInstrutor
+        [HttpPost]
+        [Authorize(Roles = "Instrutor")]
+        public async Task<ActionResult<DisciplinasParaLecionarDTO>> EditarDisciplinasInstrutor(DisciplinasParaLecionarDTO disciplinasParaLecionarDTO)
+        {
+            try
+            {
+                var disciplinasParaLecionarNovo = await _disciplinaService.EditarDisciplinasInstrutor(disciplinasParaLecionarDTO);
                 if (disciplinasParaLecionarNovo is null)
                 {
                     return NoContent();
                 }
-                return Created("CriarDisciplinasInstrutor", disciplinasParaLecionarNovo);
+                return Created("EditarDisciplinasInstrutor", disciplinasParaLecionarNovo);
             }
             catch (DuplicatedEntryException e)
             {

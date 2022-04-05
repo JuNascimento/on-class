@@ -2,7 +2,8 @@
 
 namespace OnClass.Infra.Repositories.Interfaces
 {
-    public interface IEstudanteRepository : IBaseRepository<Estudante>
+    public interface IEstudanteDisciplinaRepository : IBaseRepository<EstudanteDisciplina>
     {
+        Task<bool> InserirDisplicinasDoEstudante(List<EstudanteDisciplina> estudanteDisciplinasList);
     }
 }

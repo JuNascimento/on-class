@@ -19,5 +19,8 @@ namespace OnClass.DTO
 
         [JsonPropertyName("token")]
         public string? Token { get; set; }
+
+        [JsonPropertyName("primeiro_login")]
+        public bool? PrimeiroLogin { get; set; }
     }
 }

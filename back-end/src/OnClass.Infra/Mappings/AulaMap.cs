@@ -15,8 +15,11 @@ namespace OnClass.Infra.Mappings
             builder.Property(p => p.DataInicio).HasColumnName("DATA_INICIO");
             builder.Property(p => p.DataFim).HasColumnName("DATA_FIM");
 
-            builder.Property(p => p.InstrutorDisciplinaId).HasColumnName("INSTRUTOR_DISCIPLINA_ID");
-            builder.HasOne<Instrutor>().WithMany().HasForeignKey(f => f.InstrutorDisciplinaId);
+            builder.HasOne<Instrutor>().WithMany().HasForeignKey(f => f.InstrutorId);
+            builder.Property(p => p.InstrutorId).HasColumnName("INSTRUTOR_ID");
+
+            builder.HasOne<Disciplina>().WithMany().HasForeignKey(f => f.DisciplinaId);
+            builder.Property(p => p.DisciplinaId).HasColumnName("DISCIPLINA_ID");
         }
     }
 }

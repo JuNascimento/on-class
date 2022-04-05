@@ -15,6 +15,7 @@ namespace OnClass.Infra.Mappings
             builder.Property(p => p.UserName).HasColumnName("USER_NAME");
             builder.Property(p => p.Password).HasColumnName("PASSWORD");
             builder.Property(p => p.Salt).HasColumnName("SALT");
+            builder.Property(p => p.PrimeiroLogin).HasColumnName("PRIMEIRO_LOGIN");
 
         }
     }

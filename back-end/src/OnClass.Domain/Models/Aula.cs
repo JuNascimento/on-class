@@ -2,7 +2,8 @@
 {
     public class Aula : BaseModel
     {
-        public long InstrutorDisciplinaId { get; set; }
+        public long? InstrutorId { get; set; }
+        public long? DisciplinaId { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
 

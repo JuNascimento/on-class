@@ -2,7 +2,8 @@
 
 namespace OnClass.Infra.Repositories.Interfaces
 {
-    public interface IEstudanteDisciplinaRepository : IBaseRepository<EstudanteDisciplina>
+    public interface IEstudanteRepository : IBaseRepository<Estudante>
     {
+        public Task<Estudante> GetEstudanteByUserId(long userId);
     }
 }
