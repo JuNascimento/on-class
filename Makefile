@@ -17,7 +17,7 @@ client-fix-lint:
 	cd client && yarn fix-lint
 
 client-docker-build: 
-	cd client && docker build -t onclass:latest .
+	cd client && docker build -t onclass . 
 
 client-docker-run: 
-	cd client && docker run -it -p 3000:3000 onclass
+	cd client && docker run -it -p 3000:3000 onclass --name onclass-front
