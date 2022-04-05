@@ -31,7 +31,7 @@
         ✔ Registrar Repository @done(22-04-03 14:55)
         ✔ Registrar Service @done(22-04-03 14:55)
         ✔ Controller @done(22-04-03 14:55)
-    ☐ Criar controller para definir as disciplinas à ministrar
+    ✔ Criar controller para definir as disciplinas à ministrar @done(22-04-04 23:36)
 
 2 - Gerenciar chamadas de vídeo:
     ✔ Adiocionar SignalR no back-end @done(22-04-03 14:56)

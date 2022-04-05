@@ -29,11 +29,8 @@ namespace OnClass.Service.Authentication
 
         public async Task<EstudanteDTO> CreateEstudante(EstudanteDTO estudanteDTO)
         {
-            
-            if (await VerificaUserName(estudanteDTO.UserName))
-            {
-                throw new DuplicatedEntryException("Já existe usuário com esse nome");
-            }
+
+            await VerificaUserName(estudanteDTO.UserName);
 
             var user = _mapper.Map<User>(estudanteDTO);
             var userDB = await CreateUser(user);
@@ -50,17 +47,18 @@ namespace OnClass.Service.Authentication
 
         }
 
-        private async Task<bool> VerificaUserName(string username)
+        private async Task VerificaUserName(string username)
         {
-            return await _uow.UserRepository.VerificaUserNameDisponivel(username);
+            if(await _uow.UserRepository.VerificaUserNameDisponivel(username))
+            {
+                throw new DuplicatedEntryException("Já existe usuário com esse nome");
+            };
+
         }
 
         public async Task<InstrutorDTO> CreateInstrutor(InstrutorDTO instrutorDTO)
         {
-            if (await VerificaUserName(instrutorDTO.UserName))
-            {
-                throw new DuplicatedEntryException("Já existe usuário com esse nome");
-            }
+            await VerificaUserName(instrutorDTO.UserName);
 
             var user = _mapper.Map<User>(instrutorDTO);
             var userDB = await CreateUser(user);
