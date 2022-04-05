@@ -2,7 +2,6 @@
 using OnClass.Domain.Models;
 using OnClass.Infra.Context;
 using OnClass.Infra.Repositories.Interfaces;
-using System.Data.SqlClient;
 
 namespace OnClass.Infra.Repositories
 {

@@ -9,4 +9,13 @@ namespace OnClass.DTO
         [JsonPropertyName("cpf")]
         public string? Cpf { get; set; }
     }
+
+    public class InstrutorBasicDTO
+    {
+        [JsonPropertyName("id")]
+        public long? Id { get; set; }
+
+        [JsonPropertyName("nome")]
+        public string? NomeCompleto { get; set; }
+    }
 }

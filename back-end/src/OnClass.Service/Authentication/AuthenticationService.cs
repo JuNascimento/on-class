@@ -22,7 +22,6 @@ namespace OnClass.Service.Authentication
 
         private async Task<User> CreateUser(User user)
         {
-            //user.Password = HashGenerator.HashString(user.Password, salt);
             user.GenerateHash();
             var userDB = await _uow.UserRepository.Create(user);
             return userDB;
@@ -30,7 +29,8 @@ namespace OnClass.Service.Authentication
 
         public async Task<EstudanteDTO> CreateEstudante(EstudanteDTO estudanteDTO)
         {
-            if (await _uow.UserRepository.VerificaUserNameDisponivel(estudanteDTO.UserName))
+            
+            if (await VerificaUserName(estudanteDTO.UserName))
             {
                 throw new DuplicatedEntryException("Já existe usuário com esse nome");
             }
@@ -50,11 +50,16 @@ namespace OnClass.Service.Authentication
 
         }
 
+        private async Task<bool> VerificaUserName(string username)
+        {
+            return await _uow.UserRepository.VerificaUserNameDisponivel(username);
+        }
+
         public async Task<InstrutorDTO> CreateInstrutor(InstrutorDTO instrutorDTO)
         {
-            if (await _uow.UserRepository.VerificaUserNameDisponivel(instrutorDTO.UserName))
+            if (await VerificaUserName(instrutorDTO.UserName))
             {
-                throw new DuplicatedEntryException("");
+                throw new DuplicatedEntryException("Já existe usuário com esse nome");
             }
 
             var user = _mapper.Map<User>(instrutorDTO);
@@ -80,6 +85,7 @@ namespace OnClass.Service.Authentication
                 var usuario = await _uow.UserRepository.GetInfoByUserId(userDB.Id);
                 var authenticatedUser = new AuthenticatedUserDTO
                 {
+                    Id = userDB.Id,
                     UserName = userDB.UserName,
                     Nome = usuario.NomeCompleto,
                     Role = usuario.GetType().Name

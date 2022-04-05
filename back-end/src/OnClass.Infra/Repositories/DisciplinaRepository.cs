@@ -13,5 +13,18 @@ namespace OnClass.Infra.Repositories
         {
 
         }
+
+        public List<Disciplina> GetDisciplinasPorInstrutor(long instrutorId)
+        {
+            var disciplinas = _context.Disciplinas.Join(
+                _context.InstrutorDisciplinas.Where(e => e.InstrutorId == instrutorId),
+                disciplina => disciplina.Id,
+                instrutorDisciplina => instrutorDisciplina.DisciplinaId,
+                (disciplina, instrutorDisciplina) => new Disciplina{
+                    Id = disciplina.Id,
+                    Nome = disciplina.Nome
+                });
+            return disciplinas.ToList();
+        }
     }
 }

@@ -14,6 +14,7 @@ using OnClass.Service.Data;
 using Moq;
 using OnClass.Service.Data.Interfaces;
 using OnClass.Exceptions;
+using OnClass.Service.Authentication.Interfaces;
 
 namespace OnClass.Test.Unit.Controllers.Users
 {
@@ -21,7 +22,7 @@ namespace OnClass.Test.Unit.Controllers.Users
     {
 
         private readonly UsersController _sut;
-        private readonly Mock<IUserService> mockService = new Mock<IUserService>();
+        private readonly Mock<IAuthenticationService> mockService = new Mock<IAuthenticationService>();
 
         public CreateUserTest()
         {

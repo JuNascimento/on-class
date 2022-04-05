@@ -18,7 +18,7 @@ namespace OnClass.Helpers
             var rolesClaims = new List<Claim> { 
                 new Claim(ClaimTypes.Role, authenticatedUserDTO.Role),
                 new Claim(ClaimTypes.Name, authenticatedUserDTO.Nome),
-                new Claim("Id", authenticatedUserDTO.Role)
+                new Claim("Id", authenticatedUserDTO.Id.ToString())
             };
             var tokenDescriptor = new SecurityTokenDescriptor
             {
