@@ -10,6 +10,7 @@ namespace OnClass.Mapper
             var autoMapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<UserProfile>();
+                cfg.AddProfile<DisciplinaProfile>();
             }
             );
             var mapper = autoMapperConfig.CreateMapper();

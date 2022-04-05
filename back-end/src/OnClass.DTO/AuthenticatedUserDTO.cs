@@ -5,6 +5,9 @@ namespace OnClass.DTO
 {
     public class AuthenticatedUserDTO
     {
+        [JsonPropertyName("user_id")]
+        public long? Id { get; set; }
+
         [JsonPropertyName("username")]
         public string? UserName { get; set; }
 

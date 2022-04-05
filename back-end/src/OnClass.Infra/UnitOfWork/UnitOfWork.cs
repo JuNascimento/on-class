@@ -1,5 +1,6 @@
 ﻿using OnClass.Infra.Context;
 using OnClass.Infra.Repositories;
+using OnClass.Infra.Repositories.Interfaces;
 using System;
 
 namespace OnClass.Infra.UnitOfWork
@@ -19,31 +20,31 @@ namespace OnClass.Infra.UnitOfWork
         private InstrutorDisciplinaRepository instrutorDisciplinaRepository;
         private UserRepository userRepository;
 
-        public virtual AulaRepository AulaRepository =>
+        public virtual IAulaRepository AulaRepository =>
             aulaRepository ??= new AulaRepository(applicationContext);
 
-        public DisciplinaRepository DisciplinaRepository =>
+        public virtual IDisciplinaRepository DisciplinaRepository =>
             disciplinaRepository ??= new DisciplinaRepository(applicationContext);
 
-        public DocumentoAulaRepository DocumentoAulaRepository =>
+        public virtual IDocumentoAulaRepository DocumentoAulaRepository =>
             documentoAulaRepository ??= new DocumentoAulaRepository(applicationContext);
 
-        public EstudanteRepository EstudanteRepository =>
+        public virtual IEstudanteRepository EstudanteRepository =>
             estudanteRepository ??= new EstudanteRepository(applicationContext);
 
-        public EstudanteDisciplinaRepository EstudanteDisciplinaRepository =>
+        public virtual IEstudanteDisciplinaRepository EstudanteDisciplinaRepository =>
             estudanteDisciplinaRepository ??= new EstudanteDisciplinaRepository(applicationContext);
 
-        public FrequenciaAulaRepository FrequenciaAulaRepository =>
+        public virtual IFrequenciaAulaRepository FrequenciaAulaRepository =>
             frequenciaAulaRepository ??= new FrequenciaAulaRepository(applicationContext);
 
-        public InstrutorRepository InstrutorRepository =>
+        public virtual IInstrutorRepository InstrutorRepository =>
             instrutorRepository ??= new InstrutorRepository(applicationContext);
 
-        public InstrutorDisciplinaRepository InstrutorDisciplinaRepository =>
+        public virtual IInstrutorDisciplinaRepository InstrutorDisciplinaRepository =>
             instrutorDisciplinaRepository ??= new InstrutorDisciplinaRepository(applicationContext);
 
-        public UserRepository UserRepository =>
+        public virtual IUserRepository UserRepository =>
             userRepository ??= new UserRepository(applicationContext);
 
         public UnitOfWork(ApplicationContext _applicationContext)

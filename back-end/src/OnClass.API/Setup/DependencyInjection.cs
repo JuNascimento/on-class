@@ -16,6 +16,7 @@ namespace OnClass.API.Setup
             services.AddScoped<IAulaRepository, AulaRepository>();
 
             services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
+            services.AddScoped<IDisciplinaService, DisciplinaService>();
 
             services.AddScoped<IDocumentoAulaRepository, DocumentoAulaRepository>();
 

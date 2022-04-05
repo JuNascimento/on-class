@@ -69,7 +69,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationContext>
-    (options => options.UseMySql(ConnectionStringBuilder.Build(), Microsoft.EntityFrameworkCore.ServerVersion.Parse(@"8.0.27-mysql")), ServiceLifetime.Transient);
+    (options => options.UseMySql(ConnectionStringBuilder.Build(), Microsoft.EntityFrameworkCore.ServerVersion.Parse(@"8.0.27-mysql")), ServiceLifetime.Scoped);
 
 builder.Services.RegisterServices();
 
