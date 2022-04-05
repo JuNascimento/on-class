@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
-import { SupportMaterial, Menu, Tab, Content, Iframe } from './index.style'
+import {
+  SupportMaterial,
+  Menu,
+  Tab,
+  Content,
+  Iframe,
+  Links,
+  Link,
+} from './index.style'
 
 interface Props {
   type: string
@@ -10,6 +18,12 @@ const SupportMaterialContainer: React.FC<Props> = ({
   type,
   toggleSupportMaterial,
 }) => {
+  const LINKS = [
+    { link: 'https://www.instagram.com/', label: 'Instagram' },
+    { link: 'https://www.facebook.com/', label: 'Facebook' },
+    { link: 'https://www.google.com.br/', label: 'Google' },
+    { link: 'https://ge.globo.com/', label: 'ge.globo' },
+  ]
   const [activeTabIndex, setActiveTabIndex] = useState(1)
 
   const tab1Content = () => {
@@ -23,16 +37,20 @@ const SupportMaterialContainer: React.FC<Props> = ({
 
   const tab2Content = () => {
     return (
-      <div data-testid='content'>
-        <h1> links uteis</h1>
+      <Links data-testid='content'>
         <ol>
-          <li>link 1</li>
-          <li>link 2</li>
-          <li>link 3</li>
-          <li>link 4</li>
-          <li>link 5</li>
+          {LINKS.map((key, value) => {
+            console.log(key.link)
+            return (
+              <Link key={value}>
+                <a href={key.link} target='_blank' rel='noreferrer'>
+                  {key.label}
+                </a>
+              </Link>
+            )
+          })}
         </ol>
-      </div>
+      </Links>
     )
   }
 

@@ -21,7 +21,7 @@ const HomePageContainer: React.FC = () => {
           <div>
             <Subtitle>Professor(a)</Subtitle>
             <Link data-testid='login-teacher' to='/teacher/login'>
-              <LoginButton>Entrar</LoginButton>
+              <LoginButton isDisabled={false}>Entrar</LoginButton>
             </Link>
           </div>
         </Role>
@@ -30,7 +30,7 @@ const HomePageContainer: React.FC = () => {
           <div>
             <Subtitle data-testid='login-student'>Aluno(a)</Subtitle>
             <Link to='/student/login'>
-              <LoginButton>Entrar</LoginButton>
+              <LoginButton isDisabled={false}>Entrar</LoginButton>
             </Link>
           </div>
         </Role>
@@ -39,7 +39,7 @@ const HomePageContainer: React.FC = () => {
           <div>
             <Subtitle data-testid='new-user'>Não tem cadastro ainda?</Subtitle>
             <Link to='/new-user'>
-              <LoginButton>Cadastre-se aqui!</LoginButton>
+              <LoginButton isDisabled={false}>Cadastre-se aqui!</LoginButton>
             </Link>
           </div>
         </Role>

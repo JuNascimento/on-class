@@ -40,14 +40,21 @@ export const Role = styled.section<Props>`
   flex-direction: ${p => p.direction};
   background-color: rgba(248, 210, 210, 0.15);
   border-radius: 10px;
+  padding: 10px;
 `
 
-export const LoginButton = styled.button`
+interface ButtonProps {
+  isDisabled: boolean
+}
+
+export const LoginButton = styled.button<ButtonProps>`
   background-color: #ff5757;
   padding: 10px 40px;
   border-radius: 50px;
-  cursor: pointer;
+  cursor: ${p => (p.isDisabled ? 'not-allowed' : 'pointer')};
   border: none;
+  margin: 10px 0;
+  color: ${p => (p.isDisabled ? 'white' : 'black')};
 
   :hover {
     background-color: rgba(248, 210, 210, 0.9);
@@ -62,7 +69,7 @@ export const InputFieldsColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
 `
 
@@ -70,19 +77,19 @@ export const InputFieldsRow = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
 `
 
-export const Input = styled.input`
+interface InputProps {
+  showError: boolean
+}
+export const Input = styled.input<InputProps>`
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #f8d2d2ca;
   width: 200px;
-
-  &:focus-visible {
-    outline: unset;
-  }
+  outline: ${p => (p.showError ? '1px solid red;' : 'unset')};
 `
 
 export const Label = styled.label`
@@ -95,7 +102,6 @@ export const Password = styled.div`
   width: 100%;
   flex-direction: row;
   justify-content: center;
-  margin-left: 22px;
 `
 
 export const ShowPasswordToggle = styled.span`
@@ -105,8 +111,21 @@ export const ShowPasswordToggle = styled.span`
   right: 33px;
 `
 
-export const Category = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const Select = styled.select`
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #f8d2d2ca;
+  width: 200px;
+
+  &:focus-visible {
+    outline: unset;
+  }
+`
+
+export const Error = styled.div`
+  font-size: 8px;
+  color: red;
+  z-index: 9999;
+  position: absolute;
+  margin-top: 90px;
 `

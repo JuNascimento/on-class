@@ -51,3 +51,14 @@ export const Iframe = styled.iframe`
   width: 100%;
   height: 72.8vh;
 `
+
+export const Links = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: 'flex-start';
+`
+
+export const Link = styled.li`
+  margin: 10px 0;
+`

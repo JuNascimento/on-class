@@ -1,15 +1,15 @@
 import React from 'react'
 import HeaderContainer from '../header'
-import OnGoingClassContainer from '../on-going-class'
+import OnGoingClassContainer from '../onGoingClass'
 
 interface Props {
-  type: string
+  role: string
 }
-export const Class: React.FC<Props> = ({ type }) => {
+export const Class: React.FC<Props> = ({ role }) => {
   return (
     <>
       <HeaderContainer />
-      <OnGoingClassContainer type={type} />
+      <OnGoingClassContainer type={role} />
     </>
   )
 }

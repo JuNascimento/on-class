@@ -3,11 +3,11 @@ import Login from './login'
 import { MemoryRouter } from 'react-router-dom'
 
 describe('Login', () => {
-  describe('when type is teacher', () => {
+  describe('when role is teacher', () => {
     beforeEach(() => {
       render(
         <MemoryRouter>
-          <Login type='teacher' />
+          <Login role='teacher' />
         </MemoryRouter>
       )
     })
@@ -31,11 +31,11 @@ describe('Login', () => {
     })
   })
 
-  describe('when type is student', () => {
+  describe('when role is student', () => {
     beforeEach(() => {
       render(
         <MemoryRouter>
-          <Login type='student' />
+          <Login role='student' />
         </MemoryRouter>
       )
     })
