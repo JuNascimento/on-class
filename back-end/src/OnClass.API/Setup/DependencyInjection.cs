@@ -1,9 +1,11 @@
-﻿using OnClass.Infra.Repositories;
+﻿using OnClass.Service.Authentication;
+using OnClass.Infra.Repositories;
 using OnClass.Infra.Repositories.Interfaces;
 using OnClass.Infra.UnitOfWork;
 using OnClass.Mapper;
 using OnClass.Service.Data;
 using OnClass.Service.Data.Interfaces;
+using OnClass.Service.Authentication.Interfaces;
 
 namespace OnClass.API.Setup
 {
@@ -28,7 +30,8 @@ namespace OnClass.API.Setup
             services.AddScoped<IInstrutorDisciplinaRepository, InstrutorDisciplinaRepository>();
 
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
+            
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 

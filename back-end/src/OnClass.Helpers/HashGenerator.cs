@@ -1,31 +1,35 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
+using OnClass.Domain.Models;
 
 namespace OnClass.Helpers
 {
     public static class HashGenerator
     {
-        public static string HashString(string text, string salt = "")
+        public static void GenerateHash(this User user)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                return string.Empty;
-            }
+            var salt = GenerateSalt();
+            user.Salt = Convert.ToBase64String(salt);
+            user.Password = ComputeHash(user.Password, user.Salt);
 
-            // Uses SHA256 to create the hash
-            using var sha = SHA256.Create();
+        }
 
-            // Convert the string to a byte array first, to be processed
-            byte[] textBytes = Encoding.UTF8.GetBytes(text + salt);
-            byte[] hashBytes = sha.ComputeHash(textBytes);
+        private static byte[] GenerateSalt()
+        {
+            var randomNumber = RandomNumberGenerator.Create();
+            var salt = new byte[32];
+            randomNumber.GetBytes(salt);
+            return salt;
+        }
 
-            // Convert back to a string, removing the '-' that BitConverter adds
-            string hash = BitConverter
-                .ToString(hashBytes)
-                .Replace("-", string.Empty);
+        public static string ComputeHash(string password, string saltString)
+        {
+            var salt = Convert.FromBase64String(saltString);
 
-            return hash;
-
+            using var hashGenator = new Rfc2898DeriveBytes(password,salt);
+            hashGenator.IterationCount = 1024;
+            var bytes = hashGenator.GetBytes(32);
+            return Convert.ToBase64String(bytes);
         }
     }
 }
