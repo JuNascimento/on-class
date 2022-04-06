@@ -5,7 +5,6 @@ namespace OnClass.DTO
 {
     public class EstudanteDTO : UserDTO
     {
-
         [Required]
         [JsonPropertyName("nome_mae")]
         public string? NomeMae { get; set; }

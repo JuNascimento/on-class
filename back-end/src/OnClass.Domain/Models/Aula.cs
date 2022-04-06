@@ -6,6 +6,7 @@
         public long? DisciplinaId { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
+        public string? Uuid { get; set; }
 
     }
 }

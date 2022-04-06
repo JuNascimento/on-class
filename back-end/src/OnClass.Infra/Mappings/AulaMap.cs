@@ -14,6 +14,7 @@ namespace OnClass.Infra.Mappings
 
             builder.Property(p => p.DataInicio).HasColumnName("DATA_INICIO");
             builder.Property(p => p.DataFim).HasColumnName("DATA_FIM");
+            builder.Property(p => p.Uuid).HasColumnName("UUID");
 
             builder.HasOne<Instrutor>().WithMany().HasForeignKey(f => f.InstrutorId);
             builder.Property(p => p.InstrutorId).HasColumnName("INSTRUTOR_ID");

@@ -11,6 +11,7 @@ namespace OnClass.Mapper
             {
                 cfg.AddProfile<UserProfile>();
                 cfg.AddProfile<DisciplinaProfile>();
+                cfg.AddProfile<AulaProfile>();
             }
             );
             var mapper = autoMapperConfig.CreateMapper();
