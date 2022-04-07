@@ -17,7 +17,7 @@
         ✔ Registrar Repository @done(22-04-03 14:55)
         ✔ Registrar Service @done(22-04-03 14:55)
         ✔ Controller @done(22-04-03 14:55)
-    ☐ Criar controller para definir as disciplinas à cursar
+    ✔ Criar controller para definir as disciplinas à cursar @done(22-04-05 22:59)
 
     ✔ Criar controller para cadastro de Instrutor @done(22-04-03 14:55)
         ✔ Model @done(22-04-03 14:55)
@@ -31,7 +31,7 @@
         ✔ Registrar Repository @done(22-04-03 14:55)
         ✔ Registrar Service @done(22-04-03 14:55)
         ✔ Controller @done(22-04-03 14:55)
-    ☐ Criar controller para definir as disciplinas à ministrar
+    ✔ Criar controller para definir as disciplinas à ministrar @done(22-04-04 23:36)
 
 2 - Gerenciar chamadas de vídeo:
     ✔ Adiocionar SignalR no back-end @done(22-04-03 14:56)
@@ -43,12 +43,12 @@
 
 3 - Gerenciar chat nas chamadas de vídeo:
     ✔ Transmitir dados de vídeo de um cliente para outro @done(22-04-03 15:00)
-    ☐ Criar método para envar mensagens apenas para a sala de vídeo atual
+    ☐ Criar método para enviar mensagens apenas para a sala de vídeo atual
 
 4 - API de login:
     ✔ Implementar login único para Estudante e Instrutor @done(22-04-03 21:57)
     ✔ Implementar Token JWT @done(22-04-03 21:57)
-    ☐ Adicionar autenticação e autorização nas rotas
+    ✔ Adicionar autenticação e autorização nas rotas @done(22-04-05 22:59)
     ☐ Adicionar autenticação e autorização nos hubs
 
 5 - API para marcação de aulas:
@@ -58,12 +58,12 @@
     ✔ Registrar no ApplicationContext @done(22-04-03 15:04)
     ✔ Registrar no IUOF @done(22-04-03 15:04)
     ✔ Registrar no UOF @done(22-04-03 15:04)
-    ☐ DTO
-    ☐ Service
-        ☐ Criar regras para marcar aulas
+    ✔ DTO @done(22-04-05 22:59)
+    ✔ Service @done(22-04-05 22:59)
+        ✔ Criar regras para marcar aulas @done(22-04-05 22:59)
     ✔ Registrar Repository @done(22-04-03 15:04)
     ✔ Registrar Service @done(22-04-03 15:04)
-    ☐ Controller
+    ✔ Controller @done(22-04-05 22:59)
     ☐ (?) Desmarcar aula
     ☐ Links da Aula (DTO : {link: "string, label: "string"})
         ☐ Criar tabela no banco
@@ -82,12 +82,12 @@
     ✔ Registrar no ApplicationContext @done(22-04-03 15:04)
     ✔ Registrar no IUOF @done(22-04-03 15:04)
     ✔ Registrar no UOF @done(22-04-03 15:04)
-    ☐ DTO
-    ☐ Service
-        ☐ Criar regras para se inscrever aulas
+    ✔ DTO @done(22-04-05 22:59)
+    ✔ Service @done(22-04-05 22:59)
+        ✔ Criar regras para se inscrever aulas @done(22-04-05 22:59)
     ✔ Registrar Repository @done(22-04-03 15:04)
     ✔ Registrar Service @done(22-04-03 15:04)
-    ☐ Controller
+    ✔ Controller @done(22-04-05 23:00)
     ☐ (?) Desmarcar aula
 
 7 - API para fazer upload e download de arquivos:

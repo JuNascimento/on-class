@@ -1,4 +1,5 @@
-﻿using OnClass.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OnClass.Domain.Models;
 using OnClass.Infra.Context;
 using OnClass.Infra.Repositories.Interfaces;
 
@@ -12,6 +13,12 @@ namespace OnClass.Infra.Repositories
         public EstudanteRepository()
         {
 
+        }
+
+        public async Task<Estudante> GetEstudanteByUserId(long? userId)
+        {
+            var estudante = await _context.Estudantes.SingleOrDefaultAsync(e => e.UserId == userId);
+            return estudante;
         }
     }
 }

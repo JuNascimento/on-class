@@ -4,8 +4,10 @@ namespace OnClass.Service.Data.Interfaces
 {
     public interface IDisciplinaService
     {
+        Task<DisciplinasParaCursarDTO> EditarDisciplinasEstudante(DisciplinasParaCursarDTO disciplinasParaCursarDTO);
+        Task<DisciplinasParaLecionarDTO> EditarDisciplinasInstrutor(DisciplinasParaLecionarDTO disciplinasParaLecionarDTO);
         Task<List<DisciplinaDTO>> GetDisciplinaDTOs();
-        Task<DisciplinasParaLecionarDTO> CriarDisciplinasInstrutor(DisciplinasParaLecionarDTO disciplinasParaLecionarDTO);
-        List<DisciplinaDTO> GetDisciplinasPorInstrutor(long instrutorId);
+        Task<List<DisciplinaDTO>> GetDisciplinasPorEstudante(long estudanteId);
+        Task<List<DisciplinaDTO>> GetDisciplinasPorInstrutor(long instrutorId);
     }
 }

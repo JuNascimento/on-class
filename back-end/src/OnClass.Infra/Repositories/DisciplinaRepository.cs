@@ -26,5 +26,19 @@ namespace OnClass.Infra.Repositories
                 });
             return disciplinas.ToList();
         }
+
+        public List<Disciplina> GetDisciplinasPorEstudante(long estudanteId)
+        {
+            var disciplinas = _context.Disciplinas.Join(
+                _context.EstudanteDisciplinas.Where(e => e.EstudanteId == estudanteId),
+                disciplina => disciplina.Id,
+                estudanteDisciplina => estudanteDisciplina.DisciplinaId,
+                (disciplina, estudanteDisciplina) => new Disciplina
+                {
+                    Id = disciplina.Id,
+                    Nome = disciplina.Nome
+                });
+            return disciplinas.ToList();
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace OnClass.API.Controllers
             _authenticationService = authenticationService;
         }
 
+        // POST: Login
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO userDTO)
