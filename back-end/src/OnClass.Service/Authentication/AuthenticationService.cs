@@ -84,7 +84,6 @@ namespace OnClass.Service.Authentication
                 var usuario = await _uow.UserRepository.GetInfoByUserId(userDB.Id);
                 var authenticatedUser = new AuthenticatedUserDTO
                 {
-                    Id = userDB.Id,
                     UserName = userDB.UserName,
                     Nome = usuario.NomeCompleto,
                     Role = usuario.GetType().Name,
@@ -94,7 +93,15 @@ namespace OnClass.Service.Authentication
                 authenticatedUser.GenerateToken();
                 userDB.PrimeiroLogin = false;
                 await _uow.UserRepository.Update(userDB.Id, userDB);
-                return authenticatedUser;
+                if(usuario is Instrutor)
+                {
+                    var instrutor = new AuthenticatedInstrutorDTO(usuario.Id, authenticatedUser);
+                    instrutor.GenerateToken();
+                    return instrutor;
+                }
+                var estudante = new AuthenticatedEstudanteDTO(usuario.Id, authenticatedUser);
+                estudante.GenerateToken();
+                return estudante;
             }
             return null;
         }
