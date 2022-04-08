@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnClass.DTO;
 using OnClass.Exceptions;
 using OnClass.Service.Data.Interfaces;
+using OnClass.Service.FileHelper.Interfaces;
 
 namespace OnClass.API.Controllers
 {
@@ -11,10 +12,12 @@ namespace OnClass.API.Controllers
     public class AulasController : Controller
     {
         private readonly IAulaService _aulaService;
+        private readonly IFileHelperService _fileService;
 
-        public AulasController(IAulaService aulaService)
+        public AulasController(IAulaService aulaService, IFileHelperService fileService)
         {
             _aulaService = aulaService;
+            _fileService = fileService;
         }
 
         // GET: Aulas/GetAulas
@@ -26,8 +29,17 @@ namespace OnClass.API.Controllers
             return Ok(result);
         }
 
+        // GET: Aulas/GetAulas/5
+        [HttpGet("{aulaId}")]
+        [Authorize]
+        public async Task<ActionResult<List<AulaDTO>>> GetDocumentoAula(long aulaId)
+        {
+            var documentoAula = await _fileService.GetDocumentoAula(aulaId);
+            return Ok(documentoAula);
+        }
+
         // POST: Aulas/PesquisarAula
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         public ActionResult<List<AulaDTO>> PesquisarAula(BuscarAulaDTO buscarAulaDTO)
         {

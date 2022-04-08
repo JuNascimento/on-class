@@ -6,6 +6,8 @@ using OnClass.Mapper;
 using OnClass.Service.Data;
 using OnClass.Service.Data.Interfaces;
 using OnClass.Service.Authentication.Interfaces;
+using OnClass.Service.FileHelper;
+using OnClass.Service.FileHelper.Interfaces;
 
 namespace OnClass.API.Setup
 {
@@ -34,6 +36,8 @@ namespace OnClass.API.Setup
             services.AddScoped<IUserRepository, UserRepository>();
             
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+            services.AddScoped<IFileHelperService, FileHelperService>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 

@@ -34,6 +34,13 @@ services:
             - "25100:25100"
         networks: 
             - onclass-network
+        volumes:
+            - type: bind
+              source: ./src/OnClass.API/var/onclass
+              target: /app/var/data/onclass
+              read_only: false
+              bind:
+                propagation: shared
         depends_on:
             - mysql    
 

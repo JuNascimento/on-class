@@ -1,6 +1,18 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+
+ENV VOLUME_PATH=app/var/data/onclass
+VOLUME ${VOLUME_PATH}
+
+RUN mkdir -p ./${VOLUME_PATH}
+
+RUN useradd -ms /bin/bash userdockeronclass 
+
+RUN chown -R userdockeronclass ./${VOLUME_PATH}
+
+USER userdockeronclass
+
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build

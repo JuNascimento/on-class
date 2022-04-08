@@ -123,7 +123,7 @@ namespace OnClass.Infra.Repositories
             }
         }
 
-        public virtual async Task<T> Get(long id)
+        public virtual async Task<T> Get(long? id)
         {
             return await _context.Set<T>().FindAsync(id);
 

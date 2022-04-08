@@ -22,12 +22,11 @@ namespace OnClass.API.Controllers
 
         // POST: Users/CreateEstudante
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> CreateEstudante(EstudanteDTO estudanteDTO)
+        public async Task<ActionResult<AuthenticatedUserDTO>> CreateEstudante(EstudanteDTO estudanteDTO)
         {
             try
             {
                 var userNovo = await _authenticationService.CreateEstudante(estudanteDTO);
-                userNovo.Password = string.Empty;
                 return Created("CreateEstudante", userNovo);
             }
             catch (DuplicatedEntryException e)
@@ -40,12 +39,11 @@ namespace OnClass.API.Controllers
 
         // POST: Users/CreateInstrutor
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> CreateInstrutor(InstrutorDTO instrutorDTO)
+        public async Task<ActionResult<AuthenticatedUserDTO>> CreateInstrutor(InstrutorDTO instrutorDTO)
         {
             try
             {
                 var userNovo = await _authenticationService.CreateInstrutor(instrutorDTO);
-                userNovo.Password = string.Empty;
                 return Created("CreateInstrutor", userNovo);
             }
             catch (DuplicatedEntryException e)

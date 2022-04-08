@@ -36,9 +36,7 @@ namespace OnClass.Test.Unit.Controllers.Users
             var fixture = new Fixture().Customize(new AutoMoqCustomization());
             var estudante = fixture.Create<EstudanteDTO>();
 
-            mockService.Setup(x => x.CreateEstudante(It.IsAny<EstudanteDTO>()))
-                
-                .ReturnsAsync(estudante);
+            
 
 
             //Act

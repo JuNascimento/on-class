@@ -19,6 +19,11 @@ namespace OnClass.Service.Data
 
         public async Task<DisciplinasParaCursarDTO> EditarDisciplinasEstudante(DisciplinasParaCursarDTO disciplinasParaCursarDTO)
         {
+            var estudante = await _uow.EstudanteRepository.Get(disciplinasParaCursarDTO.EstudanteDTO.Id);
+            if(estudante is null)
+            {
+                throw new KeyNotFoundException($"Estudante não encontrado");
+            }
             var estudanteDisciplinasList = new List<EstudanteDisciplina>();
 
             var disciplinasParaDeletar = (await _uow.EstudanteDisciplinaRepository.Get())
@@ -49,6 +54,11 @@ namespace OnClass.Service.Data
 
         public async Task<DisciplinasParaLecionarDTO> EditarDisciplinasInstrutor(DisciplinasParaLecionarDTO disciplinasParaLecionarDTO)
         {
+            var instrutor = await _uow.InstrutorRepository.Get(disciplinasParaLecionarDTO.InstrutorDTO.Id);
+            if (instrutor is null)
+            {
+                throw new KeyNotFoundException($"Instrutor não encontrado");
+            }
             var instrutorDisciplinasList = new List<InstrutorDisciplina>();
 
              var disciplinasParaDeletar = (await _uow.InstrutorDisciplinaRepository.Get())

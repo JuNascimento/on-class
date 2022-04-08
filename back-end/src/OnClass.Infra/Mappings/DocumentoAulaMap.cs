@@ -13,8 +13,10 @@ namespace OnClass.Infra.Mappings
             builder.Property(p => p.Id).HasColumnName("ID");
 
             builder.Property(p => p.NomeOriginal).HasColumnName("NOME_ORGINAL");
+            builder.Property(p => p.NomeHash).HasColumnName("NOME_HASH");
             builder.Property(p => p.ExtensaoOriginal).HasColumnName("EXTENSAO_ORIGINAL");
             builder.Property(p => p.CaminhoDocumento).HasColumnName("CAMINHO_DOCUMENTO");
+            builder.Property(p => p.DataCriacao).HasColumnName("DATA_CRIACAO");
 
             builder.Property(p => p.AulaId).HasColumnName("AULA_ID");
             builder.HasOne<Aula>().WithMany().HasForeignKey(f => f.AulaId);

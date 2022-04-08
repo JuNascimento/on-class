@@ -55,13 +55,9 @@ namespace OnClass.API.Controllers
                 }
                 return Created("EditarDisciplinasEstudante", disciplinasParaCursarNovo);
             }
-            catch (DuplicatedEntryException e)
-            {
-                return UnprocessableEntity(new { message = e.Message, disciplinasParaCursarDTO });
-            }
             catch (Exception e)
             {
-                return UnprocessableEntity(new { message = e.Message, disciplinasParaCursarDTO });
+                return UnprocessableEntity(new { message = e.Message });
             }
         }
 
@@ -79,13 +75,9 @@ namespace OnClass.API.Controllers
                 }
                 return Created("EditarDisciplinasInstrutor", disciplinasParaLecionarNovo);
             }
-            catch (DuplicatedEntryException e)
-            {
-                return UnprocessableEntity(new { message = e.Message, disciplinasParaLecionarDTO });
-            }
             catch (Exception e)
             {
-                return UnprocessableEntity(new { message = e.Message, disciplinasParaLecionarDTO });
+                return UnprocessableEntity(new { message = e.Message });
             }
         }
     }

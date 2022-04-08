@@ -10,7 +10,7 @@ namespace OnClass.Infra.Repositories.Interfaces
         Task<T> Update(T obj);
         Task<T> Update(long id, T obj);
         Task<bool> Delete(long id);
-        Task<T> Get(long id);
+        Task<T> Get(long? id);
         Task<List<T>> Get();
         Task<bool> IsUniqueValue(T obj, string propertyName, object value);
     }

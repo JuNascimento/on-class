@@ -28,7 +28,7 @@ namespace OnClass.Service.Authentication
             return userDB;
         }
 
-        public async Task<EstudanteDTO> CreateEstudante(EstudanteDTO estudanteDTO)
+        public async Task<AuthenticatedUserDTO> CreateEstudante(EstudanteDTO estudanteDTO)
         {
 
             await VerificaUserName(estudanteDTO.UserName);
@@ -44,7 +44,7 @@ namespace OnClass.Service.Authentication
             var estudanteDTONovo = _mapper.Map<EstudanteDTO>(estudanteDB);
             estudanteDTONovo.UserName = userDB.UserName;
 
-            return estudanteDTONovo;
+            return await Login(estudanteDTO.UserName, estudanteDTO.Password);
 
         }
 
@@ -57,7 +57,7 @@ namespace OnClass.Service.Authentication
 
         }
 
-        public async Task<InstrutorDTO> CreateInstrutor(InstrutorDTO instrutorDTO)
+        public async Task<AuthenticatedUserDTO> CreateInstrutor(InstrutorDTO instrutorDTO)
         {
             await VerificaUserName(instrutorDTO.UserName);
 
@@ -72,7 +72,7 @@ namespace OnClass.Service.Authentication
             var instrutorDTONovo = _mapper.Map<InstrutorDTO>(instrutorDB);
             instrutorDTONovo.UserName = userDB.UserName;
 
-            return instrutorDTONovo;
+            return await Login(instrutorDTO.UserName, instrutorDTO.Password);
         }
 
         public async Task<AuthenticatedUserDTO> Login(string userName, string password)
