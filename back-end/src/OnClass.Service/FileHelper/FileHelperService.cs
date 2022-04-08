@@ -91,8 +91,13 @@ namespace OnClass.Service.FileHelper
             return fullPath;
         }
 
-        public async void DeleteFile(DocumentoAula arquivo)
+        public async Task DeleteFile(long documentoId)
         {
+            var arquivo = await _uow.DocumentoAulaRepository.Get(documentoId);
+            if(arquivo is null)
+            {
+                throw new FileNotFoundException("Arquivo não encontrado");
+            }
             DeleteFile(arquivo.CaminhoDocumento);
             await _uow.DocumentoAulaRepository.Delete(arquivo.Id);
         }

@@ -34,7 +34,7 @@ namespace OnClass.API.Controllers
 
         // Post: DownloadFiles/UploadFile
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Instrutor")]
         public async Task<ActionResult> UploadFile([FromForm] FileDTO fileDTO)
         {
             try
@@ -50,6 +50,23 @@ namespace OnClass.API.Controllers
             catch (Exception e)
             {
                 return BadRequest($"Não foi possivel salvar o arquivo:\n{e}");
+            }
+        }
+
+        // DELETE: DownloadFiles/Delete/5
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Instrutor")]
+        public async Task<ActionResult> Delete(long id)
+        {
+            try
+            {
+                await _fileService.DeleteFile(id);
+                return NoContent();
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {message = e.Message});
             }
         }
     }
