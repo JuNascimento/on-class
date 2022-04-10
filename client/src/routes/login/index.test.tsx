@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import Login from './login'
+import Login from '.'
 import { MemoryRouter } from 'react-router-dom'
 
 describe('Login', () => {

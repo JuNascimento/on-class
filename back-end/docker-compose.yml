@@ -1,44 +1,44 @@
-services: 
-    mysql:
-        image: mysql:8.0.27
-        platform: linux/amd64
-        container_name: onclass-db-mysql
-        env_file:
-            - ./db/configmap-dev.env
-        ports:
-            - "3306:3306"
-        networks: 
-            - onclass-network
+services:
+  mysql:
+    image: mysql:8.0.27
+    platform: linux/amd64
+    container_name: onclass-db-mysql
+    env_file:
+      - ./db/configmap-dev.env
+    ports:
+      - '3306:3306'
+    networks:
+      - onclass-network
 
-    flyway:
-        image: flyway/flyway
-        container_name: flyway-onclass
-        command: -connectRetries=60 migrate
-        volumes:
-            - ./flyway-docker/sql:/flyway/sql
-            - ./flyway-docker/config:/flyway/conf
-        depends_on:
-            - mysql
-        networks: 
-            - onclass-network
+  flyway:
+    image: flyway/flyway
+    container_name: flyway-onclass
+    command: -connectRetries=60 migrate
+    volumes:
+      - ./flyway-docker/sql:/flyway/sql
+      - ./flyway-docker/config:/flyway/conf
+    depends_on:
+      - mysql
+    networks:
+      - onclass-network
 
-    dotnet:
-        build: 
-            dockerfile: ./src/OnClass.API/Dockerfile
-            context: .
-        image: onclass-backend
-        container_name: onclass-back
-        env_file:
-            - ./src/OnClass.API/configmap-dev.env
-        ports:
-            - "25100:25100"
-        networks: 
-            - onclass-network
-        volumes:
-            - ./src/OnClass.API/var/onclass:/app/var/data/onclass
-        depends_on:
-            - mysql    
+  dotnet:
+    build:
+      dockerfile: ./src/OnClass.API/Dockerfile
+      context: .
+    image: onclass-backend
+    container_name: onclass-back
+    env_file:
+      - ./src/OnClass.API/configmap-dev.env
+    ports:
+      - '25100:25100'
+    networks:
+      - onclass-network
+    volumes:
+      - ./src/OnClass.API/var/onclass:/app/var/data/onclass
+    depends_on:
+      - mysql
 
-networks: 
-    onclass-network:
-        driver: bridge
+networks:
+  onclass-network:
+    driver: bridge

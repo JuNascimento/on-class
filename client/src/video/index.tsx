@@ -17,8 +17,7 @@ import {
 } from './index.style'
 
 interface Props {
-  // eslint-disable-next-line
-  setToggleSupportMaterial: any
+  setToggleSupportMaterial: (state: boolean) => void
   toggleSupportMaterial: boolean
   type: string
 }

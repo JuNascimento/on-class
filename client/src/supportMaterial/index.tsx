@@ -40,7 +40,6 @@ const SupportMaterialContainer: React.FC<Props> = ({
       <Links data-testid='content'>
         <ol>
           {LINKS.map((key, value) => {
-            console.log(key.link)
             return (
               <Link key={value}>
                 <a href={key.link} target='_blank' rel='noreferrer'>

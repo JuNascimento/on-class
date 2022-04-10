@@ -17,22 +17,31 @@ export const Title = styled.h1`
   padding: 10px 0;
 `
 
-export const Menu = styled.span`
-  position: fixed;
-  left: 20px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(255, 87, 87, 0.7);
-  }
-`
-
-export const Container = styled.section`
-  width: 25vw;
-  height: 80vh;
+export const Logout = styled.button`
+  padding: 10px 20px;
   border: 1px solid red;
-  left: 0;
+  border-radius: 5px;
   position: fixed;
-  background-color: #fff;
-  z-index: 99999999;
+  right: 5%;
+  cursor: pointer;
+  margin: -20px 0 0 0;
 `
+// export const Menu = styled.span`
+//   position: fixed;
+//   left: 20px;
+//   cursor: pointer;
+
+//   &:hover {
+//     background-color: rgba(255, 87, 87, 0.7);
+//   }
+// `
+
+// export const Container = styled.section`
+//   width: 25vw;
+//   height: 80vh;
+//   border: 1px solid red;
+//   left: 0;
+//   position: fixed;
+//   background-color: #fff;
+//   z-index: 99999999;
+// `

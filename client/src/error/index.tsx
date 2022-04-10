@@ -1,13 +1,14 @@
 import React from 'react'
-import { Error } from '../homePage/index.style'
+import { Error } from './index.style'
 
 interface ErrorProps {
+  type: string
   messageError: string
 }
 
-const ErrorTip: React.FC<ErrorProps> = ({ messageError }) => {
+const ErrorTip: React.FC<ErrorProps> = ({ type, messageError }) => {
   return (
-    <Error>
+    <Error type={type}>
       <p>{messageError}</p>
     </Error>
   )

@@ -9,8 +9,20 @@ import {
   LoginButton,
 } from './index.style'
 import { ManTeacherSvg, PersonSvg, QuestionMarkSvg } from '../icons'
+import { getSessionStorage } from '../helpers'
 
 const HomePageContainer: React.FC = () => {
+  const redirectDashboard = (role: string) => {
+    if (
+      (role === 'student' && getSessionStorage('student')) ||
+      (role === 'teacher' && getSessionStorage('teacher'))
+    ) {
+      window.location.href = `http://localhost:3000/${role}/dashboard`
+    } else {
+      window.location.href = `http://localhost:3000/${role}/login`
+    }
+  }
+
   return (
     <HomePage data-testid='login-screen-container'>
       <Title>Bem vinda(o) ao on-class app!</Title>
@@ -20,18 +32,24 @@ const HomePageContainer: React.FC = () => {
           <ManTeacherSvg />
           <div>
             <Subtitle>Professor(a)</Subtitle>
-            <Link data-testid='login-teacher' to='/teacher/login'>
-              <LoginButton isDisabled={false}>Entrar</LoginButton>
-            </Link>
+            <LoginButton
+              isDisabled={false}
+              onClick={() => redirectDashboard('teacher')}
+            >
+              Entrar
+            </LoginButton>
           </div>
         </Role>
         <Role direction='row'>
           <PersonSvg width={'100px'} />
           <div>
             <Subtitle data-testid='login-student'>Aluno(a)</Subtitle>
-            <Link to='/student/login'>
-              <LoginButton isDisabled={false}>Entrar</LoginButton>
-            </Link>
+            <LoginButton
+              isDisabled={false}
+              onClick={() => redirectDashboard('student')}
+            >
+              Entrar
+            </LoginButton>
           </div>
         </Role>
         <Role direction='row'>

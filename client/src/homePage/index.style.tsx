@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const HomePage = styled.section`
-  margin-top: 40px;
+  /* margin-top: 40px; */
   max-height: 90vh;
   text-align: center;
 `
@@ -10,11 +10,13 @@ export const Title = styled.h1`
   text-align: center;
   margin: 10px 0 30px 0;
   font-size: 30px;
+  font-weight: 600;
 `
 
 export const Subtitle = styled.h3`
   font-size: 20px;
   margin: 10px 0 20px 0;
+  font-weight: 400;
 `
 
 export const Roles = styled.article`
@@ -48,16 +50,19 @@ interface ButtonProps {
 }
 
 export const LoginButton = styled.button<ButtonProps>`
-  background-color: #ff5757;
+  font-weight: 300;
+  background-color: ${p =>
+    p.isDisabled ? 'rgba(248, 210, 210, 0.9)' : '#ff5757'};
   padding: 10px 40px;
   border-radius: 50px;
   cursor: ${p => (p.isDisabled ? 'not-allowed' : 'pointer')};
-  border: none;
+  border: 1px solid rgba(248, 210, 210, 0.9);
   margin: 10px 0;
   color: ${p => (p.isDisabled ? 'white' : 'black')};
 
   :hover {
     background-color: rgba(248, 210, 210, 0.9);
+    border: 1px solid #ff5757;
   }
 
   :focus-visible {
@@ -120,12 +125,4 @@ export const Select = styled.select`
   &:focus-visible {
     outline: unset;
   }
-`
-
-export const Error = styled.div`
-  font-size: 8px;
-  color: red;
-  z-index: 9999;
-  position: absolute;
-  margin-top: 90px;
 `

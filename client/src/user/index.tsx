@@ -8,13 +8,13 @@ import {
   ShowPasswordToggle,
 } from '../homePage/index.style'
 import { ClosedEyeSvg, ManTeacherSvg, OpenedEyeSvg, PersonSvg } from '../icons'
-import ErrorTip from '../error/error'
+import ErrorTip from '../error'
 
 interface Props {
   role: string
   showPassword: boolean
-  handleChange: any
-  handleLogin: any
+  handleChange: () => void
+  handleLogin: (username: string, password: string) => void
   showError: boolean
 }
 
@@ -36,14 +36,16 @@ export const User: React.FC<Props> = ({
     <>
       {role === 'teacher' ? <ManTeacherSvg /> : <PersonSvg width={'100px'} />}
       <InputFieldsColumn>
-        {showError && <ErrorTip messageError={'Usuário não encontrado.'} />}
-        <Label>Nome de usuário: </Label>
+        {showError && (
+          <ErrorTip type='login' messageError={'Usuário ou senha inválidos!'} />
+        )}
+        <Label>Nome de usuário </Label>
         <Input
           showError={false}
           type='username'
           onChange={e => setUsername(e.target.value)}
         />
-        <Label>Senha: </Label>
+        <Label>Senha </Label>
         <Password>
           <Input
             showError={false}

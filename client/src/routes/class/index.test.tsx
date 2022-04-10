@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react'
-import Class from './class'
+import Class from '.'
 import { MemoryRouter } from 'react-router-dom'
 
 describe('Class', () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <Class type='teacher' />
+        <Class role='teacher' />
       </MemoryRouter>
     )
   })

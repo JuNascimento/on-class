@@ -10,13 +10,21 @@ import {
   Select,
 } from '../homePage/index.style'
 import { ClosedEyeSvg, OpenedEyeSvg } from '../icons'
-import ErrorTip from '../error/error'
+import ErrorTip from '../error'
 
 interface Props {
   showPassword: boolean
-  handleNewLogin: any
-  handleChange: any
-  showError: any
+  handleNewLogin: (
+    username: string,
+    name: string,
+    password: string,
+    birth: string,
+    motherName: string,
+    cpf: string,
+    userRole: string
+  ) => void
+  handleChange: () => void
+  showError: boolean
 }
 
 export const NewUser: React.FC<Props> = ({
@@ -59,7 +67,7 @@ export const NewUser: React.FC<Props> = ({
     <>
       <InputFieldsRow>
         <InputFieldsColumn>
-          <Label>Tipo de usuário: </Label>
+          <Label>Tipo de usuário </Label>
           <Select onChange={e => setRole(e.target.value)}>
             <option value=''>-----------</option>
             <option value='teacher'>Professor(a)</option>
@@ -71,7 +79,7 @@ export const NewUser: React.FC<Props> = ({
         <>
           <InputFieldsRow>
             <InputFieldsColumn>
-              <Label>Nome: </Label>
+              <Label>Nome </Label>
               <Input
                 type='text'
                 id='name'
@@ -80,21 +88,24 @@ export const NewUser: React.FC<Props> = ({
               />
             </InputFieldsColumn>
             <InputFieldsColumn>
-              {showError && (
-                <ErrorTip messageError={'Nome de usuário já existente.'} />
-              )}
-              <Label>Nome de usuário: </Label>
+              <Label>Nome de usuário </Label>
               <Input
                 type='text'
                 id='username'
                 showError={showError}
                 onChange={e => setUsername(e.target.value)}
               />
+              {showError && (
+                <ErrorTip
+                  type={'new-user'}
+                  messageError={'Nome de usuário já existente.'}
+                />
+              )}
             </InputFieldsColumn>
           </InputFieldsRow>
           <InputFieldsRow>
             <InputFieldsColumn>
-              <Label>Data de nascimento: </Label>
+              <Label>Data de nascimento </Label>
               <Input
                 type='date'
                 id='birthday'
@@ -104,7 +115,7 @@ export const NewUser: React.FC<Props> = ({
             </InputFieldsColumn>
             {role === 'student' && (
               <InputFieldsColumn>
-                <Label>Nome da mãe: </Label>
+                <Label>Nome da mãe </Label>
                 <Input
                   type='text'
                   id='motherName'
@@ -115,7 +126,7 @@ export const NewUser: React.FC<Props> = ({
             )}
             {role === 'teacher' && (
               <InputFieldsColumn>
-                <Label>CPF: </Label>
+                <Label>CPF </Label>
                 <Input
                   type='text'
                   id='cpf'
@@ -127,7 +138,7 @@ export const NewUser: React.FC<Props> = ({
           </InputFieldsRow>
           <InputFieldsRow>
             <InputFieldsColumn>
-              <Label>Senha: </Label>
+              <Label>Senha </Label>
               <Password>
                 <Input
                   type={showPassword ? 'text' : 'password'}
@@ -147,7 +158,7 @@ export const NewUser: React.FC<Props> = ({
         isDisabled={shouldDisableButton()}
         disabled={shouldDisableButton()}
         onClick={() =>
-          handleNewLogin(name, username, password, birth, role, motherName, cpf)
+          handleNewLogin(username, name, password, birth, motherName, cpf, role)
         }
       >
         Cadastrar
