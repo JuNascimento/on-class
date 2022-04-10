@@ -9,6 +9,7 @@ import PersonInformationContainer from '../personInformation/index'
 import ReactionsContainer from '../reactions/index'
 import VideoContainer from '../video/index'
 import SupportMaterialContainer from '../supportMaterial'
+import Chat from '../chat'
 
 interface Props {
   type: string
@@ -19,6 +20,7 @@ const OnGoingClassContainer: React.FC<Props> = ({ type }) => {
 
   return (
     <OnGoingClass data-testid='on-going-class-container'>
+      <Chat />
       <ClassInfo>
         <PersonInformationContainer type={type} />
         <RemainingClassTime data-testid='remaining-class-time'>

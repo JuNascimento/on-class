@@ -5,6 +5,7 @@ import OnGoingClassContainer from '../../onGoingClass'
 interface Props {
   role: string
 }
+
 export const ClassContainer: React.FC<Props> = ({ role }) => {
   return (
     <>

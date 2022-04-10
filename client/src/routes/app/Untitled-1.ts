@@ -3,7 +3,7 @@
 // const App: React.FC = () => {
 //   // const [message, setMessage] = useState('')
 
-//   // const socketClient = new WebSocket('ws://localhost:8082')
+//   // const socketClient = new WebSocket('ws://localhost:8082')t:30
 
 //   // socketClient.addEventListener('open', () => {
 //   //   console.log('temos conexao!')

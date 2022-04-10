@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import HeaderContainer from '../../header'
 import { setSessionStorage } from '../../helpers'
 import SelectRoleContainer from '../../selectRole'
@@ -48,7 +49,8 @@ export const LoginContainer: React.FC<LoginProps> = ({ role }) => {
         (responseJson.role === 'Estudante' && role === 'student')
       ) {
         setSessionStorage(role, responseJson)
-        window.location.href = `http://localhost:3000/${role}/dashboard`
+        // window.location.href = `http://localhost:3000/${role}/dashboard`
+        return <Navigate to={`${role}/dashboard`} />
       } else {
         showError('wrong information')
       }

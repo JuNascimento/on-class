@@ -28,7 +28,9 @@ const ControlPanelContainer: React.FC = () => {
             <Class shouldFocous={true} nextClasses={true}>
               <ClassInfo>10/04/2022, 16:30 - 17:30</ClassInfo>
               <ClassInfo>Material de apoio: nenhum</ClassInfo>
-              <LoginButton isDisabled={false}>Entrar para a aula</LoginButton>
+              <LoginButton isDisabled={false} onClick={() => {}}>
+                Entrar para a aula
+              </LoginButton>
             </Class>
             <Class shouldFocous={false} nextClasses={true}>
               <ClassInfo>10/04/2022, 16:30 - 17:30</ClassInfo>

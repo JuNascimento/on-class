@@ -38,23 +38,23 @@ const Subjects: React.FC<Props> = ({ role, setShowSubjects }) => {
     getSubjects()
   }, [])
 
-  const chooseSubject = (subject: Subject) => {
+  const chooseSubject = (subject: any) => {
     const chosenSubjectsCopy = Array.from(chosenSubjects)
 
-    if (chosenSubjectsCopy.includes(subject.disciplina)) {
-      const index = chosenSubjectsCopy.indexOf(subject.disciplina)
+    if (chosenSubjectsCopy.includes(subject)) {
+      const index = chosenSubjectsCopy.indexOf(subject)
       chosenSubjectsCopy.splice(index, 1)
       setChosenSubjects(chosenSubjectsCopy)
     } else {
-      chosenSubjectsCopy.push(subject.disciplina)
+      chosenSubjectsCopy.push(subject)
       setChosenSubjects(chosenSubjectsCopy)
     }
   }
 
-  const checkSelectedItem = (subject: Subject) => {
+  const checkSelectedItem = (subject: any) => {
     const chosenSubjectsCopy = Array.from(chosenSubjects)
 
-    if (chosenSubjectsCopy.includes(subject.disciplina)) {
+    if (chosenSubjectsCopy.includes(subject)) {
       return true
     } else {
       return false
