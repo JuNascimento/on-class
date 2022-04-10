@@ -91,7 +91,7 @@
     ☐ (?) Desmarcar aula
 
 7 - API para fazer upload e download de arquivos:
-    ☐ Criar volume do docker
-    ☐ Service
-    ☐ Controller
+    ✔ Criar volume do docker @done(22-04-08 00:13)
+    ✔ Service @done(22-04-08 00:13)
+    ✔ Controller @done(22-04-08 00:13)
     
