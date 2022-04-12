@@ -31,17 +31,18 @@ export const IconsGroup = styled.article`
 
 interface IconProps {
   isChat?: boolean
+  isOpen?: boolean
 }
 
 export const Icon = styled.div<IconProps>`
-  width: ${p => (p.isChat ? `160px` : `40px`)};
+  width: ${p => (p.isChat ? `300px` : `40px`)};
   height: 40px;
   background-color: #ff5757;
   border-radius: ${p => (p.isChat ? `10px` : `40px`)};
   margin: ${p => (p.isChat ? `0px 10px 0 0` : `0 10px`)};
   cursor: pointer;
   display: flex;
-  align-items: center;
+  align-items: ${p => (p.isChat && p.isOpen ? `end` : `center`)};
   justify-content: center;
   font-weight: lighter;
 

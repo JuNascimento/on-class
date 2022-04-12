@@ -15,6 +15,26 @@ import {
   Icon,
   ChatLabel,
 } from './index.style'
+import Chat from '../chat'
+import styled from 'styled-components'
+
+const ChatOpen = styled.div`
+  width: 100%;
+  border: 1px solid red;
+`
+
+const ChatTab = styled.div`
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  z-index: 99999;
+  border: 1px solid yellow;
+`
 
 interface Props {
   setToggleSupportMaterial: (state: boolean) => void
@@ -30,15 +50,20 @@ const VideoContainer: React.FC<Props> = ({
   const [toggleChat, setToggleChat] = useState(false)
 
   const chatOpened = () => {
-    return <p>O chat tá aberto</p>
+    return (
+      <ChatTab>
+        <Chat toggleChat={toggleChat} setToggleChat={setToggleChat} />
+      </ChatTab>
+    )
+    // return <p>O chat tá aberto</p>
   }
 
   const chatClosed = () => {
     return (
-      <>
+      <ChatOpen onClick={() => setToggleChat(!toggleChat)}>
         <ChatSvg />
         <ChatLabel>Chat</ChatLabel>
-      </>
+      </ChatOpen>
     )
   }
 
@@ -48,7 +73,7 @@ const VideoContainer: React.FC<Props> = ({
         data-testid='icons'
         id='chat-icon'
         isChat={true}
-        onClick={() => setToggleChat(!toggleChat)}
+        isOpen={toggleChat}
       >
         {toggleChat ? chatOpened() : chatClosed()}
       </Icon>

@@ -3,7 +3,12 @@ import { HubConnectionBuilder } from '@microsoft/signalr'
 import ChatInput from '../chatInput'
 import ChatWindow from '../chatWindow'
 
-const Chat = () => {
+interface Props {
+  setToggleChat: (state: boolean) => void
+  toggleChat: boolean
+}
+
+const Chat: React.FC<Props> = ({ setToggleChat, toggleChat }) => {
   const [connection, setConnection] = useState<any>(null)
   const [chat, setChat] = useState([])
   const latestChat: any = useRef(null)
@@ -64,11 +69,11 @@ const Chat = () => {
   }
 
   return (
-    <div>
+    <>
+      <ChatWindow chat={chat} onClick={() => setToggleChat(!toggleChat)} />
+      {/* <hr /> */}
       <ChatInput sendMessage={sendMessage} />
-      <hr />
-      <ChatWindow chat={chat} />
-    </div>
+    </>
   )
 }
 

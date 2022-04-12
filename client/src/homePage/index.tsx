@@ -10,8 +10,7 @@ import {
 } from './index.style'
 import { ManTeacherSvg, PersonSvg, QuestionMarkSvg } from '../icons'
 import { getSessionStorage } from '../helpers'
-import Chat from '../chat'
-import { Navigate } from 'react-router-dom'
+// import { Navigate } from 'react-router-dom'
 
 const HomePageContainer: React.FC = () => {
   const redirectDashboard = (role: string) => {
@@ -19,10 +18,14 @@ const HomePageContainer: React.FC = () => {
       (role === 'student' && getSessionStorage('student')) ||
       (role === 'teacher' && getSessionStorage('teacher'))
     ) {
-      return <Navigate to={`${role}/dashboard`} />
+      console.log('socorro 1')
+      window.location.href = `http://localhost:3000/${role}/dashboard`
+      // return <Navigate to={`${role}/dashboard`} />
     }
 
-    return <Navigate to={`${role}/login`} />
+    console.log('socorro 2')
+    window.location.href = `http://localhost:3000/${role}/dashboard`
+    // return <Navigate to={`${role}/login`} />
   }
 
   return (
