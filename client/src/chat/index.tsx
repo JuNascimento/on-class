@@ -52,9 +52,9 @@ const Chat = () => {
       message: message,
     }
 
-    if (connection.connectionStarted) {
+    if (connection.connectionId) {
       try {
-        await connection.send('SendMessage', user, message)
+        await connection.send('SendMessage', 'rafa', 'eu')
       } catch (e) {
         console.log(e)
       }
