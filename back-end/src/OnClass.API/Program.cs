@@ -26,10 +26,10 @@ builder.Services.AddCors(options =>
                       builder =>
                       {
                           builder
-                            .WithOrigins("*")
+                            .WithOrigins(new string[] { @"http://localhost:3000", @"http://localhost:5135" })
                             .AllowAnyHeader()
                             .AllowAnyMethod()
-                            .AllowAnyOrigin();
+                            .AllowCredentials();
                       });
 });
 
@@ -53,7 +53,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = @"A API é protegida por tokens JWT"
+        Description = @"A API ï¿½ protegida por tokens JWT"
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
