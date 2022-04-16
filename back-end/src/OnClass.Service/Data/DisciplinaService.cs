@@ -95,14 +95,12 @@ namespace OnClass.Service.Data
 
         public async Task<List<DisciplinaDTO>> GetDisciplinasPorEstudante(long estudanteId)
         {
-            var estudante = await _uow.EstudanteRepository.Get();
             var disciplinasDB = _uow.DisciplinaRepository.GetDisciplinasPorEstudante(estudanteId);
             return _mapper.Map<List<DisciplinaDTO>>(disciplinasDB);
         }
 
         public async Task<List<DisciplinaDTO>> GetDisciplinasPorInstrutor(long instrutorId)
         {
-            var instrutor = await _uow.InstrutorRepository.Get();
             var disciplinasDB = _uow.DisciplinaRepository.GetDisciplinasPorInstrutor(instrutorId);
             return _mapper.Map<List<DisciplinaDTO>>(disciplinasDB);
         }

@@ -28,17 +28,17 @@ namespace OnClass.API.Controllers
         // Disciplinas/GetDisciplinasPorInstrutor/5
         [HttpGet("{instrutorId:long}")]
         [Authorize(Roles = "Instrutor")]
-        public ActionResult<List<DisciplinaDTO>> GetDisciplinasPorInstrutor(long instrutorId)
+        public async Task<ActionResult<List<DisciplinaDTO>>> GetDisciplinasPorInstrutor(long instrutorId)
         {
-            return Ok(_disciplinaService.GetDisciplinasPorInstrutor(instrutorId));
+            return Ok(await _disciplinaService.GetDisciplinasPorInstrutor(instrutorId));
         }
 
         // Disciplinas/GetDisciplinasPorEstudante/5
         [HttpGet("{instrutorId:long}")]
         [Authorize(Roles = "Estudante")]
-        public ActionResult<List<DisciplinaDTO>> GetDisciplinasPorEstudante(long estudanteId)
+        public async Task<ActionResult<List<DisciplinaDTO>>> GetDisciplinasPorEstudante(long estudanteId)
         {
-            return Ok(_disciplinaService.GetDisciplinasPorEstudante(estudanteId));
+            return Ok(await _disciplinaService.GetDisciplinasPorEstudante(estudanteId));
         }
 
         // Disciplinas/EditarDisciplinasEstudante
