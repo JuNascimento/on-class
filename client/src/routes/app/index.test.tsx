@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import App from '.'
+import AppContainer from '.'
 
-describe('App', () => {
+describe('AppContainer', () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <App />
+        <AppContainer />
       </MemoryRouter>
     )
   })

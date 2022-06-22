@@ -27,7 +27,8 @@
   },
   "rules": {
     "import/no-unresolved": "error",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "eslint-disable-next-line": "on"
   },
   "settings": {
     "import/resolver": {

@@ -1,8 +1,8 @@
 import React from 'react'
-import HeaderContainer from '../../header'
-import HomePageContainer from '../../homePage'
+import HeaderContainer from '../../components/header'
+import HomePageContainer from '../../containers/homePage'
 
-const AppContainer: React.FC = () => {
+const AppRoute: React.FC = () => {
   return (
     <>
       <HeaderContainer />
@@ -11,4 +11,4 @@ const AppContainer: React.FC = () => {
   )
 }
 
-export default AppContainer
+export default AppRoute
