@@ -375,3 +375,4 @@ back-end/flyway-docker/sql/V0.0.3__DML.sql
 back-end/src/OnClass.API/configmap-local.env
 back-end/src/OnClass.API/Controllers/EnvController.cs
 back-end/src/OnClass.API/var/
+back-end/src/pipeline.groovy
