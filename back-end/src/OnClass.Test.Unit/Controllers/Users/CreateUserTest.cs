@@ -45,7 +45,7 @@ namespace OnClass.Test.Unit.Controllers.Users
             //Act
             var response = await _sut.CreateEstudante(estudante);
             var createdResult = response.Result as CreatedResult;
-            var userRecebido = createdResult.Value as AuthenticatedUserDTO;
+            var userRecebido = createdResult.Value as AuthenticatedEstudanteDTO;
 
             //Assert
             Assert.NotNull(userRecebido);
