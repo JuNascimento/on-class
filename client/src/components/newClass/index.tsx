@@ -14,15 +14,32 @@ interface NewClassProps {
   role: string
   setShowModal: (state: boolean) => void
   userSubjetcs: any[]
+  setNextClasses: any
+}
+
+interface DateInterface {
+  day: null | string
+  month: null | string
+  year: null | string
+}
+
+interface HourInterface {
+  hour: null | string
+  minute: null | string
 }
 
 const NewClassContainer: React.FC<NewClassProps> = ({
   role,
   setShowModal,
   userSubjetcs,
+  setNextClasses,
 }) => {
-  const [date, setDate] = useState({ day: null, month: null, year: null })
-  const [time, setTime] = useState({ hour: null, minute: null })
+  const [date, setDate] = useState<DateInterface>({
+    day: null,
+    month: null,
+    year: null,
+  })
+  const [time, setTime] = useState<HourInterface>({ hour: null, minute: null })
   const [subject, setSubject] = useState({ id: null, disciplina: null })
 
   const handleDate = (value: any) => {
@@ -47,21 +64,10 @@ const NewClassContainer: React.FC<NewClassProps> = ({
     const classStartDate = `${date.year}-${date.month}-${date.day}T${time.hour}:${time.minute}:00.000Z`
     let classFinishDate = ''
 
-    if (parseInt(time.hour) === 23) {
-      if (parseInt(date.day) + 1 < 10) {
-        classFinishDate = `${date.year}-${date.month}-0${
-          parseInt(date.day) + 1
-        }T00:${time.minute}:00.000Z`
-      } else {
-        classFinishDate = `${date.year}-${date.month}-${
-          parseInt(date.day) + 1
-        }T00:${time.minute}:00.000Z`
-      }
-    } else {
-      classFinishDate = `${date.year}-${date.month}-${date.day}T${
-        parseInt(time.hour) + 1
-      }:${time.minute}:00.000Z`
-    }
+    const timeHour = time.hour && parseInt(time.hour) + 1
+    classFinishDate = `${date.year}-${date.month}-${date.day}T${timeHour}:${time.minute}:00.000Z`
+
+    console.log('aaaaaaaaa', getSessionStorage('teacher'))
 
     const data = {
       instrutor: {
@@ -89,6 +95,7 @@ const NewClassContainer: React.FC<NewClassProps> = ({
 
     if (response.ok) {
       setShowModal(false)
+      console.log('o q é isso', responseJson)
     }
   }
 

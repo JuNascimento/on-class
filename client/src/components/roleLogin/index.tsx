@@ -1,7 +1,7 @@
 import React from 'react'
 import { Subtitle, Role, LoginButton } from '../homePage/index.style'
 
-type RoleLoginProps = {
+interface RoleLoginProps {
   redirectDashboard: any
   role: string
   svgIcon: React.ReactNode

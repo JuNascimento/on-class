@@ -61,7 +61,7 @@ const NewUserContainer: React.FC = () => {
     if (response.ok) {
       setErrorWithoutRegister(false)
       setSessionStorage(userRole, responseJson)
-      window.location.href = `http://localhost:3000/${userRole}/dashboard`
+      window.location.href = `http://localhost:3000/${userRole}/subjects`
     }
 
     if (responseJson.message === 'Já existe usuário com esse nome') {

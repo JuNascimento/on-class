@@ -4,6 +4,7 @@ import { LoginButton } from '../homePage/index.style'
 import { ModalContainer } from '../modal'
 import NewClassContainer from '../newClass'
 import {
+  Dashboard,
   Class,
   Classes,
   ClassInfo,
@@ -18,6 +19,8 @@ import {
 const TeacherPanel: React.FC = () => {
   const [showModal, setShowModal] = useState(false)
   const [userSubjets, setUserSubjects] = useState([])
+  const [nextClasses, setNextClasses] = useState([])
+  const [hasCompletedClasses, setHasCompletedClasses] = useState(false)
 
   const getUserSubjects = async () => {
     const user = getSessionStorage('teacher')
@@ -36,10 +39,14 @@ const TeacherPanel: React.FC = () => {
     setUserSubjects(responseSubjects)
   }
 
+  useEffect(() => {
+    getUserSubjects()
+  }, [])
+
   const getClassesAvaliable = () => {}
 
   useEffect(() => {
-    getUserSubjects()
+    getClassesAvaliable()
   }, [])
 
   const goToClass = () => {
@@ -79,31 +86,43 @@ const TeacherPanel: React.FC = () => {
   }
 
   return (
-    <>
+    <Dashboard>
       <Lados>
         <Lado>
           <Subtitle>
             <SubtitleLabel>Próximas aulas</SubtitleLabel>
           </Subtitle>
           <Classes>
-            <Class shouldFocous={true} nextClasses={true}>
-              <ClassInfo>10/04/2022, 16:30 - 17:30</ClassInfo>
-              <ClassInfo>Material de apoio: nenhum</ClassInfo>
-              <LoginButton isDisabled={false} onClick={() => goToClass()}>
-                Entrar para a aula
-              </LoginButton>
-            </Class>
-            {showNextClasses()}
+            {nextClasses.length > 0 ? (
+              <>
+                <Class shouldFocous={true} nextClasses={true}>
+                  <ClassInfo>10/04/2022, 16:30 - 17:30</ClassInfo>
+                  <ClassInfo>Material de apoio: nenhum</ClassInfo>
+                  <LoginButton isDisabled={false} onClick={() => goToClass()}>
+                    Entrar para a aula
+                  </LoginButton>
+                </Class>
+                {showNextClasses()}
+              </>
+            ) : (
+              <p>Não tem aulas agendadas</p>
+            )}
           </Classes>
-          <StickyButton onClick={() => setShowModal(true)}>
+          <LoginButton isDisabled={false} onClick={() => setShowModal(true)}>
             Abrir novo horário
-          </StickyButton>
+          </LoginButton>
         </Lado>
         <Lado>
           <Subtitle>
             <SubtitleLabel>Aulas concluídas</SubtitleLabel>
           </Subtitle>
-          <Classes>{showCompletedClasses()}</Classes>
+          <Classes>
+            {hasCompletedClasses ? (
+              showCompletedClasses()
+            ) : (
+              <p>Você não tem aulas concluídas</p>
+            )}
+          </Classes>
         </Lado>
       </Lados>
       {showModal && (
@@ -112,10 +131,11 @@ const TeacherPanel: React.FC = () => {
             role={'teacher'}
             setShowModal={setShowModal}
             userSubjetcs={userSubjets}
+            setNextClasses={setNextClasses}
           />
         </ModalContainer>
       )}
-    </>
+    </Dashboard>
   )
 }
 

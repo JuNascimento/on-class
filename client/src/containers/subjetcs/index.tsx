@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getSessionStorage, setSessionStorage } from '../../components/helpers'
 import Subjects from '../../components/subjects'
 
-type Subject = {
+interface Subject {
   id: number
   disciplina: string
 }
@@ -12,7 +12,6 @@ interface Props {
 }
 
 const SubjectsContainer: React.FC<Props> = ({ role }) => {
-  const [showSubjects, setShowSubjects] = useState(false)
   const [subjects, setSubjects] = useState<Subject[]>([])
   const [chosenSubjects, setChosenSubjects] = useState<string[]>([])
 
@@ -97,10 +96,14 @@ const SubjectsContainer: React.FC<Props> = ({ role }) => {
       const sessionStorage = getSessionStorage(role)
       sessionStorage.primeiro_login = false
       setSessionStorage(role, sessionStorage)
-      setShowSubjects(false)
+      window.location.href = `http://localhost:3000/${role}/dashboard`
     } else {
       console.error('deu erro')
     }
+  }
+
+  const shouldDisableButton = () => {
+    return !(chosenSubjects.length > 0)
   }
 
   return (
@@ -110,6 +113,7 @@ const SubjectsContainer: React.FC<Props> = ({ role }) => {
       checkSelectedItem={checkSelectedItem}
       chooseSubject={chooseSubject}
       saveSubjects={saveSubjects}
+      shouldDisableButton={shouldDisableButton}
     />
   )
 }

@@ -5,9 +5,13 @@ import { ManTeacherSvg, PersonSvg, QuestionMarkSvg } from '../icons'
 
 interface HomePageProps {
   redirectDashboard: any
+  redirectToNewLogin: any
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ redirectDashboard }) => {
+export const HomePage: React.FC<HomePageProps> = ({
+  redirectDashboard,
+  redirectToNewLogin,
+}) => {
   return (
     <Home data-testid='login-screen-container'>
       <Title>Bem vinda(o) ao on-class app!</Title>
@@ -15,7 +19,7 @@ export const HomePage: React.FC<HomePageProps> = ({ redirectDashboard }) => {
       <Roles>
         <Role direction='row'>
           <ManTeacherSvg />
-          <div>
+          <>
             <Subtitle>Professor(a)</Subtitle>
             <LoginButton
               isDisabled={false}
@@ -23,11 +27,11 @@ export const HomePage: React.FC<HomePageProps> = ({ redirectDashboard }) => {
             >
               Entrar
             </LoginButton>
-          </div>
+          </>
         </Role>
         <Role direction='row'>
           <PersonSvg />
-          <div>
+          <>
             <Subtitle>Aluno(a)</Subtitle>
             <LoginButton
               isDisabled={false}
@@ -35,16 +39,19 @@ export const HomePage: React.FC<HomePageProps> = ({ redirectDashboard }) => {
             >
               Entrar
             </LoginButton>
-          </div>
+          </>
         </Role>
         <Role direction='row'>
           <QuestionMarkSvg />
-          <div>
+          <>
             <Subtitle data-testid='new-user'>Não tem cadastro ainda?</Subtitle>
-            <Link to='/signin'>
-              <LoginButton isDisabled={false}>Cadastre-se aqui!</LoginButton>
-            </Link>
-          </div>
+            <LoginButton
+              isDisabled={false}
+              onClick={() => redirectToNewLogin()}
+            >
+              Cadastre-se aqui!
+            </LoginButton>
+          </>
         </Role>
       </Roles>
     </Home>

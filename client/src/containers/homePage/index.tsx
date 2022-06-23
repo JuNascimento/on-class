@@ -4,17 +4,31 @@ import { HomePage } from '../../components/homePage'
 
 const HomePageContainer: React.FC = () => {
   const redirectDashboard = (role: string) => {
-    if (
-      (role === 'student' && getSessionStorage('student')) ||
-      (role === 'teacher' && getSessionStorage('teacher'))
-    ) {
-      window.location.href = `http://localhost:3000/${role}/dashboard`
+    const hasSession = getSessionStorage(role)
+    let url = `http://localhost:3000/${role}/login`
+
+    if (hasSession) {
+      if (hasSession.primeiro_login) {
+        url = `http://localhost:3000/${role}/subjects`
+      } else {
+        url = `http://localhost:3000/${role}/dashboard`
+      }
     }
 
-    window.location.href = `http://localhost:3000/${role}/login`
+    window.location.href = url
   }
 
-  return <HomePage redirectDashboard={redirectDashboard} />
+  const redirectToNewLogin = () => {
+    const url = `http://localhost:3000/signin`
+    window.location.href = url
+  }
+
+  return (
+    <HomePage
+      redirectDashboard={redirectDashboard}
+      redirectToNewLogin={redirectToNewLogin}
+    />
+  )
 }
 
 export default HomePageContainer

@@ -8,6 +8,7 @@ interface Props {
   checkSelectedItem: any
   chooseSubject: any
   saveSubjects: any
+  shouldDisableButton: any
 }
 
 const Subjects: React.FC<Props> = ({
@@ -16,6 +17,7 @@ const Subjects: React.FC<Props> = ({
   checkSelectedItem,
   chooseSubject,
   saveSubjects,
+  shouldDisableButton,
 }) => {
   const title =
     role === 'teacher'
@@ -38,7 +40,11 @@ const Subjects: React.FC<Props> = ({
               </SubjectItem>
             )
           })}
-          <LoginButton isDisabled={true} onClick={() => saveSubjects()}>
+          <LoginButton
+            onClick={() => saveSubjects()}
+            isDisabled={shouldDisableButton()}
+            disabled={shouldDisableButton()}
+          >
             Começar
           </LoginButton>
         </SubjectsBoard>
