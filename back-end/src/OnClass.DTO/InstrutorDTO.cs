@@ -15,7 +15,7 @@ namespace OnClass.DTO
         [JsonPropertyName("id")]
         public long? Id { get; set; }
 
-        [JsonPropertyName("nome")]
+        [JsonPropertyName("name")]
         public string? NomeCompleto { get; set; }
     }
 }

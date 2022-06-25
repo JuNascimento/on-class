@@ -17,28 +17,14 @@ const ChatContainer: React.FC<Props> = ({ role }) => {
 
   latestChat.current = chat
 
-  useEffect(() => {
-    console.log('foi chamado socorro')
+  useEffect(async () => {
+    //console.log('foi chamado socorro')
     const newConnection = signalR.create('http://localhost:25100/chat')
-    newConnection.start()
+    
+    await newConnection.start()
+    signalR.send(newConnection, 'Rafffaa', 'aasdasd')
 
-    console.log('con', newConnection)
-    if (window.connectionChat?._connectionState === 'Connected') {
-      window.connectionChat = newConnection
-    } else {
-      window.connectionChat = undefined
-    }
-
-    console.log('connection', window.connectionChat)
-    // sessionStorage.setItem('connectionChat', newConnection)
   }, [])
-
-  useEffect(() => {
-    console.log('segundo')
-    if (connection) {
-      signalR.receive(connection, latestChat, setChat)
-    }
-  }, [connection])
 
   const getUser = () => {
     const user = getSessionStorage(role)
@@ -51,7 +37,6 @@ const ChatContainer: React.FC<Props> = ({ role }) => {
     if (sessionStorageItem) {
       return JSON.parse(sessionStorageItem)
     }
-    signalR.send(sessionStorageItem, getUser(), 'alguem')
   }
 
   return (
