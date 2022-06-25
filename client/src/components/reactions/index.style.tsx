@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Reactions = styled.section`
+export const ReactionsContent = styled.section`
   width: 40vw;
   background-color: #ff5757;
   height: 50px;

@@ -1,16 +1,16 @@
 import styled from 'styled-components'
 
-export const Video = styled.section`
+export const Interaction = styled.section`
   width: 100%;
   background-color: black;
   position: relative;
 `
 
-interface VideoControlsProps {
+interface InteractionControlsProps {
   direction: string
 }
 
-export const VideoControls = styled.section<VideoControlsProps>`
+export const InteractionControls = styled.section<InteractionControlsProps>`
   z-index: 99;
   bottom: ${p => (p.direction === 'bottom' ? `30px` : `unset`)};
   top: ${p => (p.direction === 'bottom' ? `unset` : `30px`)};
@@ -23,18 +23,18 @@ export const VideoControls = styled.section<VideoControlsProps>`
     p.direction === 'bottom' ? `space-between` : `flex-end`};
 `
 
-export const IconsGroup = styled.article`
+export const InteractionGroup = styled.article`
   display: flex;
   align-items: center;
   margin: 0 20px;
 `
 
-interface IconProps {
+interface InteractionItemProps {
   isChat?: boolean
   isOpen?: boolean
 }
 
-export const Icon = styled.div<IconProps>`
+export const InteractionItem = styled.div<InteractionItemProps>`
   width: ${p => (p.isChat ? `300px` : `40px`)};
   height: 40px;
   background-color: #ff5757;

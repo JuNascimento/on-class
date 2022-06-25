@@ -1,0 +1,75 @@
+import React, { useState, useRef, useEffect } from 'react'
+import Chat from '../../components/chat'
+import { getSessionStorage } from '../../components/helpers'
+import SignalRClient from '../../components/helpers/signalR'
+import { InteractionItem } from '../../components/interactions/index.style'
+
+interface Props {
+  role: string
+}
+
+const ChatContainer: React.FC<Props> = ({ role }) => {
+  const [toggleChat, setToggleChat] = useState(false)
+  const [connection, setConnection] = useState<any>(null)
+  const [chat, setChat] = useState([])
+  const latestChat: any = useRef(null)
+  const signalR = new SignalRClient()
+
+  latestChat.current = chat
+
+  useEffect(() => {
+    console.log('foi chamado socorro')
+    const newConnection = signalR.create('http://localhost:25100/chat')
+    newConnection.start()
+
+    console.log('con', newConnection)
+    if (window.connectionChat?._connectionState === 'Connected') {
+      window.connectionChat = newConnection
+    } else {
+      window.connectionChat = undefined
+    }
+
+    console.log('connection', window.connectionChat)
+    // sessionStorage.setItem('connectionChat', newConnection)
+  }, [])
+
+  useEffect(() => {
+    console.log('segundo')
+    if (connection) {
+      signalR.receive(connection, latestChat, setChat)
+    }
+  }, [connection])
+
+  const getUser = () => {
+    const user = getSessionStorage(role)
+
+    return user
+  }
+
+  const sendMessage = () => {
+    const sessionStorageItem = sessionStorage.getItem('connectionChat')
+    if (sessionStorageItem) {
+      return JSON.parse(sessionStorageItem)
+    }
+    signalR.send(sessionStorageItem, getUser(), 'alguem')
+  }
+
+  return (
+    <InteractionItem
+      data-testid='icons'
+      id='chat-icon'
+      isChat={true}
+      isOpen={toggleChat}
+    >
+      <Chat
+        setToggleChat={setToggleChat}
+        user={getUser()}
+        toggleChat={toggleChat}
+        chat={chat}
+        sendMessage={sendMessage}
+      />
+    </InteractionItem>
+  )
+}
+
+export default ChatContainer

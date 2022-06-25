@@ -7,26 +7,13 @@ interface Props {
 }
 
 const ChatMessages: React.FC<Props> = ({ chat, setToggleChat }) => {
-  const chatItem = () => {
+  const chatItem = (user: string, message: string) => {
     return (
-      <Message
-        key={Date.now() * Math.random()}
-        user={'Julia'}
-        message={'lalala'}
-      />
+      <Message key={Date.now() * Math.random()} user={user} message={message} />
     )
   }
 
-  return (
-    <div>
-      {chatItem()}
-      {chatItem()}
-      {chatItem()}
-      {chatItem()}
-      {chatItem()}
-      {chatItem()}
-    </div>
-  )
+  return <div>{chatItem('Julia', 'mensagem da julia')}</div>
 }
 
 export default ChatMessages

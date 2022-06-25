@@ -17,7 +17,7 @@ const Message: React.FC<Props> = ({ user, message }) => (
     <p>
       <strong>{user}</strong>:
     </p>
-    <p>Oi, Pepe</p>
+    <p>{message}</p>
   </div>
 )
 

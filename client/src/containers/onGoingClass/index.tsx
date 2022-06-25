@@ -2,41 +2,41 @@ import React, { useState } from 'react'
 import {
   OnGoingClass,
   ClassInfo,
-  Class,
+  ClassContent,
   RemainingClassTime,
 } from './index.style'
-import PersonInformationContainer from '../../components/personInformation/index'
+import PersonInformation from '../../components/personInformation/index'
 import ReactionsContainer from '../../components/reactions'
-import VideoContainer from '../../components/video/index'
-import SupportMaterialContainer from '../../components/supportMaterial'
+import InteractionContainer from '../interactions'
+import SupportMaterialContainer from '../suportMaterial'
 
 interface Props {
-  type: string
+  role: string
 }
 
-const OnGoingClassContainer: React.FC<Props> = ({ type }) => {
+const OnGoingClassContainer: React.FC<Props> = ({ role }) => {
   const [toggleSupportMaterial, setToggleSupportMaterial] = useState(false)
 
   return (
     <OnGoingClass data-testid='on-going-class-container'>
       <ClassInfo>
-        <PersonInformationContainer type={type} />
+        <PersonInformation type={role} />
         <RemainingClassTime data-testid='remaining-class-time'>
-          Tempo restante: 57:14
+          Tempo restante: 59:45
         </RemainingClassTime>
         <ReactionsContainer />
       </ClassInfo>
-      <Class>
-        <VideoContainer
-          setToggleSupportMaterial={setToggleSupportMaterial}
+      <ClassContent>
+        <InteractionContainer
           toggleSupportMaterial={toggleSupportMaterial}
-          type={type}
+          setToggleSupportMaterial={setToggleSupportMaterial}
+          role={role}
         />
         <SupportMaterialContainer
-          type={type}
+          type={role}
           toggleSupportMaterial={toggleSupportMaterial}
         />
-      </Class>
+      </ClassContent>
     </OnGoingClass>
   )
 }

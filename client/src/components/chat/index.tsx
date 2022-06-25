@@ -1,53 +1,43 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import ChatInput from '../chatInput'
 import ChatMessages from '../chatWindow'
 import { ArrowSvg, ChatSvg } from '../icons'
-import { ChatLabel } from '../video/index.style'
-import SignalRClient from '../helpers/signalR'
+import { ChatLabel } from '../interactions/index.style'
 import { ChatHeader, ChatIcons, ChatBody } from './index.style'
 
 interface Props {
   setToggleChat: (state: boolean) => void
+  user: any
+  toggleChat: boolean
+  chat: any
+  sendMessage: any
 }
 
-const Chat: React.FC<Props> = ({ setToggleChat }) => {
-  const [connection, setConnection] = useState<any>(null)
-  const [chat, setChat] = useState([])
-  const latestChat: any = useRef(null)
-  const signalR = new SignalRClient()
-
-  latestChat.current = chat
-
-  useEffect(() => {
-    const newConnection = signalR.create('http://localhost:25100/chat')
-    setConnection(newConnection)
-  }, [])
-
-  useEffect(() => {
-    if (connection) {
-      signalR.receive(connection, latestChat, setChat)
-    }
-  }, [connection])
-
+const Chat: React.FC<Props> = ({
+  setToggleChat,
+  toggleChat,
+  chat,
+  sendMessage,
+  user,
+}) => {
   return (
-    <>
-      <ChatHeader onClick={() => setToggleChat(false)}>
+    <div>
+      <ChatHeader onClick={() => setToggleChat(!toggleChat)}>
         <ChatIcons>
           <ChatSvg />
           <ChatLabel>Chat</ChatLabel>
         </ChatIcons>
         <ChatIcons>
-          <ArrowSvg rotate={'rotate(0)'} />
+          <ArrowSvg rotate={toggleChat ? 'rotate(0)' : 'rotate(180)'} />
         </ChatIcons>
       </ChatHeader>
-      <ChatBody>
-        <ChatMessages chat={chat} setToggleChat={setToggleChat} />
-        <ChatInput
-          sendMessage={signalR.send(connection, 'rafa', 'eu')}
-          connection={connection}
-        />
-      </ChatBody>
-    </>
+      {toggleChat && (
+        <ChatBody>
+          <ChatMessages chat={chat} setToggleChat={setToggleChat} />
+          <ChatInput sendMessage={sendMessage} user={user} />
+        </ChatBody>
+      )}
+    </div>
   )
 }
 

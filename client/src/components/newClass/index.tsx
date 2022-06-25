@@ -14,7 +14,6 @@ interface NewClassProps {
   role: string
   setShowModal: (state: boolean) => void
   userSubjetcs: any[]
-  setNextClasses: any
 }
 
 interface DateInterface {
@@ -32,7 +31,6 @@ const NewClassContainer: React.FC<NewClassProps> = ({
   role,
   setShowModal,
   userSubjetcs,
-  setNextClasses,
 }) => {
   const [date, setDate] = useState<DateInterface>({
     day: null,

@@ -7,7 +7,7 @@ describe('Login', () => {
     beforeEach(() => {
       render(
         <MemoryRouter>
-          <Login role='teacher' />
+          <Login />
         </MemoryRouter>
       )
     })
@@ -35,7 +35,7 @@ describe('Login', () => {
     beforeEach(() => {
       render(
         <MemoryRouter>
-          <Login role='student' />
+          <Login />
         </MemoryRouter>
       )
     })

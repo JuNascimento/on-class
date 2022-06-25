@@ -1,42 +1,45 @@
 import React, { useState } from 'react'
-import { Reactions, Reaction, Emoji } from './index.style'
+import { ReactionsContent, Reaction, Emoji } from './index.style'
 
-const ReactionsContainer: React.FC = () => {
+const URL_EMOJI =
+  'https://cdn.shopify.com/s/files/1/1061/1924/files/Thumbs_Up_Sign_Emoji_Icon_ios10.png?13752525173949329807'
+
+const Reactions: React.FC = () => {
   const [toggle, setToggle] = useState(false)
 
   return (
-    <Reactions data-testid='reactions-container'>
+    <ReactionsContent data-testid='reactions-container'>
       <Reaction
         data-testid='reaction-emoji'
         id='first-reaction'
         onClick={() => setToggle(!toggle)}
       >
-        <Emoji src='https://cdn.shopify.com/s/files/1/1061/1924/files/Thumbs_Up_Sign_Emoji_Icon_ios10.png?13752525173949329807' />
+        <Emoji src={URL_EMOJI} />
       </Reaction>
       {toggle && (
         <>
           <Reaction data-testid='reaction-emoji'>
-            <Emoji src='https://cdn.shopify.com/s/files/1/1061/1924/files/Thumbs_Up_Sign_Emoji_Icon_ios10.png?13752525173949329807' />
+            <Emoji src={URL_EMOJI} />
           </Reaction>
           <Reaction data-testid='reaction-emoji'>
-            <Emoji src='https://cdn.shopify.com/s/files/1/1061/1924/files/Thumbs_Up_Sign_Emoji_Icon_ios10.png?13752525173949329807' />
+            <Emoji src={URL_EMOJI} />
           </Reaction>
           <Reaction data-testid='reaction-emoji'>
-            <Emoji src='https://cdn.shopify.com/s/files/1/1061/1924/files/Thumbs_Up_Sign_Emoji_Icon_ios10.png?13752525173949329807' />
+            <Emoji src={URL_EMOJI} />
           </Reaction>
           <Reaction data-testid='reaction-emoji'>
-            <Emoji src='https://cdn.shopify.com/s/files/1/1061/1924/files/Thumbs_Up_Sign_Emoji_Icon_ios10.png?13752525173949329807' />
+            <Emoji src={URL_EMOJI} />
           </Reaction>
           <Reaction data-testid='reaction-emoji'>
-            <Emoji src='https://cdn.shopify.com/s/files/1/1061/1924/files/Thumbs_Up_Sign_Emoji_Icon_ios10.png?13752525173949329807' />
+            <Emoji src={URL_EMOJI} />
           </Reaction>
           <Reaction data-testid='reaction-emoji'>
-            <Emoji src='https://cdn.shopify.com/s/files/1/1061/1924/files/Thumbs_Up_Sign_Emoji_Icon_ios10.png?13752525173949329807' />
+            <Emoji src={URL_EMOJI} />
           </Reaction>
         </>
       )}
-    </Reactions>
+    </ReactionsContent>
   )
 }
 
-export default ReactionsContainer
+export default Reactions

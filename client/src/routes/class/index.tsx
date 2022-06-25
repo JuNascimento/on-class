@@ -6,13 +6,13 @@ interface Props {
   role: string
 }
 
-const ClassContainer: React.FC<Props> = ({ role }) => {
+const ClassRoutes: React.FC<Props> = ({ role }) => {
   return (
     <>
       <HeaderContainer />
-      <OnGoingClassContainer type={role} />
+      <OnGoingClassContainer role={role} />
     </>
   )
 }
 
-export default ClassContainer
+export default ClassRoutes

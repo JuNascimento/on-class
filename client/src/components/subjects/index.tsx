@@ -1,6 +1,12 @@
 import React from 'react'
 import { Roles, LoginButton } from '../../components/homePage/index.style'
-import { Title, SubjectsBoard, SubjectItem } from './index.style'
+import {
+  Title,
+  SubjectsSelector,
+  SubjectsItems,
+  SubjectsBoard,
+  SubjectItem,
+} from './index.style'
 
 interface Props {
   role: any
@@ -27,19 +33,21 @@ const Subjects: React.FC<Props> = ({
   return (
     <>
       <Title>{title}</Title>
-      <Roles>
-        <SubjectsBoard>
-          {subjects.map((_value: any, key: any) => {
-            return (
-              <SubjectItem
-                key={`key-${key}`}
-                isSelected={checkSelectedItem(subjects[key])}
-                onClick={() => chooseSubject(subjects[key])}
-              >
-                {subjects[key].disciplina}
-              </SubjectItem>
-            )
-          })}
+      <SubjectsBoard>
+        <SubjectsSelector>
+          <SubjectsItems>
+            {subjects.map((_value: any, key: any) => {
+              return (
+                <SubjectItem
+                  key={`key-${key}`}
+                  isSelected={checkSelectedItem(subjects[key])}
+                  onClick={() => chooseSubject(subjects[key])}
+                >
+                  {subjects[key].disciplina}
+                </SubjectItem>
+              )
+            })}
+          </SubjectsItems>
           <LoginButton
             onClick={() => saveSubjects()}
             isDisabled={shouldDisableButton()}
@@ -47,8 +55,8 @@ const Subjects: React.FC<Props> = ({
           >
             Começar
           </LoginButton>
-        </SubjectsBoard>
-      </Roles>
+        </SubjectsSelector>
+      </SubjectsBoard>
     </>
   )
 }

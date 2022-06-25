@@ -8,6 +8,7 @@ class SignalRClient {
         .withAutomaticReconnect()
         .build()
 
+      console.log(`[SignalR - Create] Deu certo para criar`, newConnection)
       return newConnection
     } catch (error) {
       console.error(`[SignalR - Create] ${error}`)
@@ -24,11 +25,13 @@ class SignalRClient {
 
           callback(updatedChat)
         })
+        console.log(`[SignalR - Create] Deu certo para receber`)
       })
       .catch((error: any) => console.error(`[SignalR - Receive] ${error}`))
   }
 
   async send(connection: any, user: any, message: any) {
+    console.log('deu ruim aqui?', connection)
     if (connection.connectionId) {
       try {
         await connection.send('Send', user, message)

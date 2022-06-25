@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-interface SupportMaterialProps {
+interface SupportMaterialContentProps {
   toggleSupportMaterial: boolean
 }
 
-export const SupportMaterial = styled.article<SupportMaterialProps>`
+export const SupportMaterialContent = styled.article<SupportMaterialContentProps>`
   display: ${p => (p.toggleSupportMaterial ? `block` : `none`)};
   width: 40vw;
   height: 72.8vh;

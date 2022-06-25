@@ -19,7 +19,7 @@ export const RemainingClassTime = styled.section`
   font-weight: lighter;
 `
 
-export const Class = styled.article`
+export const ClassContent = styled.article`
   display: flex;
   height: 80vh;
 `

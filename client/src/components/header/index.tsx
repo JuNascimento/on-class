@@ -1,19 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { removeItemSessionStorage } from '../helpers'
-import { Header, Title, Logout } from './index.style'
+import { Head, Title, Logout } from './index.style'
 
-const HeaderContainer: React.FC = () => {
+const Header: React.FC = () => {
   return (
-    <Header data-testid='header-container'>
+    <Head data-testid='header-container'>
       <Link to='/'>
         <Title>on-class app</Title>
       </Link>
       <Link to='/'>
         <Logout onClick={() => removeItemSessionStorage()}>Sair</Logout>
       </Link>
-    </Header>
+    </Head>
   )
 }
 
-export default HeaderContainer
+export default Header

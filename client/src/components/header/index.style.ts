@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Header = styled.header`
+export const Head = styled.header`
   background-color: #ff5757;
   display: flex;
   align-items: center;
@@ -26,22 +26,3 @@ export const Logout = styled.button`
   cursor: pointer;
   margin: -20px 0 0 0;
 `
-// export const Menu = styled.span`
-//   position: fixed;
-//   left: 20px;
-//   cursor: pointer;
-
-//   &:hover {
-//     background-color: rgba(255, 87, 87, 0.7);
-//   }
-// `
-
-// export const Container = styled.section`
-//   width: 25vw;
-//   height: 80vh;
-//   border: 1px solid red;
-//   left: 0;
-//   position: fixed;
-//   background-color: #fff;
-//   z-index: 99999999;
-// `

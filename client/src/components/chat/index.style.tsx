@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const ChatHeader = styled.div`
-  width: 100%;
+  width: 300px;
   background-color: #ff5757;
   height: 40px;
   max-height: 40px;
@@ -17,5 +17,15 @@ export const ChatIcons = styled.div`
 `
 
 export const ChatBody = styled.div`
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  position: relative;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  z-index: 99999;
+  flex-direction: column;
   overflow-y: scroll;
 `

@@ -8,17 +8,28 @@ export const Title = styled.h1`
 `
 
 export const SubjectsBoard = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const SubjectsItems = styled.article`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px;
+`
+
+export const SubjectsSelector = styled.section`
   width: 500px;
   height: 50vh;
   border: 3px solid #f8d2d2ca;
-  margin: 0 30px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  flex-direction: column;
   background-color: rgba(248, 210, 210, 0.15);
   border-radius: 10px;
-  padding: 10px;
   flex-wrap: wrap;
 `
 
@@ -30,7 +41,7 @@ export const SubjectItem = styled.div<Props>`
   width: 100px;
   height: 45px;
   padding: 10px;
-  margin: 0 10px;
+  margin: 10px;
   border: ${p => (p.isSelected ? '3px solid #ff5757' : '3px solid #f8d2d2ca')};
   background-color: ${p => (p.isSelected ? '#f8d2d2ca' : 'none')};
   text-align: center;

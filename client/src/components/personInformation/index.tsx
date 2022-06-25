@@ -1,15 +1,15 @@
 import React from 'react'
 import { PersonSvg } from '../icons'
-import { PersonInformation, Photo, Info, InfoItem } from './index.style'
+import { PersonInfo, Photo, Info, InfoItem } from './index.style'
 
 interface Props {
   type: string
 }
 
-const PersonInformationContainer: React.FC<Props> = ({ type }) => {
+const PersonInformation: React.FC<Props> = ({ type }) => {
   const personName = type === 'teacher' ? 'Julia Nascimento' : 'Pedro Furtado'
   return (
-    <PersonInformation data-testid='person-information-container'>
+    <PersonInfo data-testid='person-information-container'>
       <Photo>
         <PersonSvg />
       </Photo>
@@ -17,8 +17,8 @@ const PersonInformationContainer: React.FC<Props> = ({ type }) => {
         <InfoItem>{personName}</InfoItem>
         <InfoItem>Cálculo I</InfoItem>
       </Info>
-    </PersonInformation>
+    </PersonInfo>
   )
 }
 
-export default PersonInformationContainer
+export default PersonInformation
