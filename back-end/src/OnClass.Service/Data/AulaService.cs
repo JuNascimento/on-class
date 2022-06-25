@@ -37,7 +37,10 @@ namespace OnClass.Service.Data
             aula.InstrutorId = instrutorDB.Id;
             aula.Uuid = Guid.NewGuid().ToString();
             var aulaDB = await _uow.AulaRepository.Create(aula);
-            return _mapper.Map<AulaDTO>(aulaDB);
+            var aulaDTONovo = _mapper.Map<AulaDTO>(aulaDB);
+            aulaDTONovo.InstrutorDTO = aulaDTO.InstrutorDTO;
+            aulaDTONovo.DisciplinaDTO = aulaDTO.DisciplinaDTO;
+            return aulaDTONovo;
         }
 
         public async Task<AulaDTO> EditarAula(AulaDTO aulaDTO)
