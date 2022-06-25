@@ -22,10 +22,11 @@ namespace OnClass.Test.Unit.Controllers.Users
     {
 
         private readonly UsersController _sut;
-        private readonly Mock<IAuthenticationService> mockService = new Mock<IAuthenticationService>();
+        private readonly Mock<IAuthenticationService> mockService;
 
         public CreateUserTest()
-        {
+        { 
+            mockService = new Mock<IAuthenticationService>();
             _sut = new UsersController(mockService.Object);
         }
 
@@ -36,13 +37,15 @@ namespace OnClass.Test.Unit.Controllers.Users
             var fixture = new Fixture().Customize(new AutoMoqCustomization());
             var estudante = fixture.Create<EstudanteDTO>();
 
-            
+            var estudanteAutenticado = fixture.Create<AuthenticatedEstudanteDTO>();
 
+            mockService.Setup(r => r.CreateEstudante(It.IsAny<EstudanteDTO>()))
+                .ReturnsAsync(value: estudanteAutenticado);
 
             //Act
             var response = await _sut.CreateEstudante(estudante);
             var createdResult = response.Result as CreatedResult;
-            var userRecebido = createdResult.Value as UserDTO;
+            var userRecebido = createdResult.Value as AuthenticatedEstudanteDTO;
 
             //Assert
             Assert.NotNull(userRecebido);
