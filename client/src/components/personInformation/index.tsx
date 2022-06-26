@@ -3,11 +3,11 @@ import { PersonSvg } from '../icons'
 import { PersonInfo, Photo, Info, InfoItem } from './index.style'
 
 interface Props {
-  type: string
+  userInfo: any
 }
 
-const PersonInformation: React.FC<Props> = ({ type }) => {
-  const personName = type === 'teacher' ? 'Julia Nascimento' : 'Pedro Furtado'
+const PersonInformation: React.FC<Props> = ({ userInfo }) => {
+  const personName = userInfo.name
   return (
     <PersonInfo data-testid='person-information-container'>
       <Photo>

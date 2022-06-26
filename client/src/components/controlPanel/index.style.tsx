@@ -1,25 +1,5 @@
 import styled from 'styled-components'
 
-export const StickyButton = styled.button`
-  margin: 15px 0;
-  width: 30%;
-  height: 70px;
-  border-radius: 50px;
-  background-color: #ff5757;
-  border: none;
-  font-size: 16px;
-  font-weight: 200;
-
-  :hover {
-    background-color: rgba(248, 210, 210, 0.9);
-    border: 1px solid #ff5757;
-  }
-
-  :focus-visible {
-    outline: unset;
-  }
-`
-
 export const Subtitle = styled.div`
   padding: 0 30%;
 `

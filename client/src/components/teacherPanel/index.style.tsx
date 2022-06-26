@@ -9,26 +9,6 @@ export const Dashboard = styled.section`
   flex-direction: column;
 `
 
-export const StickyButton = styled.button`
-  margin: 15px 0;
-  width: 30%;
-  height: 70px;
-  border-radius: 50px;
-  background-color: #ff5757;
-  border: none;
-  font-size: 16px;
-  font-weight: 200;
-
-  :hover {
-    background-color: rgba(248, 210, 210, 0.9);
-    border: 1px solid #ff5757;
-  }
-
-  :focus-visible {
-    outline: unset;
-  }
-`
-
 export const Subtitle = styled.div`
   padding: 0 30%;
 `
@@ -74,7 +54,7 @@ interface Props {
 }
 
 export const Class = styled.div<Props>`
-  width: 100%;
+  min-width: 200px;
   background-color: ${p => (p.nextClasses ? '#f8d2d2ca' : '#f8d2d25c')};
   align-items: center;
   width: 46%;

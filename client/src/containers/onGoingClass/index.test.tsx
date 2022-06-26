@@ -3,7 +3,7 @@ import OnGoingClassContainer from './index'
 
 describe('OnGoingClassContainer', () => {
   beforeEach(() => {
-    render(<OnGoingClassContainer type='teacher' />)
+    render(<OnGoingClassContainer role={''} />)
   })
 
   test('should have PersonInformationContainer in the document', () => {

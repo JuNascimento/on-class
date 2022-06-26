@@ -12,7 +12,12 @@ describe('VideoContainer', () => {
         <VideoContainer
           setToggleSupportMaterial={jest.fn()}
           toggleSupportMaterial={false}
-          type='teacher'
+          videoRef={undefined}
+          role={undefined}
+          handleCamera={undefined}
+          handleMichophone={undefined}
+          handleShareScreen={undefined}
+          handleFullScreen={undefined}
         />
       )
       container = wrapper.container
@@ -90,7 +95,12 @@ describe('VideoContainer', () => {
         <VideoContainer
           setToggleSupportMaterial={jest.fn()}
           toggleSupportMaterial={false}
-          type='student'
+          videoRef={undefined}
+          role={undefined}
+          handleCamera={undefined}
+          handleMichophone={undefined}
+          handleShareScreen={undefined}
+          handleFullScreen={undefined}
         />
       )
       container = wrapper.container

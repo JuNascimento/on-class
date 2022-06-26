@@ -12,6 +12,9 @@ describe('SupportMaterialContainer', () => {
         <SupportMaterialContainer
           type={'teacher'}
           toggleSupportMaterial={true}
+          generateTabs={undefined}
+          defineContentTeacher={undefined}
+          defineContentStudent={undefined}
         />
       )
       container = wrapper.container
@@ -122,6 +125,9 @@ describe('SupportMaterialContainer', () => {
         <SupportMaterialContainer
           type={'student'}
           toggleSupportMaterial={false}
+          generateTabs={undefined}
+          defineContentTeacher={undefined}
+          defineContentStudent={undefined}
         />
       )
       container = wrapper.container

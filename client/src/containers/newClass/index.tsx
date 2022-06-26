@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
-import { StickyButton } from '../controlPanel/index.style'
-import { getSessionStorage } from '../helpers'
+import { LoginButton } from '../../components/homePage/index.style'
+import { getSessionStorage } from '../../components/helpers'
 import {
   InputFieldsColumn,
   Label,
   Select,
   Input,
-} from '../homePage/index.style'
-import { CloseSvg } from '../icons'
+} from '../../components/homePage/index.style'
+import { CloseSvg } from '../../components/icons'
 import { NewClass, Close } from './index.style'
 
 interface NewClassProps {
   role: string
   setShowModal: (state: boolean) => void
   userSubjetcs: any[]
+  setClasses: any
+  classes: any
 }
 
 interface DateInterface {
@@ -31,6 +33,8 @@ const NewClassContainer: React.FC<NewClassProps> = ({
   role,
   setShowModal,
   userSubjetcs,
+  setClasses,
+  classes,
 }) => {
   const [date, setDate] = useState<DateInterface>({
     day: null,
@@ -65,8 +69,6 @@ const NewClassContainer: React.FC<NewClassProps> = ({
     const timeHour = time.hour && parseInt(time.hour) + 1
     classFinishDate = `${date.year}-${date.month}-${date.day}T${timeHour}:${time.minute}:00.000Z`
 
-    console.log('aaaaaaaaa', getSessionStorage('teacher'))
-
     const data = {
       instrutor: {
         id: getSessionStorage('teacher').instrutor_id,
@@ -90,10 +92,24 @@ const NewClassContainer: React.FC<NewClassProps> = ({
     })
 
     const responseJson = await response.json()
+    const newClass = {
+      data_fim: responseJson.aulaNova.data_fim,
+      data_inicio: responseJson.aulaNova.data_inicio,
+      disciplina: {
+        id: responseJson.aulaNova.disciplina.id,
+        disciplina: responseJson.aulaNova.disciplina.disciplina,
+      },
+      id: responseJson.aulaNova.id,
+      instrutor: {
+        id: responseJson.aulaNova.instrutor.id,
+        name: responseJson.aulaNova.instrutor.name,
+      },
+      uuid: responseJson.aulaNova.uuid,
+    }
 
     if (response.ok) {
       setShowModal(false)
-      console.log('o q é isso', responseJson)
+      setClasses([...classes, newClass])
     }
   }
 
@@ -139,9 +155,9 @@ const NewClassContainer: React.FC<NewClassProps> = ({
             showError={false}
             onChange={e => handleHour(e.target.value)}
           />
-          <StickyButton onClick={() => createClass()}>
+          <LoginButton isDisabled={false} onClick={() => createClass()}>
             Criar nova aula
-          </StickyButton>
+          </LoginButton>
         </InputFieldsColumn>
       </article>
     </NewClass>
