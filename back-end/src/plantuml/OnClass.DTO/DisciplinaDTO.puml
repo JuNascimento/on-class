@@ -1,0 +1,7 @@
+@startuml
+class DisciplinaDTO {
+    + Id : long? <<get>> <<set>>
+    + Nome : string? <<get>> <<set>>
+}
+BaseDTO <|-- DisciplinaDTO
+@enduml

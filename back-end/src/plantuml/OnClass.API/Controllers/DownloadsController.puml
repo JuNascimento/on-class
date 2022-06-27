@@ -1,0 +1,10 @@
+@startuml
+class DownloadsController {
+    + DownloadsController(fileService:IFileHelperService)
+    + <<async>> DownloadFile(id:long) : Task<ActionResult>
+    + <<async>> UploadFile(fileDTO:FileDTO) : Task<ActionResult>
+    + <<async>> Delete(id:long) : Task<ActionResult>
+}
+Controller <|-- DownloadsController
+DownloadsController --> "_fileService" IFileHelperService
+@enduml

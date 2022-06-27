@@ -1,0 +1,19 @@
+@startuml
+class "BaseRepository"<T> {
+    + BaseRepository()
+    + BaseRepository(context:ApplicationContext)
+    + <<virtual>> <<async>> Create(obj:T) : Task<T>
+    + <<virtual>> <<async>> Update(obj:T) : Task<T>
+    + <<virtual>> <<async>> Update(id:long, obj:T) : Task<T>
+    + <<virtual>> <<async>> Delete(id:long) : Task<bool>
+    + <<virtual>> <<async>> Get(id:long?) : Task<T>
+    + <<virtual>> <<async>> Get() : Task<List<T>>
+    - EntryExists(id:long) : bool
+    + <<virtual>> <<async>> IsUniqueValue(obj:T, propertyName:string, value:object) : Task<bool>
+    - {static} CompareByReflection(objetoASerComparado:object, objetoComparador:object, propertyName:string, value:object) : bool
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<T>" <|-- "BaseRepository"
+"BaseRepository" --> "_context" ApplicationContext
+@enduml

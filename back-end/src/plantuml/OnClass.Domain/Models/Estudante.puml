@@ -1,0 +1,9 @@
+@startuml
+class Estudante {
+    + NomeCompleto : string <<get>> <<set>>
+    + NomeMae : string <<get>> <<set>>
+    + UserId : long <<get>> <<set>>
+}
+BaseModel <|-- Estudante
+Estudante --> "DataNascimento" DateTime
+@enduml

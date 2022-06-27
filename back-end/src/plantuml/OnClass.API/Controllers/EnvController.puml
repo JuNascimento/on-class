@@ -1,0 +1,6 @@
+@startuml
+class EnvController {
+    + Index() : IActionResult
+}
+Controller <|-- EnvController
+@enduml

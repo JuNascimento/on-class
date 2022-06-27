@@ -1,0 +1,5 @@
+@startuml
+class DotEnv <<static>> {
+    + {static} Load(filePath:string) : void
+}
+@enduml

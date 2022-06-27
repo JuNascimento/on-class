@@ -1,0 +1,664 @@
+@startuml
+class "Empty`1"<T> {
+}
+class "AddDbContext`1"<T> {
+}
+class "MapHub`1"<T> {
+}
+class AulaDTO {
+    + Id : long? <<get>> <<set>>
+    + Uuid : string? <<get>> <<set>>
+}
+class BuscarAulaDTO {
+}
+class AulaEstudanteDTO {
+    + EstudanteId : long? <<get>> <<set>>
+    + AulaId : long? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+AulaDTO --> "InstrutorDTO" InstrutorBasicDTO
+AulaDTO --> "DisciplinaDTO" DisciplinaDTO
+AulaDTO --> "DataInicio" DateTime
+AulaDTO --> "DataFim" DateTime
+BuscarAulaDTO --> "IdInstrutores<long?>" "List`1"
+BuscarAulaDTO --> "IdDisciplinas<long?>" "List`1"
+BuscarAulaDTO --> "DataInicio" DateTime
+BuscarAulaDTO --> "DataFim" DateTime
+class AuthenticatedUserDTO {
+    + AuthenticatedUserDTO()
+    + AuthenticatedUserDTO(userName:string?, nome:string?, role:string?, token:string?, tokenExpiration:DateTime?, primeiroLogin:bool?)
+    + AuthenticatedUserDTO(user:AuthenticatedUserDTO)
+    + UserName : string? <<get>> <<set>>
+    + Nome : string? <<get>> <<set>>
+    + Role : string? <<get>> <<set>>
+    + Token : string? <<get>> <<set>>
+    + TokenExpiration : DateTime? <<get>> <<set>>
+    + PrimeiroLogin : bool? <<get>> <<set>>
+}
+class AuthenticatedEstudanteDTO {
+    + Id : long? <<get>> <<set>>
+    + AuthenticatedEstudanteDTO(id:long?, user:AuthenticatedUserDTO)
+}
+class AuthenticatedInstrutorDTO {
+    + Id : long? <<get>> <<set>>
+    + AuthenticatedInstrutorDTO(id:long?, user:AuthenticatedUserDTO)
+}
+AuthenticatedUserDTO <|-- AuthenticatedEstudanteDTO
+AuthenticatedUserDTO <|-- AuthenticatedInstrutorDTO
+class BaseDTO {
+}
+class DisciplinaDTO {
+    + Id : long? <<get>> <<set>>
+    + Nome : string? <<get>> <<set>>
+}
+BaseDTO <|-- DisciplinaDTO
+class DisciplinasParaCursarDTO {
+}
+class "List`1"<T> {
+}
+DisciplinasParaCursarDTO --> "EstudanteDTO" EstudanteBasicDTO
+DisciplinasParaCursarDTO --> "DisciplinasDTO<DisciplinaDTO>" "List`1"
+class DisciplinasParaLecionarDTO {
+}
+class "List`1"<T> {
+}
+DisciplinasParaLecionarDTO --> "InstrutorDTO" InstrutorBasicDTO
+DisciplinasParaLecionarDTO --> "DisciplinasDTO<DisciplinaDTO>" "List`1"
+class EstudanteDTO {
+    + NomeMae : string? <<get>> <<set>>
+}
+class EstudanteBasicDTO {
+    + Id : long? <<get>> <<set>>
+    + NomeCompleto : string? <<get>> <<set>>
+}
+UserDTO <|-- EstudanteDTO
+class FileDTO {
+    + AulaId : long <<get>> <<set>>
+    + FormFile : IFormFile? <<get>> <<set>>
+}
+class DocumentoAulaDTO {
+    + IdArquivo : long <<get>> <<set>>
+    + NomeArquivo : string <<get>> <<set>>
+}
+class InstrutorDTO {
+    + Cpf : string? <<get>> <<set>>
+}
+class InstrutorBasicDTO {
+    + Id : long? <<get>> <<set>>
+    + NomeCompleto : string? <<get>> <<set>>
+}
+UserDTO <|-- InstrutorDTO
+class LoginRequestDTO {
+    + UserName : string? <<get>> <<set>>
+    + Password : string? <<get>> <<set>>
+}
+class UserDTO {
+    + UserName : string? <<get>> <<set>>
+    + NomeCompleto : string? <<get>> <<set>>
+    + Password : string? <<get>> <<set>>
+}
+BaseDTO <|-- UserDTO
+UserDTO --> "DataNascimento" DateTime
+class DuplicatedEntryException {
+    + DuplicatedEntryException()
+    + DuplicatedEntryException(message:string)
+    + DuplicatedEntryException(message:string, innerException:Exception)
+    # DuplicatedEntryException(info:SerializationInfo, context:StreamingContext)
+}
+InvalidOperationException <|-- DuplicatedEntryException
+class UnableToDeleteException {
+    + UnableToDeleteException()
+    + UnableToDeleteException(message:string)
+    + UnableToDeleteException(message:string, innerException:Exception)
+    # UnableToDeleteException(info:SerializationInfo, context:StreamingContext)
+}
+InvalidOperationException <|-- UnableToDeleteException
+class HashGenerator <<static>> {
+    + {static} GenerateHash(user:User) : void
+    - {static} GenerateSalt() : byte[]
+    + {static} ComputeHash(password:string, saltString:string) : string
+}
+class TokenHelper <<static>> {
+    + {static} GenerateToken(authenticatedUserDTO:AuthenticatedUserDTO) : void
+}
+class AutoMapperConfig {
+    + {static} RegisterAutoMapper() : IMapper
+}
+class AllowedExtensionsAttribute {
+    + AllowedExtensionsAttribute(extensions:string[])
+    # <<override>> IsValid(value:object, validationContext:ValidationContext) : ValidationResult
+    + {static} GetErrorMessage() : string
+}
+ValidationAttribute <|-- AllowedExtensionsAttribute
+class AulasController {
+    + AulasController(aulaService:IAulaService, fileService:IFileHelperService)
+    + <<async>> GetAulas() : Task<ActionResult<List<AulaDTO>>>
+    + <<async>> GetDocumentoAula(aulaId:long) : Task<ActionResult<List<AulaDTO>>>
+    + PesquisarAula(buscarAulaDTO:BuscarAulaDTO) : ActionResult<List<AulaDTO>>
+    + <<async>> CriarAula(aulaDTO:AulaDTO) : Task<ActionResult<AulaDTO>>
+    + <<async>> EditarAula(aulaDTO:AulaDTO) : Task<ActionResult<AulaDTO>>
+    + <<async>> InscricaoAula(aulaEstudanteDTO:AulaEstudanteDTO) : Task<ActionResult<AulaDTO>>
+}
+Controller <|-- AulasController
+AulasController --> "_aulaService" IAulaService
+AulasController --> "_fileService" IFileHelperService
+class DisciplinasController {
+    + DisciplinasController(disciplinaService:IDisciplinaService)
+    + <<async>> GetDisciplinas() : Task<ActionResult<List<DisciplinaDTO>>>
+    + <<async>> GetDisciplinasPorInstrutor(instrutorId:long) : Task<ActionResult<List<DisciplinaDTO>>>
+    + <<async>> GetDisciplinasPorEstudante(estudanteId:long) : Task<ActionResult<List<DisciplinaDTO>>>
+    + <<async>> EditarDisciplinasEstudante(disciplinasParaCursarDTO:DisciplinasParaCursarDTO) : Task<ActionResult<DisciplinasParaCursarDTO>>
+    + <<async>> EditarDisciplinasInstrutor(disciplinasParaLecionarDTO:DisciplinasParaLecionarDTO) : Task<ActionResult<DisciplinasParaLecionarDTO>>
+}
+Controller <|-- DisciplinasController
+DisciplinasController --> "_disciplinaService" IDisciplinaService
+class DownloadsController {
+    + DownloadsController(fileService:IFileHelperService)
+    + <<async>> DownloadFile(id:long) : Task<ActionResult>
+    + <<async>> UploadFile(fileDTO:FileDTO) : Task<ActionResult>
+    + <<async>> Delete(id:long) : Task<ActionResult>
+}
+Controller <|-- DownloadsController
+DownloadsController --> "_fileService" IFileHelperService
+class EnvController {
+    + Index() : IActionResult
+}
+Controller <|-- EnvController
+class LoginController {
+    + LoginController(authenticationService:IAuthenticationService)
+    + <<async>> Login(userDTO:LoginRequestDTO) : Task<ActionResult<AuthenticatedUserDTO>>
+}
+Controller <|-- LoginController
+LoginController --> "_authenticationService" IAuthenticationService
+class UsersController {
+    + UsersController(authenticationService:IAuthenticationService)
+    + <<async>> CreateEstudante(estudanteDTO:EstudanteDTO) : Task<ActionResult<AuthenticatedUserDTO>>
+    + <<async>> CreateInstrutor(instrutorDTO:InstrutorDTO) : Task<ActionResult<AuthenticatedUserDTO>>
+}
+Controller <|-- UsersController
+UsersController --> "_authenticationService" IAuthenticationService
+class ChatHub {
+    + <<async>> SendMessage(user:string, message:string) : Task
+    + <<async>> CreateGroup(groupName:string, user:string) : Task
+    + <<async>> RemoveFromGroup(groupName:string, user:string) : Task
+    + <<async>> SendMessageToGroup(properties:ChatHubProperties) : Task
+}
+Hub <|-- ChatHub
+class VideoHub {
+    + <<async>> SendStream(stream:object) : Task
+    + <<async>> UploadStreamBytes(stream:string) : Task
+    + <<async>> SendStreamDataToGroup(properties:VideoHubProperties, data:IAsyncEnumerable<string>) : Task
+    + <<async>> CreateGroup(groupName:string, user:string) : Task
+    + <<async>> RemoveFromGroup(groupName:string, user:string) : Task
+    + <<async>> SendDataToGroup(properties:VideoHubProperties, data:object) : Task
+}
+class VideoHubProperties {
+    + GroupName : string <<get>> <<set>>
+    + UserName : string <<get>> <<set>>
+}
+Hub <|-- VideoHub
+class ConnectionStringBuilder {
+    + {static} Build() : string
+}
+class DependencyInjection <<static>> {
+    + {static} RegisterServices(services:IServiceCollection) : void
+}
+class DotEnv <<static>> {
+    + {static} Load(filePath:string) : void
+}
+interface IVideoChat {
+    ReceiveMessage(user:string, message:string) : Task
+}
+class VideoChat {
+    + <<async>> SendMessage(user:string, message:string) : Task
+}
+class "Hub`1"<T> {
+}
+"Hub`1" "<IVideoChat>" <|-- VideoChat
+class Arquivo {
+    + NomeOriginal : string? <<get>> <<set>>
+    + NomeHash : string? <<get>> <<set>>
+    + ExtensaoOriginal : string? <<get>> <<set>>
+    + CaminhoArquivo : string? <<get>> <<set>>
+}
+BaseModel <|-- Arquivo
+Arquivo --> "DataCriacao" DateTime
+class Aula {
+    + InstrutorId : long? <<get>> <<set>>
+    + DisciplinaId : long? <<get>> <<set>>
+    + Uuid : string? <<get>> <<set>>
+}
+BaseModel <|-- Aula
+Aula --> "DataInicio" DateTime
+Aula --> "DataFim" DateTime
+class BaseModel {
+    + Id : long <<get>> <<set>>
+}
+class Disciplina {
+    + Nome : string <<get>> <<set>>
+}
+BaseModel <|-- Disciplina
+class DocumentoAula {
+    + AulaId : long? <<get>> <<set>>
+    + NomeOriginal : string? <<get>> <<set>>
+    + ExtensaoOriginal : string? <<get>> <<set>>
+    + CaminhoDocumento : string? <<get>> <<set>>
+    + NomeHash : string? <<get>> <<set>>
+}
+BaseModel <|-- DocumentoAula
+DocumentoAula --> "DataCriacao" DateTime
+class Estudante {
+    + NomeCompleto : string <<get>> <<set>>
+    + NomeMae : string <<get>> <<set>>
+    + UserId : long <<get>> <<set>>
+}
+BaseModel <|-- Estudante
+Estudante --> "DataNascimento" DateTime
+class EstudanteDisciplina {
+    + EstudanteId : long? <<get>> <<set>>
+    + DisciplinaId : long? <<get>> <<set>>
+}
+BaseModel <|-- EstudanteDisciplina
+class FrequenciaAula {
+    + AulaId : long? <<get>> <<set>>
+    + EstudanteId : long? <<get>> <<set>>
+}
+BaseModel <|-- FrequenciaAula
+class Instrutor {
+    + NomeCompleto : string? <<get>> <<set>>
+    + Cpf : string? <<get>> <<set>>
+    + UserId : long <<get>> <<set>>
+}
+BaseModel <|-- Instrutor
+Instrutor --> "DataNascimento" DateTime
+class InstrutorDisciplina {
+    + InstrutorId : long? <<get>> <<set>>
+    + DisciplinaId : long? <<get>> <<set>>
+}
+BaseModel <|-- InstrutorDisciplina
+class User {
+    + UserName : string <<get>> <<set>>
+    + Password : string <<get>> <<set>>
+    + Salt : string <<get>> <<set>>
+    + PrimeiroLogin : bool <<get>> <<set>>
+}
+BaseModel <|-- User
+class ChatHubProperties {
+    + GroupName : string <<get>> <<set>>
+    + UserName : string <<get>> <<set>>
+    + Message : string <<get>> <<set>>
+}
+class ChatMessage {
+    + UserName : string <<get>> <<set>>
+    + Message : string <<get>> <<set>>
+}
+class ApplicationContext {
+    + ApplicationContext()
+    + ApplicationContext(options:DbContextOptions<ApplicationContext>)
+    # <<override>> OnModelCreating(modelBuilder:ModelBuilder) : void
+}
+class "DbSet`1"<T> {
+}
+DbContext <|-- ApplicationContext
+ApplicationContext --> "Aulas<Aula>" "DbSet`1"
+ApplicationContext --> "Disciplinas<Disciplina>" "DbSet`1"
+ApplicationContext --> "DocumentoAulas<DocumentoAula>" "DbSet`1"
+ApplicationContext --> "Estudantes<Estudante>" "DbSet`1"
+ApplicationContext --> "EstudanteDisciplinas<EstudanteDisciplina>" "DbSet`1"
+ApplicationContext --> "FrequenciaAulas<FrequenciaAula>" "DbSet`1"
+ApplicationContext --> "Instrutores<Instrutor>" "DbSet`1"
+ApplicationContext --> "InstrutorDisciplinas<InstrutorDisciplina>" "DbSet`1"
+ApplicationContext --> "Users<User>" "DbSet`1"
+class AulaMap {
+    + Configure(builder:EntityTypeBuilder<Aula>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<Aula>" <|-- AulaMap
+class DisciplinaMap {
+    + Configure(builder:EntityTypeBuilder<Disciplina>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<Disciplina>" <|-- DisciplinaMap
+class DocumentoAulaMap {
+    + Configure(builder:EntityTypeBuilder<DocumentoAula>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<DocumentoAula>" <|-- DocumentoAulaMap
+class EstudanteDisciplinaMap {
+    + Configure(builder:EntityTypeBuilder<EstudanteDisciplina>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<EstudanteDisciplina>" <|-- EstudanteDisciplinaMap
+class EstudanteMap {
+    + Configure(builder:EntityTypeBuilder<Estudante>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<Estudante>" <|-- EstudanteMap
+class FrequenciaAulaMap {
+    + Configure(builder:EntityTypeBuilder<FrequenciaAula>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<FrequenciaAula>" <|-- FrequenciaAulaMap
+class InstrutorDisciplinaMap {
+    + Configure(builder:EntityTypeBuilder<InstrutorDisciplina>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<InstrutorDisciplina>" <|-- InstrutorDisciplinaMap
+class InstrutorMap {
+    + Configure(builder:EntityTypeBuilder<Instrutor>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<Instrutor>" <|-- InstrutorMap
+class UserMap {
+    + Configure(builder:EntityTypeBuilder<User>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<User>" <|-- UserMap
+class AulaRepository {
+    + AulaRepository(context:ApplicationContext)
+    + AulaRepository()
+    + BuscarAulas(instrutoresId:List<long?>, disciplinas:List<long?>, dataInicio:DateTime, dataFim:DateTime) : List<Aula>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<Aula>" <|-- AulaRepository
+IAulaRepository <|-- AulaRepository
+class "BaseRepository"<T> {
+    + BaseRepository()
+    + BaseRepository(context:ApplicationContext)
+    + <<virtual>> <<async>> Create(obj:T) : Task<T>
+    + <<virtual>> <<async>> Update(obj:T) : Task<T>
+    + <<virtual>> <<async>> Update(id:long, obj:T) : Task<T>
+    + <<virtual>> <<async>> Delete(id:long) : Task<bool>
+    + <<virtual>> <<async>> Get(id:long?) : Task<T>
+    + <<virtual>> <<async>> Get() : Task<List<T>>
+    - EntryExists(id:long) : bool
+    + <<virtual>> <<async>> IsUniqueValue(obj:T, propertyName:string, value:object) : Task<bool>
+    - {static} CompareByReflection(objetoASerComparado:object, objetoComparador:object, propertyName:string, value:object) : bool
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<T>" <|-- "BaseRepository"
+"BaseRepository" --> "_context" ApplicationContext
+class DisciplinaRepository {
+    + DisciplinaRepository(context:ApplicationContext)
+    + DisciplinaRepository()
+    + GetDisciplinasPorInstrutor(instrutorId:long) : List<Disciplina>
+    + GetDisciplinasPorEstudante(estudanteId:long) : List<Disciplina>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<Disciplina>" <|-- DisciplinaRepository
+IDisciplinaRepository <|-- DisciplinaRepository
+class DocumentoAulaRepository {
+    + DocumentoAulaRepository(context:ApplicationContext)
+    + DocumentoAulaRepository()
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<DocumentoAula>" <|-- DocumentoAulaRepository
+IDocumentoAulaRepository <|-- DocumentoAulaRepository
+class EstudanteDisciplinaRepository {
+    + EstudanteDisciplinaRepository(context:ApplicationContext)
+    + EstudanteDisciplinaRepository()
+    + <<async>> InserirDisplicinasDoEstudante(estudanteDisciplinasList:List<EstudanteDisciplina>) : Task<bool>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<EstudanteDisciplina>" <|-- EstudanteDisciplinaRepository
+IEstudanteDisciplinaRepository <|-- EstudanteDisciplinaRepository
+class EstudanteRepository {
+    + EstudanteRepository(context:ApplicationContext)
+    + EstudanteRepository()
+    + <<async>> GetEstudanteByUserId(userId:long?) : Task<Estudante>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<Estudante>" <|-- EstudanteRepository
+IEstudanteRepository <|-- EstudanteRepository
+class FrequenciaAulaRepository {
+    + FrequenciaAulaRepository(context:ApplicationContext)
+    + FrequenciaAulaRepository()
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<FrequenciaAula>" <|-- FrequenciaAulaRepository
+IFrequenciaAulaRepository <|-- FrequenciaAulaRepository
+class InstrutorDisciplinaRepository {
+    + InstrutorDisciplinaRepository(context:ApplicationContext)
+    + InstrutorDisciplinaRepository()
+    + <<async>> InserirDisplicinasDoInstrutor(instrutorDisciplinasList:List<InstrutorDisciplina>) : Task<bool>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<InstrutorDisciplina>" <|-- InstrutorDisciplinaRepository
+IInstrutorDisciplinaRepository <|-- InstrutorDisciplinaRepository
+class InstrutorRepository {
+    + InstrutorRepository(context:ApplicationContext)
+    + InstrutorRepository()
+    + <<async>> GetInstrutorByUserId(userId:long) : Task<Instrutor>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<Instrutor>" <|-- InstrutorRepository
+IInstrutorRepository <|-- InstrutorRepository
+class UserRepository {
+    + UserRepository(context:ApplicationContext)
+    + UserRepository()
+    + <<async>> VerificaUserNameDisponivel(username:string) : Task<bool>
+    + <<async>> GetByUserName(username:string) : Task<User>
+    + <<async>> GetInfoByUserId(id:long) : Task<dynamic>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<User>" <|-- UserRepository
+IUserRepository <|-- UserRepository
+interface IUnitOfWork {
+    Commit() : void
+}
+IUnitOfWork --> "AulaRepository" IAulaRepository
+IUnitOfWork --> "DisciplinaRepository" IDisciplinaRepository
+IUnitOfWork --> "DocumentoAulaRepository" IDocumentoAulaRepository
+IUnitOfWork --> "EstudanteRepository" IEstudanteRepository
+IUnitOfWork --> "EstudanteDisciplinaRepository" IEstudanteDisciplinaRepository
+IUnitOfWork --> "FrequenciaAulaRepository" IFrequenciaAulaRepository
+IUnitOfWork --> "InstrutorRepository" IInstrutorRepository
+IUnitOfWork --> "InstrutorDisciplinaRepository" IInstrutorDisciplinaRepository
+IUnitOfWork --> "UserRepository" IUserRepository
+class UnitOfWork {
+    - disposed : bool
+    + UnitOfWork(_applicationContext:ApplicationContext)
+    + <<virtual>> <<async>> Commit() : void
+    # <<virtual>> Dispose(disposing:bool) : void
+    + <<virtual>> Dispose() : void
+}
+IDisposable <|-- UnitOfWork
+IUnitOfWork <|-- UnitOfWork
+UnitOfWork --> "applicationContext" ApplicationContext
+UnitOfWork --> "aulaRepository" AulaRepository
+UnitOfWork --> "disciplinaRepository" DisciplinaRepository
+UnitOfWork --> "documentoAulaRepository" DocumentoAulaRepository
+UnitOfWork --> "estudanteRepository" EstudanteRepository
+UnitOfWork --> "estudanteDisciplinaRepository" EstudanteDisciplinaRepository
+UnitOfWork --> "frequenciaAulaRepository" FrequenciaAulaRepository
+UnitOfWork --> "instrutorRepository" InstrutorRepository
+UnitOfWork --> "instrutorDisciplinaRepository" InstrutorDisciplinaRepository
+UnitOfWork --> "userRepository" UserRepository
+UnitOfWork --> "AulaRepository" IAulaRepository
+UnitOfWork --> "DisciplinaRepository" IDisciplinaRepository
+UnitOfWork --> "DocumentoAulaRepository" IDocumentoAulaRepository
+UnitOfWork --> "EstudanteRepository" IEstudanteRepository
+UnitOfWork --> "EstudanteDisciplinaRepository" IEstudanteDisciplinaRepository
+UnitOfWork --> "FrequenciaAulaRepository" IFrequenciaAulaRepository
+UnitOfWork --> "InstrutorRepository" IInstrutorRepository
+UnitOfWork --> "InstrutorDisciplinaRepository" IInstrutorDisciplinaRepository
+UnitOfWork --> "UserRepository" IUserRepository
+class AulaProfile {
+    + AulaProfile()
+}
+Profile <|-- AulaProfile
+class DisciplinaProfile {
+    + DisciplinaProfile()
+}
+Profile <|-- DisciplinaProfile
+class UserProfile {
+    + UserProfile()
+}
+Profile <|-- UserProfile
+class AuthenticationService {
+    - <<readonly>> salt : string
+    + AuthenticationService(uow:IUnitOfWork, mapper:IMapper)
+    - <<async>> CreateUser(user:User) : Task<User>
+    + <<async>> CreateEstudante(estudanteDTO:EstudanteDTO) : Task<AuthenticatedUserDTO>
+    - <<async>> VerificaUserName(username:string) : Task
+    + <<async>> CreateInstrutor(instrutorDTO:InstrutorDTO) : Task<AuthenticatedUserDTO>
+    + <<async>> Login(userName:string, password:string) : Task<AuthenticatedUserDTO>
+    - IsValidUser(user:User, password:string) : bool
+}
+IAuthenticationService <|-- AuthenticationService
+AuthenticationService --> "_uow" IUnitOfWork
+AuthenticationService --> "_mapper" IMapper
+class AulaService {
+    + AulaService(uow:IUnitOfWork, mapper:IMapper)
+    + <<async>> InscricaoAula(aulaEstudanteDTO:AulaEstudanteDTO) : Task<AulaDTO>
+    + <<async>> CriarAula(aulaDTO:AulaDTO) : Task<AulaDTO>
+    + <<async>> EditarAula(aulaDTO:AulaDTO) : Task<AulaDTO>
+    + <<async>> GetAulas() : Task<List<AulaDTO>>
+    + PesquisarAula(buscarAulaDTO:BuscarAulaDTO) : List<AulaDTO>
+}
+IAulaService <|-- AulaService
+AulaService --> "_uow" IUnitOfWork
+AulaService --> "_mapper" IMapper
+class DisciplinaService {
+    + DisciplinaService(uow:IUnitOfWork, mapper:IMapper)
+    + <<async>> EditarDisciplinasEstudante(disciplinasParaCursarDTO:DisciplinasParaCursarDTO) : Task<DisciplinasParaCursarDTO>
+    + <<async>> EditarDisciplinasInstrutor(disciplinasParaLecionarDTO:DisciplinasParaLecionarDTO) : Task<DisciplinasParaLecionarDTO>
+    + <<async>> GetDisciplinaDTOs() : Task<List<DisciplinaDTO>>
+    + <<async>> GetDisciplinasPorEstudante(estudanteId:long) : Task<List<DisciplinaDTO>>
+    + <<async>> GetDisciplinasPorInstrutor(instrutorId:long) : Task<List<DisciplinaDTO>>
+}
+IDisciplinaService <|-- DisciplinaService
+DisciplinaService --> "_uow" IUnitOfWork
+DisciplinaService --> "_mapper" IMapper
+class FileHelperService {
+    - <<readonly>> dirPath : string
+    + FileHelperService(environment:IHostEnvironment, uow:IUnitOfWork)
+    + <<async>> GetSingleFileAsync(documentoId:long) : Task<(string, byte[])>
+    - {static} <<async>> GetSingleFileAsync(arquivo:DocumentoAula) : Task<byte[]>
+    + <<async>> SaveFileAsync(fileDTO:FileDTO) : Task<string>
+    - GetFullPath() : string
+    + <<async>> DeleteFile(documentoId:long) : Task
+    - {static} DeleteFile(caminhoArquivo:string) : void
+    + <<async>> GetDocumentoAula(aulaId:long) : Task<DocumentoAulaDTO>
+}
+IFileHelperService <|-- FileHelperService
+FileHelperService --> "_environment" IHostEnvironment
+FileHelperService --> "_uow" IUnitOfWork
+interface IAulaRepository {
+    BuscarAulas(instrutoresId:List<long?>, disciplinas:List<long?>, dataInicio:DateTime, dataFim:DateTime) : List<Aula>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<Aula>" <|-- IAulaRepository
+interface "IBaseRepository"<T> {
+    Create(obj:T) : Task<T>
+    Update(obj:T) : Task<T>
+    Update(id:long, obj:T) : Task<T>
+    Delete(id:long) : Task<bool>
+    Get(id:long?) : Task<T>
+    Get() : Task<List<T>>
+    IsUniqueValue(obj:T, propertyName:string, value:object) : Task<bool>
+}
+interface IDisciplinaRepository {
+    GetDisciplinasPorInstrutor(instrutorId:long) : List<Disciplina>
+    GetDisciplinasPorEstudante(estudanteId:long) : List<Disciplina>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<Disciplina>" <|-- IDisciplinaRepository
+interface IDocumentoAulaRepository {
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<DocumentoAula>" <|-- IDocumentoAulaRepository
+interface IEstudanteDisciplinaRepository {
+    InserirDisplicinasDoEstudante(estudanteDisciplinasList:List<EstudanteDisciplina>) : Task<bool>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<EstudanteDisciplina>" <|-- IEstudanteDisciplinaRepository
+interface IEstudanteRepository {
+    + GetEstudanteByUserId(userId:long?) : Task<Estudante>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<Estudante>" <|-- IEstudanteRepository
+interface IFrequenciaAulaRepository {
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<FrequenciaAula>" <|-- IFrequenciaAulaRepository
+interface IInstrutorDisciplinaRepository {
+    + InserirDisplicinasDoInstrutor(instrutorDisciplinasList:List<InstrutorDisciplina>) : Task<bool>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<InstrutorDisciplina>" <|-- IInstrutorDisciplinaRepository
+interface IInstrutorRepository {
+    + GetInstrutorByUserId(userId:long) : Task<Instrutor>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<Instrutor>" <|-- IInstrutorRepository
+interface IUserRepository {
+    + VerificaUserNameDisponivel(username:string) : Task<bool>
+    + GetByUserName(username:string) : Task<User>
+    + GetInfoByUserId(Id:long) : Task<dynamic>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<User>" <|-- IUserRepository
+interface IAuthenticationService {
+    + CreateEstudante(estudanteDTO:EstudanteDTO) : Task<AuthenticatedUserDTO>
+    + CreateInstrutor(instrutorDTO:InstrutorDTO) : Task<AuthenticatedUserDTO>
+    + Login(userName:string, password:string) : Task<AuthenticatedUserDTO>
+}
+interface IAulaService {
+    CriarAula(aulaDTO:AulaDTO) : Task<AulaDTO>
+    EditarAula(aulaDTO:AulaDTO) : Task<AulaDTO>
+    GetAulas() : Task<List<AulaDTO>>
+    InscricaoAula(aulaEstudanteDTO:AulaEstudanteDTO) : Task<AulaDTO>
+    PesquisarAula(buscarAulaDTO:BuscarAulaDTO) : List<AulaDTO>
+}
+interface IDisciplinaService {
+    EditarDisciplinasEstudante(disciplinasParaCursarDTO:DisciplinasParaCursarDTO) : Task<DisciplinasParaCursarDTO>
+    EditarDisciplinasInstrutor(disciplinasParaLecionarDTO:DisciplinasParaLecionarDTO) : Task<DisciplinasParaLecionarDTO>
+    GetDisciplinaDTOs() : Task<List<DisciplinaDTO>>
+    GetDisciplinasPorEstudante(estudanteId:long) : Task<List<DisciplinaDTO>>
+    GetDisciplinasPorInstrutor(instrutorId:long) : Task<List<DisciplinaDTO>>
+}
+interface IFileHelperService {
+    + DeleteFile(documentoId:long) : Task
+    + GetSingleFileAsync(documentoId:long) : Task<(string, byte[])>
+    + SaveFileAsync(fileDTO:FileDTO) : Task<string>
+    + GetDocumentoAula(aulaId:long) : Task<DocumentoAulaDTO>
+}
+class CreateUserTest {
+    + CreateUserTest()
+    + <<async>> CriarEstudanteERetornaMensagemCorreta() : Task
+}
+class "Mock`1"<T> {
+}
+CreateUserTest --> "_sut" UsersController
+CreateUserTest --> "mockService<IAuthenticationService>" "Mock`1"
+@enduml

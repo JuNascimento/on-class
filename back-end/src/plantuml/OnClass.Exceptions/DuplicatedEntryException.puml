@@ -1,0 +1,9 @@
+@startuml
+class DuplicatedEntryException {
+    + DuplicatedEntryException()
+    + DuplicatedEntryException(message:string)
+    + DuplicatedEntryException(message:string, innerException:Exception)
+    # DuplicatedEntryException(info:SerializationInfo, context:StreamingContext)
+}
+InvalidOperationException <|-- DuplicatedEntryException
+@enduml

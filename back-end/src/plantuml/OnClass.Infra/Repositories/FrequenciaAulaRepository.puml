@@ -1,0 +1,10 @@
+@startuml
+class FrequenciaAulaRepository {
+    + FrequenciaAulaRepository(context:ApplicationContext)
+    + FrequenciaAulaRepository()
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<FrequenciaAula>" <|-- FrequenciaAulaRepository
+IFrequenciaAulaRepository <|-- FrequenciaAulaRepository
+@enduml

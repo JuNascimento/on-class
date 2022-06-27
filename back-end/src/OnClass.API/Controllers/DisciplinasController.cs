@@ -34,7 +34,7 @@ namespace OnClass.API.Controllers
         }
 
         // Disciplinas/GetDisciplinasPorEstudante/5
-        [HttpGet("{instrutorId:long}")]
+        [HttpGet("{estudanteId:long}")]
         [Authorize(Roles = "Estudante")]
         public ActionResult<List<DisciplinaDTO>> GetDisciplinasPorEstudante(long estudanteId)
         {

@@ -140,26 +140,5 @@ namespace OnClass.Infra.Repositories
         {
             return _context.Set<T>().Any(e => e.Id == id);
         }
-
-        public virtual async Task<bool> IsUniqueValue(T obj, string propertyName, object value)
-        {
-            var entityList = await Get();
-            foreach (var entity in entityList)
-            {
-                return !CompareByReflection(entity, obj, propertyName, value);
-            }
-            return true;
-        }
-
-        private static bool CompareByReflection(object objetoASerComparado, object objetoComparador, string propertyName, object value)
-        {
-            if (objetoASerComparado.GetType() == objetoComparador.GetType())
-            {
-                var property = (objetoASerComparado).GetType().GetProperty(propertyName);
-                var propValue = property.GetValue(objetoASerComparado, null);
-                return propValue.Equals(value);
-            }
-            return false;
-        }
     }
 }

@@ -1,0 +1,14 @@
+@startuml
+class AulasController {
+    + AulasController(aulaService:IAulaService, fileService:IFileHelperService)
+    + <<async>> GetAulas() : Task<ActionResult<List<AulaDTO>>>
+    + <<async>> GetDocumentoAula(aulaId:long) : Task<ActionResult<List<AulaDTO>>>
+    + PesquisarAula(buscarAulaDTO:BuscarAulaDTO) : ActionResult<List<AulaDTO>>
+    + <<async>> CriarAula(aulaDTO:AulaDTO) : Task<ActionResult<AulaDTO>>
+    + <<async>> EditarAula(aulaDTO:AulaDTO) : Task<ActionResult<AulaDTO>>
+    + <<async>> InscricaoAula(aulaEstudanteDTO:AulaEstudanteDTO) : Task<ActionResult<AulaDTO>>
+}
+Controller <|-- AulasController
+AulasController --> "_aulaService" IAulaService
+AulasController --> "_fileService" IFileHelperService
+@enduml

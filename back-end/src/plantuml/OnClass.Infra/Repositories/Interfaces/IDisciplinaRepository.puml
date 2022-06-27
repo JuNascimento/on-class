@@ -1,0 +1,9 @@
+@startuml
+interface IDisciplinaRepository {
+    GetDisciplinasPorInstrutor(instrutorId:long) : List<Disciplina>
+    GetDisciplinasPorEstudante(estudanteId:long) : List<Disciplina>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<Disciplina>" <|-- IDisciplinaRepository
+@enduml

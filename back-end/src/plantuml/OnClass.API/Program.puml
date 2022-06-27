@@ -1,0 +1,8 @@
+@startuml
+class "Empty`1"<T> {
+}
+class "AddDbContext`1"<T> {
+}
+class "MapHub`1"<T> {
+}
+@enduml

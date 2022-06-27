@@ -1,0 +1,9 @@
+@startuml
+class UnableToDeleteException {
+    + UnableToDeleteException()
+    + UnableToDeleteException(message:string)
+    + UnableToDeleteException(message:string, innerException:Exception)
+    # UnableToDeleteException(info:SerializationInfo, context:StreamingContext)
+}
+InvalidOperationException <|-- UnableToDeleteException
+@enduml

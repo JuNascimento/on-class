@@ -1,0 +1,7 @@
+@startuml
+class HashGenerator <<static>> {
+    + {static} GenerateHash(user:User) : void
+    - {static} GenerateSalt() : byte[]
+    + {static} ComputeHash(password:string, saltString:string) : string
+}
+@enduml

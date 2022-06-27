@@ -1,0 +1,5 @@
+@startuml
+class TokenHelper <<static>> {
+    + {static} GenerateToken(authenticatedUserDTO:AuthenticatedUserDTO) : void
+}
+@enduml

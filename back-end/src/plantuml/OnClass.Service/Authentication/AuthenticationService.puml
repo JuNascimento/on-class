@@ -1,0 +1,15 @@
+@startuml
+class AuthenticationService {
+    - <<readonly>> salt : string
+    + AuthenticationService(uow:IUnitOfWork, mapper:IMapper)
+    - <<async>> CreateUser(user:User) : Task<User>
+    + <<async>> CreateEstudante(estudanteDTO:EstudanteDTO) : Task<AuthenticatedUserDTO>
+    - <<async>> VerificaUserName(username:string) : Task
+    + <<async>> CreateInstrutor(instrutorDTO:InstrutorDTO) : Task<AuthenticatedUserDTO>
+    + <<async>> Login(userName:string, password:string) : Task<AuthenticatedUserDTO>
+    - IsValidUser(user:User, password:string) : bool
+}
+IAuthenticationService <|-- AuthenticationService
+AuthenticationService --> "_uow" IUnitOfWork
+AuthenticationService --> "_mapper" IMapper
+@enduml

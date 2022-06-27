@@ -1,0 +1,7 @@
+@startuml
+class EstudanteDisciplina {
+    + EstudanteId : long? <<get>> <<set>>
+    + DisciplinaId : long? <<get>> <<set>>
+}
+BaseModel <|-- EstudanteDisciplina
+@enduml

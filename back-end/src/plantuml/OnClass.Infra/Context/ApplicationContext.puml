@@ -1,0 +1,19 @@
+@startuml
+class ApplicationContext {
+    + ApplicationContext()
+    + ApplicationContext(options:DbContextOptions<ApplicationContext>)
+    # <<override>> OnModelCreating(modelBuilder:ModelBuilder) : void
+}
+class "DbSet`1"<T> {
+}
+DbContext <|-- ApplicationContext
+ApplicationContext --> "Aulas<Aula>" "DbSet`1"
+ApplicationContext --> "Disciplinas<Disciplina>" "DbSet`1"
+ApplicationContext --> "DocumentoAulas<DocumentoAula>" "DbSet`1"
+ApplicationContext --> "Estudantes<Estudante>" "DbSet`1"
+ApplicationContext --> "EstudanteDisciplinas<EstudanteDisciplina>" "DbSet`1"
+ApplicationContext --> "FrequenciaAulas<FrequenciaAula>" "DbSet`1"
+ApplicationContext --> "Instrutores<Instrutor>" "DbSet`1"
+ApplicationContext --> "InstrutorDisciplinas<InstrutorDisciplina>" "DbSet`1"
+ApplicationContext --> "Users<User>" "DbSet`1"
+@enduml

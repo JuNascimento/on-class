@@ -1,0 +1,10 @@
+@startuml
+class DocumentoAulaRepository {
+    + DocumentoAulaRepository(context:ApplicationContext)
+    + DocumentoAulaRepository()
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<DocumentoAula>" <|-- DocumentoAulaRepository
+IDocumentoAulaRepository <|-- DocumentoAulaRepository
+@enduml

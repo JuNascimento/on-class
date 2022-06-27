@@ -1,0 +1,8 @@
+@startuml
+class FrequenciaAulaMap {
+    + Configure(builder:EntityTypeBuilder<FrequenciaAula>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<FrequenciaAula>" <|-- FrequenciaAulaMap
+@enduml

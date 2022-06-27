@@ -1,0 +1,10 @@
+@startuml
+class InstrutorDTO {
+    + Cpf : string? <<get>> <<set>>
+}
+class InstrutorBasicDTO {
+    + Id : long? <<get>> <<set>>
+    + NomeCompleto : string? <<get>> <<set>>
+}
+UserDTO <|-- InstrutorDTO
+@enduml

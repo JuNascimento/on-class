@@ -1,0 +1,11 @@
+@startuml
+class EstudanteRepository {
+    + EstudanteRepository(context:ApplicationContext)
+    + EstudanteRepository()
+    + <<async>> GetEstudanteByUserId(userId:long?) : Task<Estudante>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<Estudante>" <|-- EstudanteRepository
+IEstudanteRepository <|-- EstudanteRepository
+@enduml

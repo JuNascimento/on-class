@@ -1,0 +1,15 @@
+@startuml
+class VideoHub {
+    + <<async>> SendStream(stream:object) : Task
+    + <<async>> UploadStreamBytes(stream:string) : Task
+    + <<async>> SendStreamDataToGroup(properties:VideoHubProperties, data:IAsyncEnumerable<string>) : Task
+    + <<async>> CreateGroup(groupName:string, user:string) : Task
+    + <<async>> RemoveFromGroup(groupName:string, user:string) : Task
+    + <<async>> SendDataToGroup(properties:VideoHubProperties, data:object) : Task
+}
+class VideoHubProperties {
+    + GroupName : string <<get>> <<set>>
+    + UserName : string <<get>> <<set>>
+}
+Hub <|-- VideoHub
+@enduml

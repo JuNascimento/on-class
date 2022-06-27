@@ -1,0 +1,5 @@
+@startuml
+class DependencyInjection <<static>> {
+    + {static} RegisterServices(services:IServiceCollection) : void
+}
+@enduml

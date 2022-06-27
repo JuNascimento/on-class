@@ -1,0 +1,9 @@
+@startuml
+interface IDisciplinaService {
+    EditarDisciplinasEstudante(disciplinasParaCursarDTO:DisciplinasParaCursarDTO) : Task<DisciplinasParaCursarDTO>
+    EditarDisciplinasInstrutor(disciplinasParaLecionarDTO:DisciplinasParaLecionarDTO) : Task<DisciplinasParaLecionarDTO>
+    GetDisciplinaDTOs() : Task<List<DisciplinaDTO>>
+    GetDisciplinasPorEstudante(estudanteId:long) : Task<List<DisciplinaDTO>>
+    GetDisciplinasPorInstrutor(instrutorId:long) : Task<List<DisciplinaDTO>>
+}
+@enduml

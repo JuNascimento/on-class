@@ -1,0 +1,9 @@
+@startuml
+class UsersController {
+    + UsersController(authenticationService:IAuthenticationService)
+    + <<async>> CreateEstudante(estudanteDTO:EstudanteDTO) : Task<ActionResult<AuthenticatedUserDTO>>
+    + <<async>> CreateInstrutor(instrutorDTO:InstrutorDTO) : Task<ActionResult<AuthenticatedUserDTO>>
+}
+Controller <|-- UsersController
+UsersController --> "_authenticationService" IAuthenticationService
+@enduml

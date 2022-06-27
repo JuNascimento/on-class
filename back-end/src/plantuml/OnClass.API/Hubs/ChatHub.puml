@@ -1,0 +1,9 @@
+@startuml
+class ChatHub {
+    + <<async>> SendMessage(user:string, message:string) : Task
+    + <<async>> CreateGroup(groupName:string, user:string) : Task
+    + <<async>> RemoveFromGroup(groupName:string, user:string) : Task
+    + <<async>> SendMessageToGroup(properties:ChatHubProperties) : Task
+}
+Hub <|-- ChatHub
+@enduml

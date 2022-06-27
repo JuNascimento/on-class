@@ -1,0 +1,10 @@
+@startuml
+class FileDTO {
+    + AulaId : long <<get>> <<set>>
+    + FormFile : IFormFile? <<get>> <<set>>
+}
+class DocumentoAulaDTO {
+    + IdArquivo : long <<get>> <<set>>
+    + NomeArquivo : string <<get>> <<set>>
+}
+@enduml

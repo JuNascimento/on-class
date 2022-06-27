@@ -1,0 +1,8 @@
+@startuml
+interface IEstudanteDisciplinaRepository {
+    InserirDisplicinasDoEstudante(estudanteDisciplinasList:List<EstudanteDisciplina>) : Task<bool>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<EstudanteDisciplina>" <|-- IEstudanteDisciplinaRepository
+@enduml

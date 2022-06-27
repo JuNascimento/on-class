@@ -1,0 +1,8 @@
+@startuml
+interface IEstudanteRepository {
+    + GetEstudanteByUserId(userId:long?) : Task<Estudante>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<Estudante>" <|-- IEstudanteRepository
+@enduml

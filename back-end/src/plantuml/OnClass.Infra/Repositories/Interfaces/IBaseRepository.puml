@@ -1,0 +1,11 @@
+@startuml
+interface "IBaseRepository"<T> {
+    Create(obj:T) : Task<T>
+    Update(obj:T) : Task<T>
+    Update(id:long, obj:T) : Task<T>
+    Delete(id:long) : Task<bool>
+    Get(id:long?) : Task<T>
+    Get() : Task<List<T>>
+    IsUniqueValue(obj:T, propertyName:string, value:object) : Task<bool>
+}
+@enduml

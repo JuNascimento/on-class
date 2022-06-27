@@ -1,0 +1,14 @@
+@startuml
+interface IUnitOfWork {
+    Commit() : void
+}
+IUnitOfWork --> "AulaRepository" IAulaRepository
+IUnitOfWork --> "DisciplinaRepository" IDisciplinaRepository
+IUnitOfWork --> "DocumentoAulaRepository" IDocumentoAulaRepository
+IUnitOfWork --> "EstudanteRepository" IEstudanteRepository
+IUnitOfWork --> "EstudanteDisciplinaRepository" IEstudanteDisciplinaRepository
+IUnitOfWork --> "FrequenciaAulaRepository" IFrequenciaAulaRepository
+IUnitOfWork --> "InstrutorRepository" IInstrutorRepository
+IUnitOfWork --> "InstrutorDisciplinaRepository" IInstrutorDisciplinaRepository
+IUnitOfWork --> "UserRepository" IUserRepository
+@enduml

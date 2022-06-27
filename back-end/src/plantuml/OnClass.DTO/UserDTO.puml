@@ -1,0 +1,9 @@
+@startuml
+class UserDTO {
+    + UserName : string? <<get>> <<set>>
+    + NomeCompleto : string? <<get>> <<set>>
+    + Password : string? <<get>> <<set>>
+}
+BaseDTO <|-- UserDTO
+UserDTO --> "DataNascimento" DateTime
+@enduml

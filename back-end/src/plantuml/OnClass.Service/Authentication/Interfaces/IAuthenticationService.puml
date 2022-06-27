@@ -1,0 +1,7 @@
+@startuml
+interface IAuthenticationService {
+    + CreateEstudante(estudanteDTO:EstudanteDTO) : Task<AuthenticatedUserDTO>
+    + CreateInstrutor(instrutorDTO:InstrutorDTO) : Task<AuthenticatedUserDTO>
+    + Login(userName:string, password:string) : Task<AuthenticatedUserDTO>
+}
+@enduml

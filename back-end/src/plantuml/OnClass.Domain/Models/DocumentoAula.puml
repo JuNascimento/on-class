@@ -1,0 +1,11 @@
+@startuml
+class DocumentoAula {
+    + AulaId : long? <<get>> <<set>>
+    + NomeOriginal : string? <<get>> <<set>>
+    + ExtensaoOriginal : string? <<get>> <<set>>
+    + CaminhoDocumento : string? <<get>> <<set>>
+    + NomeHash : string? <<get>> <<set>>
+}
+BaseModel <|-- DocumentoAula
+DocumentoAula --> "DataCriacao" DateTime
+@enduml

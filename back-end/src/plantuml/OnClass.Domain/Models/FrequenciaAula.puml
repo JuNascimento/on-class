@@ -1,0 +1,7 @@
+@startuml
+class FrequenciaAula {
+    + AulaId : long? <<get>> <<set>>
+    + EstudanteId : long? <<get>> <<set>>
+}
+BaseModel <|-- FrequenciaAula
+@enduml

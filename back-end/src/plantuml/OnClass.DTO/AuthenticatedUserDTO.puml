@@ -1,0 +1,23 @@
+@startuml
+class AuthenticatedUserDTO {
+    + AuthenticatedUserDTO()
+    + AuthenticatedUserDTO(userName:string?, nome:string?, role:string?, token:string?, tokenExpiration:DateTime?, primeiroLogin:bool?)
+    + AuthenticatedUserDTO(user:AuthenticatedUserDTO)
+    + UserName : string? <<get>> <<set>>
+    + Nome : string? <<get>> <<set>>
+    + Role : string? <<get>> <<set>>
+    + Token : string? <<get>> <<set>>
+    + TokenExpiration : DateTime? <<get>> <<set>>
+    + PrimeiroLogin : bool? <<get>> <<set>>
+}
+class AuthenticatedEstudanteDTO {
+    + Id : long? <<get>> <<set>>
+    + AuthenticatedEstudanteDTO(id:long?, user:AuthenticatedUserDTO)
+}
+class AuthenticatedInstrutorDTO {
+    + Id : long? <<get>> <<set>>
+    + AuthenticatedInstrutorDTO(id:long?, user:AuthenticatedUserDTO)
+}
+AuthenticatedUserDTO <|-- AuthenticatedEstudanteDTO
+AuthenticatedUserDTO <|-- AuthenticatedInstrutorDTO
+@enduml
