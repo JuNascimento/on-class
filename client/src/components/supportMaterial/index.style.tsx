@@ -45,6 +45,11 @@ export const Tab = styled.div<TabProps>`
 
 export const Content = styled.div`
   height: 100%;
+  border: 1px solid red;
+`
+
+export const Subtitle = styled.h3`
+  padding: 0 20px;
 `
 
 export const Iframe = styled.iframe`
@@ -53,10 +58,12 @@ export const Iframe = styled.iframe`
 `
 
 export const Links = styled.div`
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   align-items: 'flex-start';
+  text-decoration: underline;
+  cursor: pointer;
 `
 
 export const Link = styled.li`

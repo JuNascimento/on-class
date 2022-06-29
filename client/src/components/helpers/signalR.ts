@@ -19,8 +19,6 @@ class SignalRClient {
     try {
       if (connection) {
         await connection.invoke('SendMessage', user, message)
-      } else {
-        console.error('[SignalR - Send] No connection to server yet')
       }
     } catch (error) {
       console.error(`[SignalR - Send] ${error}`)

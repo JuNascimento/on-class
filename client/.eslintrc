@@ -28,7 +28,7 @@
   "rules": {
     "import/no-unresolved": "error",
     "react/react-in-jsx-scope": "off",
-    "eslint-disable-next-line": "on"
+    "eslint-disable-next-line": 0
   },
   "settings": {
     "import/resolver": {

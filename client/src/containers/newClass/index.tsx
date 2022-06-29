@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
-import { LoginButton } from '../../components/homePage/index.style'
 import { getSessionStorage } from '../../components/helpers'
 import {
   InputFieldsColumn,
   Label,
   Select,
   Input,
+  Title,
+  LoginButton,
 } from '../../components/homePage/index.style'
-import { CloseSvg } from '../../components/icons'
-import { NewClass, Close } from './index.style'
 
 interface NewClassProps {
   role: string
-  setShowModal: (state: boolean) => void
+  setNewClassModal: (state: boolean) => void
   userSubjetcs: any[]
   setClasses: any
   classes: any
@@ -31,7 +30,7 @@ interface HourInterface {
 
 const NewClassContainer: React.FC<NewClassProps> = ({
   role,
-  setShowModal,
+  setNewClassModal,
   userSubjetcs,
   setClasses,
   classes,
@@ -45,19 +44,43 @@ const NewClassContainer: React.FC<NewClassProps> = ({
   const [subject, setSubject] = useState({ id: null, disciplina: null })
 
   const handleDate = (value: any) => {
-    const startDate = new Date(value).toISOString().slice(0, 10)
-    const year = startDate.split('-')[0]
-    const month = startDate.split('-')[1]
-    const day = startDate.split('-')[2]
+    if (value !== '') {
+      const startDate = new Date(value).toISOString().slice(0, 10)
+      const year = startDate.split('-')[0]
+      const month = startDate.split('-')[1]
+      const day = startDate.split('-')[2]
 
-    setDate({ ...date, day: day, month: month, year: year })
+      setDate({ ...date, day: day, month: month, year: year })
+    } else {
+      setDate({ ...date, day: null, month: null, year: null })
+    }
   }
 
   const handleHour = (value: any) => {
-    const hour = value.split(':')[0]
-    const minute = value.split(':')[1]
+    if (value !== '') {
+      const hour = value.split(':')[0]
+      const minute = value.split(':')[1]
 
-    setTime({ ...time, hour: hour, minute: minute })
+      setTime({ ...time, hour: hour, minute: minute })
+    } else {
+      setTime({ ...time, hour: null, minute: null })
+    }
+  }
+
+  const handleSubject = (value: any) => {
+    if (value !== '') {
+      setSubject({
+        ...subject,
+        id: userSubjetcs[parseInt(value)].id,
+        disciplina: userSubjetcs[parseInt(value)].disciplina,
+      })
+    } else {
+      setSubject({
+        ...subject,
+        id: null,
+        disciplina: null,
+      })
+    }
   }
 
   const createClass = async () => {
@@ -108,59 +131,67 @@ const NewClassContainer: React.FC<NewClassProps> = ({
     }
 
     if (response.ok) {
-      setShowModal(false)
+      setNewClassModal(false)
       setClasses([...classes, newClass])
     }
   }
 
+  const shouldDisableButton = () => {
+    return !(
+      subject.id &&
+      subject.id !== '' &&
+      date.day &&
+      date.day !== '' &&
+      date.month &&
+      date.month !== '' &&
+      date.year &&
+      date.year !== '' &&
+      time.hour &&
+      time.hour !== '' &&
+      time.minute &&
+      time.minute !== ''
+    )
+  }
+
   return (
-    <NewClass>
-      <Close onClick={() => setShowModal(false)}>
-        <CloseSvg />
-      </Close>
-      <article>
-        <InputFieldsColumn>
-          <Label>Disciplina da aula </Label>
-          <Select
-            onChange={e =>
-              setSubject({
-                ...subject,
-                id: userSubjetcs[parseInt(e.target.value)].id,
-                disciplina: userSubjetcs[parseInt(e.target.value)].disciplina,
-              })
-            }
-          >
-            <option key={'subject-avaliable-none'} value=''>
-              -----------
-            </option>
-            {userSubjetcs.map((key, value) => {
-              return (
-                <option key={`subject-avaliable-${value}`} value={value}>
-                  {key.disciplina}
-                </option>
-              )
-            })}
-          </Select>
-          <Label>Data da aula </Label>
-          <Input
-            type='date'
-            id='birthday'
-            showError={false}
-            onChange={e => handleDate(e.target.value)}
-          />
-          <Label>Hora da aula </Label>
-          <Input
-            type='time'
-            id='time'
-            showError={false}
-            onChange={e => handleHour(e.target.value)}
-          />
-          <LoginButton isDisabled={false} onClick={() => createClass()}>
-            Criar nova aula
-          </LoginButton>
-        </InputFieldsColumn>
-      </article>
-    </NewClass>
+    <>
+      <Title>Crie nova aula</Title>
+      <InputFieldsColumn>
+        <Label>Disciplina</Label>
+        <Select onChange={e => handleSubject(e.target.value)}>
+          <option key={'subject-avaliable-none'} value=''>
+            -----------
+          </option>
+          {userSubjetcs.map((key, value) => {
+            return (
+              <option key={`subject-avaliable-${value}`} value={value}>
+                {key.disciplina}
+              </option>
+            )
+          })}
+        </Select>
+        <Label>Data</Label>
+        <Input
+          type='date'
+          id='birthday'
+          showError={false}
+          onChange={e => handleDate(e.target.value)}
+        />
+        <Label>Horário</Label>
+        <Input
+          type='time'
+          id='time'
+          showError={false}
+          onChange={e => handleHour(e.target.value)}
+        />
+        <LoginButton
+          isDisabled={shouldDisableButton()}
+          onClick={() => createClass()}
+        >
+          Criar nova aula
+        </LoginButton>
+      </InputFieldsColumn>
+    </>
   )
 }
 

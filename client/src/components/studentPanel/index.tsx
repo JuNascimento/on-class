@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import NewClassContainer from '../../containers/newClass'
-import SubjectsContainer from '../../containers/subjetcs'
-import NotImplemented from '../notImplemented'
 import { getSessionStorage } from '../helpers'
 import { LoginButton } from '../homePage/index.style'
 import { ModalContainer } from '../modal'
@@ -16,21 +13,15 @@ import {
   Subtitle,
   SubtitleLabel,
 } from './index.style'
+import SubjectsContainer from '../../containers/subjetcs'
+import NotImplemented from '../notImplemented'
 
-interface ClassType {
-  instrutor: {
-    id: number
-    name: string
-  }
-  disciplina: {
-    id: number
-    disciplina: string
-  }
-  data_inicio: string
-  data_fim: string
+interface Subject {
+  id: number
+  disciplina: string
 }
 
-const TeacherPanel: React.FC = () => {
+const StudentPanel: React.FC = () => {
   const [newClassModal, setNewClassModal] = useState(false)
   const [editSubjectsModal, setEditSubjectsModal] = useState(false)
   const [userSubjets, setUserSubjects] = useState([])
@@ -38,9 +29,9 @@ const TeacherPanel: React.FC = () => {
   const [notImplementedError, setNotImplementedError] = useState(false)
 
   const getUserSubjects = async () => {
-    const user = getSessionStorage('teacher')
-    const roleId = user.instrutor_id
-    const url = `http://localhost:25100/Disciplinas/GetDisciplinasPorInstrutor/${roleId}`
+    const user = getSessionStorage('student')
+    const roleId = user.estudante_id
+    const url = `http://localhost:25100/Disciplinas/GetDisciplinasPorEstudante/1?estudanteId=${roleId}`
 
     const response = await fetch(url, {
       method: 'GET',
@@ -59,7 +50,7 @@ const TeacherPanel: React.FC = () => {
   }, [])
 
   const getClassesAvaliable = async () => {
-    const user = getSessionStorage('teacher')
+    const user = getSessionStorage('student')
     const url = `http://localhost:25100/Aulas/GetAulas`
 
     const response = await fetch(url, {
@@ -79,7 +70,7 @@ const TeacherPanel: React.FC = () => {
   }, [])
 
   const goToClass = () => {
-    window.location.href = `http://localhost:3000/teacher/class`
+    window.location.href = `http://localhost:3000/student/class`
   }
 
   const handleNotImplementedError = () => {
@@ -87,14 +78,12 @@ const TeacherPanel: React.FC = () => {
   }
 
   const showNextClasses = () => {
-    const teachersId = classes.map((key: ClassType) => {
-      return key.instrutor.id
+    const subjectsId = userSubjets.map((key: Subject) => {
+      return key.id
     })
-    const user = getSessionStorage('teacher')
-    const roleId = user.instrutor_id
 
     return classes.map((key: any, value) => {
-      if (teachersId.includes(roleId)) {
+      if (subjectsId.includes(key.id)) {
         return (
           <Class
             key={`next-class-${value}`}
@@ -123,7 +112,7 @@ const TeacherPanel: React.FC = () => {
   }
 
   const showCompletedClasses = () => {
-    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((key: number) => {
+    return [0, 1, 2, 3].map(key => {
       return (
         <Class
           key={`completed-class-${key}`}
@@ -157,7 +146,7 @@ const TeacherPanel: React.FC = () => {
             isDisabled={false}
             onClick={() => setNewClassModal(true)}
           >
-            Abrir novo horário
+            Se inscrever em nova aula
           </LoginButton>
         </Lado>
         <Lado>
@@ -175,18 +164,12 @@ const TeacherPanel: React.FC = () => {
       </Lados>
       {newClassModal && (
         <ModalContainer setcloseModal={setNewClassModal}>
-          <NewClassContainer
-            role={'teacher'}
-            setNewClassModal={setNewClassModal}
-            userSubjetcs={userSubjets}
-            setClasses={setClasses}
-            classes={classes}
-          />
+          <NotImplemented />
         </ModalContainer>
       )}
       {editSubjectsModal && (
         <ModalContainer setcloseModal={setEditSubjectsModal}>
-          <SubjectsContainer role={'teacher'} />
+          <SubjectsContainer role={'student'} />
         </ModalContainer>
       )}
       {notImplementedError && (
@@ -198,4 +181,4 @@ const TeacherPanel: React.FC = () => {
   )
 }
 
-export default TeacherPanel
+export default StudentPanel

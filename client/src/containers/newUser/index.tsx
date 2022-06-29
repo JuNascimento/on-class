@@ -5,15 +5,6 @@ import { setSessionStorage } from '../../components/helpers'
 const NewUserContainer: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [errorWithoutRegister, setErrorWithoutRegister] = useState(false)
-  const [errorWrongInfo, setErrorWrongInfo] = useState(false)
-
-  const showError = (type: string) => {
-    if (type === 'wrong information') {
-      setErrorWrongInfo(true)
-    } else {
-      setErrorWithoutRegister(true)
-    }
-  }
 
   const handleChange = () => {
     setShowPassword(!showPassword)
@@ -65,7 +56,7 @@ const NewUserContainer: React.FC = () => {
     }
 
     if (responseJson.message === 'Já existe usuário com esse nome') {
-      showError('without register')
+      setErrorWithoutRegister(true)
     }
   }
 

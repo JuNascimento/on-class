@@ -46,6 +46,7 @@ export const Classes = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   overflow-y: auto;
+  width: 100%;
 `
 
 interface Props {
@@ -54,7 +55,6 @@ interface Props {
 }
 
 export const Class = styled.div<Props>`
-  min-width: 200px;
   background-color: ${p => (p.nextClasses ? '#f8d2d2ca' : '#f8d2d25c')};
   align-items: center;
   width: 46%;

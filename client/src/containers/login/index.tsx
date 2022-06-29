@@ -8,16 +8,7 @@ interface Props {
 
 const LoginContainer: React.FC<Props> = ({ role }) => {
   const [showPassword, setShowPassword] = useState(false)
-  const [errorWithoutRegister, setErrorWithoutRegister] = useState(false)
   const [errorWrongInfo, setErrorWrongInfo] = useState(false)
-
-  const showError = (type: string) => {
-    if (type === 'wrong information') {
-      setErrorWrongInfo(true)
-    } else {
-      setErrorWithoutRegister(true)
-    }
-  }
 
   const handleChange = () => {
     setShowPassword(!showPassword)
@@ -49,12 +40,12 @@ const LoginContainer: React.FC<Props> = ({ role }) => {
         setSessionStorage(role, responseJson)
         window.location.href = `http://localhost:3000/${role}/dashboard`
       } else {
-        showError('wrong information')
+        setErrorWrongInfo(true)
       }
     }
 
     if (responseJson.message === 'Usuário ou senha inválidos!') {
-      showError('wrong information')
+      setErrorWrongInfo(true)
     }
   }
 

@@ -1,12 +1,22 @@
 import styled from 'styled-components'
 
+export const Dashboard = styled.section`
+  height: 90vh;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
 export const Subtitle = styled.div`
   padding: 0 30%;
 `
 
 export const SubtitleLabel = styled.h3`
+  border-bottom: 1px solid #ff5757;
+  padding: 10px 0;
   font-size: 20px;
-  margin: 10px 0 20px 0;
   font-weight: 400;
 `
 
@@ -36,6 +46,7 @@ export const Classes = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   overflow-y: auto;
+  width: 100%;
 `
 
 interface Props {
@@ -44,7 +55,6 @@ interface Props {
 }
 
 export const Class = styled.div<Props>`
-  width: 100%;
   background-color: ${p => (p.nextClasses ? '#f8d2d2ca' : '#f8d2d25c')};
   align-items: center;
   width: 46%;

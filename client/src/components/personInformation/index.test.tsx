@@ -4,7 +4,7 @@ import PersonInformationContainer from './index'
 
 describe('PersonInformationContainer', () => {
   beforeEach(() => {
-    render(<PersonInformationContainer type='teacher' />)
+    render(<PersonInformationContainer userInfo='teacher' />)
   })
 
   test('should render svg element correctly', () => {
@@ -21,7 +21,7 @@ describe('PersonInformationContainer', () => {
 
   describe('when type is `teacher`', () => {
     test.skip('should have `Julia Nascimento` text in the document', () => {
-      render(<PersonInformationContainer type='teacher' />)
+      render(<PersonInformationContainer userInfo='teacher' />)
 
       const expectedText = screen.getByText('Julia Nascimento')
 
@@ -31,7 +31,7 @@ describe('PersonInformationContainer', () => {
 
   describe('when type is `student`', () => {
     test('should have `Pedro Furtado` text in the document', () => {
-      render(<PersonInformationContainer type='student' />)
+      render(<PersonInformationContainer userInfo='student' />)
 
       const expectedText = screen.getByText('Pedro Furtado')
 

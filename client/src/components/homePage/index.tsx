@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Home, Title, Subtitle, Roles, Role, LoginButton } from './index.style'
 import { ManTeacherSvg, PersonSvg, QuestionMarkSvg } from '../icons'
 

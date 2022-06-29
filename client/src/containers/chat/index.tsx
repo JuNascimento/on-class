@@ -17,15 +17,10 @@ const ChatContainer: React.FC<Props> = ({ role }) => {
 
   latestChat.current = chat
 
-  useEffect(() => {
-    const createConnection = async () => {
-      const newConnection = signalR.create('http://localhost:25100/chat')
-
-      await newConnection.start()
-      signalR.send(newConnection, 'Rafffaa', 'aasdasd')
-    }
-
-    createConnection()
+  useEffect(async () => {
+    const newConnection = signalR.create('http://localhost:25100/chat')
+    setConnection(newConnection)
+    await connection.start()
   }, [])
 
   const getUser = () => {
@@ -35,11 +30,13 @@ const ChatContainer: React.FC<Props> = ({ role }) => {
   }
 
   const sendMessage = () => {
-    const sessionStorageItem = sessionStorage.getItem('connectionChat')
-    if (sessionStorageItem) {
-      return JSON.parse(sessionStorageItem)
-    }
-    signalR.send(sessionStorageItem, getUser(), 'alguem')
+    signalR.send(connection, 'Rafffaa', 'aasdasd')
+    console.log('nao tem conexao', connection)
+    // const sessionStorageItem = sessionStorage.getItem('connectionChat')
+    // if (sessionStorageItem) {
+    //   return JSON.parse(sessionStorageItem)
+
+    // }
   }
 
   return (

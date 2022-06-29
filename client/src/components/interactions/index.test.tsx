@@ -10,14 +10,15 @@ describe('VideoContainer', () => {
     beforeEach(() => {
       wrapper = render(
         <VideoContainer
-          setToggleSupportMaterial={jest.fn()}
+          role={'teacher'}
+          setToggleSupportMaterial={jest.fn}
           toggleSupportMaterial={false}
-          videoRef={undefined}
-          role={undefined}
-          handleCamera={undefined}
-          handleMichophone={undefined}
-          handleShareScreen={undefined}
-          handleFullScreen={undefined}
+          handleCamera={jest.fn}
+          videoStatus={false}
+          handleMichophone={jest.fn}
+          microphoneStatus={false}
+          handleShareScreen={jest.fn}
+          handleFullScreen={jest.fn}
         />
       )
       container = wrapper.container
@@ -93,14 +94,15 @@ describe('VideoContainer', () => {
     beforeEach(() => {
       wrapper = render(
         <VideoContainer
-          setToggleSupportMaterial={jest.fn()}
+          role={'student'}
+          setToggleSupportMaterial={jest.fn}
           toggleSupportMaterial={false}
-          videoRef={undefined}
-          role={undefined}
-          handleCamera={undefined}
-          handleMichophone={undefined}
-          handleShareScreen={undefined}
-          handleFullScreen={undefined}
+          handleCamera={jest.fn}
+          videoStatus={false}
+          handleMichophone={jest.fn}
+          microphoneStatus={false}
+          handleShareScreen={jest.fn}
+          handleFullScreen={jest.fn}
         />
       )
       container = wrapper.container

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Roles, LoginButton } from '../../components/homePage/index.style'
+import { LoginButton } from '../../components/homePage/index.style'
 import {
   Title,
   SubjectsSelector,
@@ -18,17 +18,13 @@ interface Props {
 }
 
 const Subjects: React.FC<Props> = ({
-  role,
   subjects,
   checkSelectedItem,
   chooseSubject,
   saveSubjects,
   shouldDisableButton,
 }) => {
-  const title =
-    role === 'teacher'
-      ? 'Escolha as matérias que quer ensinar'
-      : 'Escolha as matérias que quer aprender'
+  const title = 'Escolha suas matérias de interesse'
 
   return (
     <>

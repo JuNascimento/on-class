@@ -1,6 +1,9 @@
 client-run:
 	cd client && yarn start
 
+client-video-call:
+	cd client && node src/components/helpers/socketConnection.js
+
 client-setup:
 	clear && cd client && yarn
 

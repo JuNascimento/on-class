@@ -5,7 +5,9 @@ import {
   Iframe,
   Links,
   Link,
+  Subtitle,
 } from '../../components/supportMaterial/index.style'
+import File from './documento-teste-tcc.pdf'
 
 const LINKS = [
   { link: 'https://www.instagram.com/', label: 'Atividade 1' },
@@ -24,41 +26,35 @@ const SupportMaterialContainer: React.FC<Props> = ({
   toggleSupportMaterial,
 }) => {
   const [activeTabIndex, setActiveTabIndex] = useState(1)
+  const [notImplementedError, setNotImplementedError] = useState(false)
 
   const tab1Content = () => {
-    return (
-      <Iframe
-        data-testid='content'
-        src='https://www.w3docs.com/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf'
-      />
-    )
+    return <Iframe data-testid='content' src={File} />
   }
 
   const tab2Content = () => {
     return (
-      <Links data-testid='content'>
-        <ol>
-          {LINKS.map((key, value) => {
-            return (
-              <Link key={value}>
-                <a href={key.link} target='_blank' rel='noreferrer'>
-                  {key.label}
-                </a>
-              </Link>
-            )
-          })}
-        </ol>
-      </Links>
+      <>
+        <Subtitle>Links úteis para você</Subtitle>
+        <Links data-testid='content'>
+          <ol>
+            {LINKS.map((key, value) => {
+              return (
+                <Link key={value}>
+                  <div onClick={() => setNotImplementedError(true)}>
+                    {key.label}
+                  </div>
+                </Link>
+              )
+            })}
+          </ol>
+        </Links>
+      </>
     )
   }
 
   const tab3Content = () => {
-    return (
-      <Iframe
-        data-testid='content'
-        src='https://www.w3docs.com/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf'
-      />
-    )
+    return <Iframe data-testid='content' src={File} />
   }
 
   const defineContentStudent = () => {
@@ -126,6 +122,8 @@ const SupportMaterialContainer: React.FC<Props> = ({
       generateTabs={generateTabs}
       defineContentTeacher={defineContentTeacher}
       defineContentStudent={defineContentStudent}
+      notImplementedError={notImplementedError}
+      setNotImplementedError={setNotImplementedError}
     />
   )
 }

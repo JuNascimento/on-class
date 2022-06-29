@@ -11,10 +11,12 @@ describe('SupportMaterialContainer', () => {
       wrapper = render(
         <SupportMaterialContainer
           type={'teacher'}
-          toggleSupportMaterial={true}
-          generateTabs={undefined}
-          defineContentTeacher={undefined}
-          defineContentStudent={undefined}
+          toggleSupportMaterial={false}
+          generateTabs={jest.fn()}
+          defineContentTeacher={jest.fn()}
+          defineContentStudent={jest.fn()}
+          notImplementedError={false}
+          setNotImplementedError={jest.fn()}
         />
       )
       container = wrapper.container
@@ -125,9 +127,11 @@ describe('SupportMaterialContainer', () => {
         <SupportMaterialContainer
           type={'student'}
           toggleSupportMaterial={false}
-          generateTabs={undefined}
-          defineContentTeacher={undefined}
-          defineContentStudent={undefined}
+          generateTabs={jest.fn()}
+          defineContentTeacher={jest.fn()}
+          defineContentStudent={jest.fn()}
+          notImplementedError={false}
+          setNotImplementedError={jest.fn()}
         />
       )
       container = wrapper.container

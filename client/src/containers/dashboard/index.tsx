@@ -1,4 +1,5 @@
 import React from 'react'
+import StudentPanel from '../../components/studentPanel'
 import TeacherPanel from '../../components/teacherPanel'
 
 interface Props {
@@ -10,7 +11,7 @@ const DashboardContainer: React.FC<Props> = ({ role }) => {
     return <TeacherPanel />
   }
 
-  return <TeacherPanel />
+  return <StudentPanel />
 }
 
 export default DashboardContainer
