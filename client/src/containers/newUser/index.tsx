@@ -57,12 +57,10 @@ const NewUserContainer: React.FC = () => {
     }
 
     if (responseJson.errors['DataNascimento'][0] === 'Idade não permitida!') {
-      console.log('entro aqui 2')
       setErrorInvalidDate(true)
     }
 
     if (responseJson.errors['Cpf'][0] === 'CPF inválido!') {
-      console.log('entro aqui')
       setErrorInvalidCPF(true)
     }
 
