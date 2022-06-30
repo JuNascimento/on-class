@@ -19,18 +19,28 @@ interface Props {
 const OnGoingClassContainer: React.FC<Props> = ({ role }) => {
   const [toggleSupportMaterial, setToggleSupportMaterial] = useState(false)
   const [userInfo, setUserInfo] = useState({})
+  const [classInfo, setClassInfo] = useState({})
+
+  const getClassInformation = () => {
+    const selectedClass = sessionStorage.getItem(`${role}CurrentClass`)
+    const classInfoObj = selectedClass && JSON.parse(selectedClass)
+    setClassInfo(classInfoObj)
+  }
 
   useEffect(() => {
-    const getClassInformation = () => {
-      const user = getSessionStorage(role)
-      const userInfoObject = {
-        id: user.instrutor_id,
-        name: user.nome,
-      }
+    getUserInformation()
+  }, [])
 
-      setUserInfo(userInfoObject)
+  const getUserInformation = () => {
+    const user = getSessionStorage(role)
+    const userInfoObject = {
+      id: user.instrutor_id,
+      name: user.nome,
     }
+    setUserInfo(userInfoObject)
+  }
 
+  useEffect(() => {
     getClassInformation()
   }, [])
 
@@ -38,7 +48,7 @@ const OnGoingClassContainer: React.FC<Props> = ({ role }) => {
     <VideoContainer>
       <OnGoingClass data-testid='on-going-class-container'>
         <ClassInfo>
-          <PersonInformation userInfo={userInfo} />
+          <PersonInformation userInfo={userInfo} classInfo={classInfo} />
           <RemainingClassTime data-testid='remaining-class-time'>
             Tempo restante: 59:45
           </RemainingClassTime>

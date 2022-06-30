@@ -4,10 +4,13 @@ import { PersonInfo, Photo, Info, InfoItem } from './index.style'
 
 interface Props {
   userInfo: any
+  classInfo: any
 }
 
-const PersonInformation: React.FC<Props> = ({ userInfo }) => {
+const PersonInformation: React.FC<Props> = ({ userInfo, classInfo }) => {
   const personName = userInfo.name
+  const subjectName = classInfo.disciplina && classInfo.disciplina.name
+
   return (
     <PersonInfo data-testid='person-information-container'>
       <Photo>
@@ -15,7 +18,7 @@ const PersonInformation: React.FC<Props> = ({ userInfo }) => {
       </Photo>
       <Info>
         <InfoItem>{personName}</InfoItem>
-        <InfoItem>Cálculo I</InfoItem>
+        <InfoItem>{subjectName}</InfoItem>
       </Info>
     </PersonInfo>
   )

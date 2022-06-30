@@ -85,6 +85,7 @@ const NewClassContainer: React.FC<NewClassProps> = ({
 
   const createClass = async () => {
     const url = 'http://localhost:25100/Aulas/CriarAula'
+    const user = getSessionStorage('teacher')
 
     const classStartDate = `${date.year}-${date.month}-${date.day}T${time.hour}:${time.minute}:00.000Z`
     let classFinishDate = ''
@@ -94,8 +95,8 @@ const NewClassContainer: React.FC<NewClassProps> = ({
 
     const data = {
       instrutor: {
-        id: getSessionStorage('teacher').instrutor_id,
-        name: getSessionStorage('teacher').nome,
+        id: user.instrutor_id,
+        name: user.nome,
       },
       disciplina: {
         id: subject.id,
@@ -105,11 +106,13 @@ const NewClassContainer: React.FC<NewClassProps> = ({
       data_fim: classFinishDate,
     }
 
+    console.log('aula criada', data)
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + getSessionStorage(role).token,
+        Authorization: 'Bearer ' + user.token,
       },
       body: JSON.stringify(data),
     })
