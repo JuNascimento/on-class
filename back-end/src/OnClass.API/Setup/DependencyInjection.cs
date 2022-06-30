@@ -39,7 +39,7 @@ namespace OnClass.API.Setup
 
             services.AddScoped<IFileHelperService, FileHelperService>();
 
-            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddSingleton(AutoMapperConfig.RegisterAutoMapper());
         }
