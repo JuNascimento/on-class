@@ -1,0 +1,6 @@
+@startuml
+class Disciplina {
+    + Nome : string <<get>> <<set>>
+}
+BaseModel <|-- Disciplina
+@enduml

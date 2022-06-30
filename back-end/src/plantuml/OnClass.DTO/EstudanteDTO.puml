@@ -1,0 +1,10 @@
+@startuml
+class EstudanteDTO {
+    + NomeMae : string? <<get>> <<set>>
+}
+class EstudanteBasicDTO {
+    + Id : long? <<get>> <<set>>
+    + NomeCompleto : string? <<get>> <<set>>
+}
+UserDTO <|-- EstudanteDTO
+@enduml

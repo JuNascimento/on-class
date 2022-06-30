@@ -1,0 +1,8 @@
+@startuml
+class LoginController {
+    + LoginController(authenticationService:IAuthenticationService)
+    + <<async>> Login(userDTO:LoginRequestDTO) : Task<ActionResult<AuthenticatedUserDTO>>
+}
+Controller <|-- LoginController
+LoginController --> "_authenticationService" IAuthenticationService
+@enduml

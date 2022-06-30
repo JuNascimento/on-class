@@ -1,0 +1,10 @@
+@startuml
+interface IUserRepository {
+    + VerificaUserNameDisponivel(username:string) : Task<bool>
+    + GetByUserName(username:string) : Task<User>
+    + GetInfoByUserId(Id:long) : Task<dynamic>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<User>" <|-- IUserRepository
+@enduml

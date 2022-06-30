@@ -1,0 +1,6 @@
+@startuml
+class LoginRequestDTO {
+    + UserName : string? <<get>> <<set>>
+    + Password : string? <<get>> <<set>>
+}
+@enduml

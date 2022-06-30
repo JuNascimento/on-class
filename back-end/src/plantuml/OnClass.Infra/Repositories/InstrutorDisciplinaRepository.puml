@@ -1,0 +1,11 @@
+@startuml
+class InstrutorDisciplinaRepository {
+    + InstrutorDisciplinaRepository(context:ApplicationContext)
+    + InstrutorDisciplinaRepository()
+    + <<async>> InserirDisplicinasDoInstrutor(instrutorDisciplinasList:List<InstrutorDisciplina>) : Task<bool>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<InstrutorDisciplina>" <|-- InstrutorDisciplinaRepository
+IInstrutorDisciplinaRepository <|-- InstrutorDisciplinaRepository
+@enduml

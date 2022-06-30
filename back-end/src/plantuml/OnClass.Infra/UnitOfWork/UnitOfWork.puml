@@ -1,0 +1,30 @@
+@startuml
+class UnitOfWork {
+    - disposed : bool
+    + UnitOfWork(_applicationContext:ApplicationContext)
+    + <<virtual>> <<async>> Commit() : void
+    # <<virtual>> Dispose(disposing:bool) : void
+    + <<virtual>> Dispose() : void
+}
+IDisposable <|-- UnitOfWork
+IUnitOfWork <|-- UnitOfWork
+UnitOfWork --> "applicationContext" ApplicationContext
+UnitOfWork --> "aulaRepository" AulaRepository
+UnitOfWork --> "disciplinaRepository" DisciplinaRepository
+UnitOfWork --> "documentoAulaRepository" DocumentoAulaRepository
+UnitOfWork --> "estudanteRepository" EstudanteRepository
+UnitOfWork --> "estudanteDisciplinaRepository" EstudanteDisciplinaRepository
+UnitOfWork --> "frequenciaAulaRepository" FrequenciaAulaRepository
+UnitOfWork --> "instrutorRepository" InstrutorRepository
+UnitOfWork --> "instrutorDisciplinaRepository" InstrutorDisciplinaRepository
+UnitOfWork --> "userRepository" UserRepository
+UnitOfWork --> "AulaRepository" IAulaRepository
+UnitOfWork --> "DisciplinaRepository" IDisciplinaRepository
+UnitOfWork --> "DocumentoAulaRepository" IDocumentoAulaRepository
+UnitOfWork --> "EstudanteRepository" IEstudanteRepository
+UnitOfWork --> "EstudanteDisciplinaRepository" IEstudanteDisciplinaRepository
+UnitOfWork --> "FrequenciaAulaRepository" IFrequenciaAulaRepository
+UnitOfWork --> "InstrutorRepository" IInstrutorRepository
+UnitOfWork --> "InstrutorDisciplinaRepository" IInstrutorDisciplinaRepository
+UnitOfWork --> "UserRepository" IUserRepository
+@enduml

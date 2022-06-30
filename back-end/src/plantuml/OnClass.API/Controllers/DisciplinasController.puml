@@ -1,0 +1,12 @@
+@startuml
+class DisciplinasController {
+    + DisciplinasController(disciplinaService:IDisciplinaService)
+    + <<async>> GetDisciplinas() : Task<ActionResult<List<DisciplinaDTO>>>
+    + <<async>> GetDisciplinasPorInstrutor(instrutorId:long) : Task<ActionResult<List<DisciplinaDTO>>>
+    + <<async>> GetDisciplinasPorEstudante(estudanteId:long) : Task<ActionResult<List<DisciplinaDTO>>>
+    + <<async>> EditarDisciplinasEstudante(disciplinasParaCursarDTO:DisciplinasParaCursarDTO) : Task<ActionResult<DisciplinasParaCursarDTO>>
+    + <<async>> EditarDisciplinasInstrutor(disciplinasParaLecionarDTO:DisciplinasParaLecionarDTO) : Task<ActionResult<DisciplinasParaLecionarDTO>>
+}
+Controller <|-- DisciplinasController
+DisciplinasController --> "_disciplinaService" IDisciplinaService
+@enduml

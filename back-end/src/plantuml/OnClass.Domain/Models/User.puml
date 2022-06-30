@@ -1,0 +1,9 @@
+@startuml
+class User {
+    + UserName : string <<get>> <<set>>
+    + Password : string <<get>> <<set>>
+    + Salt : string <<get>> <<set>>
+    + PrimeiroLogin : bool <<get>> <<set>>
+}
+BaseModel <|-- User
+@enduml

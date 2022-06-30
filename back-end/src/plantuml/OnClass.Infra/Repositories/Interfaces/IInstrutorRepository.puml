@@ -1,0 +1,8 @@
+@startuml
+interface IInstrutorRepository {
+    + GetInstrutorByUserId(userId:long) : Task<Instrutor>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<Instrutor>" <|-- IInstrutorRepository
+@enduml

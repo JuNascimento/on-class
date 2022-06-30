@@ -12,6 +12,5 @@ namespace OnClass.Infra.Repositories.Interfaces
         Task<bool> Delete(long id);
         Task<T> Get(long? id);
         Task<List<T>> Get();
-        Task<bool> IsUniqueValue(T obj, string propertyName, object value);
     }
 }

@@ -1,0 +1,5 @@
+@startuml
+interface IVideoChat {
+    ReceiveMessage(user:string, message:string) : Task
+}
+@enduml

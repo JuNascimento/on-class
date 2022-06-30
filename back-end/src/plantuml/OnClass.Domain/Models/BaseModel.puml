@@ -1,0 +1,5 @@
+@startuml
+class BaseModel {
+    + Id : long <<get>> <<set>>
+}
+@enduml

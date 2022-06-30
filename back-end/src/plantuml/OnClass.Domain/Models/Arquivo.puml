@@ -1,0 +1,10 @@
+@startuml
+class Arquivo {
+    + NomeOriginal : string? <<get>> <<set>>
+    + NomeHash : string? <<get>> <<set>>
+    + ExtensaoOriginal : string? <<get>> <<set>>
+    + CaminhoArquivo : string? <<get>> <<set>>
+}
+BaseModel <|-- Arquivo
+Arquivo --> "DataCriacao" DateTime
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class AulaMap {
+    + Configure(builder:EntityTypeBuilder<Aula>) : void
+}
+class "IEntityTypeConfiguration`1"<T> {
+}
+"IEntityTypeConfiguration`1" "<Aula>" <|-- AulaMap
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class InstrutorDisciplina {
+    + InstrutorId : long? <<get>> <<set>>
+    + DisciplinaId : long? <<get>> <<set>>
+}
+BaseModel <|-- InstrutorDisciplina
+@enduml

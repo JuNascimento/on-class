@@ -1,0 +1,12 @@
+@startuml
+class DisciplinaRepository {
+    + DisciplinaRepository(context:ApplicationContext)
+    + DisciplinaRepository()
+    + GetDisciplinasPorInstrutor(instrutorId:long) : List<Disciplina>
+    + GetDisciplinasPorEstudante(estudanteId:long) : List<Disciplina>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<Disciplina>" <|-- DisciplinaRepository
+IDisciplinaRepository <|-- DisciplinaRepository
+@enduml

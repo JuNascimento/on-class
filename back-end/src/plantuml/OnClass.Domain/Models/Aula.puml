@@ -1,0 +1,10 @@
+@startuml
+class Aula {
+    + InstrutorId : long? <<get>> <<set>>
+    + DisciplinaId : long? <<get>> <<set>>
+    + Uuid : string? <<get>> <<set>>
+}
+BaseModel <|-- Aula
+Aula --> "DataInicio" DateTime
+Aula --> "DataFim" DateTime
+@enduml

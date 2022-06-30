@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.15" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OnClass.Extensions\OnClass.Extensions.csproj" />
+  </ItemGroup>
+
 </Project>

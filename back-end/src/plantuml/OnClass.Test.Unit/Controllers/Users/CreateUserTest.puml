@@ -1,0 +1,10 @@
+@startuml
+class CreateUserTest {
+    + CreateUserTest()
+    + <<async>> CriarEstudanteERetornaMensagemCorreta() : Task
+}
+class "Mock`1"<T> {
+}
+CreateUserTest --> "_sut" UsersController
+CreateUserTest --> "mockService<IAuthenticationService>" "Mock`1"
+@enduml

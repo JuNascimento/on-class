@@ -1,0 +1,8 @@
+@startuml
+class DisciplinasParaLecionarDTO {
+}
+class "List`1"<T> {
+}
+DisciplinasParaLecionarDTO --> "InstrutorDTO" InstrutorBasicDTO
+DisciplinasParaLecionarDTO --> "DisciplinasDTO<DisciplinaDTO>" "List`1"
+@enduml

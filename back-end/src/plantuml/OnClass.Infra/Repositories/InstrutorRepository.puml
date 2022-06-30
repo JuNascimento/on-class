@@ -1,0 +1,11 @@
+@startuml
+class InstrutorRepository {
+    + InstrutorRepository(context:ApplicationContext)
+    + InstrutorRepository()
+    + <<async>> GetInstrutorByUserId(userId:long) : Task<Instrutor>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<Instrutor>" <|-- InstrutorRepository
+IInstrutorRepository <|-- InstrutorRepository
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+interface IFrequenciaAulaRepository {
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<FrequenciaAula>" <|-- IFrequenciaAulaRepository
+@enduml

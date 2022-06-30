@@ -1,0 +1,11 @@
+@startuml
+class AulaRepository {
+    + AulaRepository(context:ApplicationContext)
+    + AulaRepository()
+    + BuscarAulas(instrutoresId:List<long?>, disciplinas:List<long?>, dataInicio:DateTime, dataFim:DateTime) : List<Aula>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<Aula>" <|-- AulaRepository
+IAulaRepository <|-- AulaRepository
+@enduml

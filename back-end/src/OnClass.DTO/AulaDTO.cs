@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnClass.Validations;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace OnClass.DTO
@@ -22,9 +23,9 @@ namespace OnClass.DTO
         
         [Required]
         [JsonPropertyName("data_inicio")]
+        [DataInicioAula]
         public DateTime DataInicio { get; set; }
         
-        [Required]
         [JsonPropertyName("data_fim")]
         public DateTime DataFim { get; set; }  
     }

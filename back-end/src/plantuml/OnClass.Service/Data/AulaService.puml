@@ -1,0 +1,13 @@
+@startuml
+class AulaService {
+    + AulaService(uow:IUnitOfWork, mapper:IMapper)
+    + <<async>> InscricaoAula(aulaEstudanteDTO:AulaEstudanteDTO) : Task<AulaDTO>
+    + <<async>> CriarAula(aulaDTO:AulaDTO) : Task<AulaDTO>
+    + <<async>> EditarAula(aulaDTO:AulaDTO) : Task<AulaDTO>
+    + <<async>> GetAulas() : Task<List<AulaDTO>>
+    + PesquisarAula(buscarAulaDTO:BuscarAulaDTO) : List<AulaDTO>
+}
+IAulaService <|-- AulaService
+AulaService --> "_uow" IUnitOfWork
+AulaService --> "_mapper" IMapper
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class DisciplinaService {
+    + DisciplinaService(uow:IUnitOfWork, mapper:IMapper)
+    + <<async>> EditarDisciplinasEstudante(disciplinasParaCursarDTO:DisciplinasParaCursarDTO) : Task<DisciplinasParaCursarDTO>
+    + <<async>> EditarDisciplinasInstrutor(disciplinasParaLecionarDTO:DisciplinasParaLecionarDTO) : Task<DisciplinasParaLecionarDTO>
+    + <<async>> GetDisciplinaDTOs() : Task<List<DisciplinaDTO>>
+    + <<async>> GetDisciplinasPorEstudante(estudanteId:long) : Task<List<DisciplinaDTO>>
+    + <<async>> GetDisciplinasPorInstrutor(instrutorId:long) : Task<List<DisciplinaDTO>>
+}
+IDisciplinaService <|-- DisciplinaService
+DisciplinaService --> "_uow" IUnitOfWork
+DisciplinaService --> "_mapper" IMapper
+@enduml

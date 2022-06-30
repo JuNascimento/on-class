@@ -26,7 +26,7 @@ namespace OnClass.API.Controllers
         }
 
         // Disciplinas/GetDisciplinasPorInstrutor/5
-        [HttpGet("{instrutorId:long}")]
+        [HttpGet("{instrutorId}")]
         [Authorize(Roles = "Instrutor")]
         public async Task<ActionResult<List<DisciplinaDTO>>> GetDisciplinasPorInstrutor(long instrutorId)
         {
@@ -34,7 +34,7 @@ namespace OnClass.API.Controllers
         }
 
         // Disciplinas/GetDisciplinasPorEstudante/5
-        [HttpGet("{instrutorId:long}")]
+        [HttpGet("{estudanteId}")]
         [Authorize(Roles = "Estudante")]
         public async Task<ActionResult<List<DisciplinaDTO>>> GetDisciplinasPorEstudante(long estudanteId)
         {

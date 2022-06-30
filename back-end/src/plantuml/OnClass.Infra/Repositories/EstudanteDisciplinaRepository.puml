@@ -1,0 +1,11 @@
+@startuml
+class EstudanteDisciplinaRepository {
+    + EstudanteDisciplinaRepository(context:ApplicationContext)
+    + EstudanteDisciplinaRepository()
+    + <<async>> InserirDisplicinasDoEstudante(estudanteDisciplinasList:List<EstudanteDisciplina>) : Task<bool>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<EstudanteDisciplina>" <|-- EstudanteDisciplinaRepository
+IEstudanteDisciplinaRepository <|-- EstudanteDisciplinaRepository
+@enduml

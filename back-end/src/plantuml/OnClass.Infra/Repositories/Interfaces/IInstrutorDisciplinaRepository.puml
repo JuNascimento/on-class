@@ -1,0 +1,8 @@
+@startuml
+interface IInstrutorDisciplinaRepository {
+    + InserirDisplicinasDoInstrutor(instrutorDisciplinasList:List<InstrutorDisciplina>) : Task<bool>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<InstrutorDisciplina>" <|-- IInstrutorDisciplinaRepository
+@enduml

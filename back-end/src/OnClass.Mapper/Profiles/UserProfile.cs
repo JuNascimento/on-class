@@ -14,10 +14,16 @@ namespace OnClass.Mapper.Profiles
             CreateMap<Estudante, EstudanteDTO>()
                 .ReverseMap();
 
-            CreateMap<User, EstudanteDTO>()
+            CreateMap<Estudante, EstudanteBasicDTO>()
                 .ReverseMap();
 
+            CreateMap<User, EstudanteDTO>()
+                .ReverseMap();
+            
             CreateMap<Instrutor, InstrutorDTO>()
+                .ReverseMap();
+
+            CreateMap<Instrutor, InstrutorBasicDTO>()
                 .ReverseMap();
 
             CreateMap<User, InstrutorDTO>()

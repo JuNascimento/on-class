@@ -1,0 +1,5 @@
+@startuml
+class ConnectionStringBuilder {
+    + {static} Build() : string
+}
+@enduml

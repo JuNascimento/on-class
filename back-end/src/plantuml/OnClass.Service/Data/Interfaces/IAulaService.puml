@@ -1,0 +1,9 @@
+@startuml
+interface IAulaService {
+    CriarAula(aulaDTO:AulaDTO) : Task<AulaDTO>
+    EditarAula(aulaDTO:AulaDTO) : Task<AulaDTO>
+    GetAulas() : Task<List<AulaDTO>>
+    InscricaoAula(aulaEstudanteDTO:AulaEstudanteDTO) : Task<AulaDTO>
+    PesquisarAula(buscarAulaDTO:BuscarAulaDTO) : List<AulaDTO>
+}
+@enduml

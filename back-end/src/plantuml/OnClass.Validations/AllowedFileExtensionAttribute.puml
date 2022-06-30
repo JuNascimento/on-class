@@ -1,0 +1,8 @@
+@startuml
+class AllowedExtensionsAttribute {
+    + AllowedExtensionsAttribute(extensions:string[])
+    # <<override>> IsValid(value:object, validationContext:ValidationContext) : ValidationResult
+    + {static} GetErrorMessage() : string
+}
+ValidationAttribute <|-- AllowedExtensionsAttribute
+@enduml

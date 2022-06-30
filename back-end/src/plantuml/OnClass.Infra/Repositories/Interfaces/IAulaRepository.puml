@@ -1,0 +1,8 @@
+@startuml
+interface IAulaRepository {
+    BuscarAulas(instrutoresId:List<long?>, disciplinas:List<long?>, dataInicio:DateTime, dataFim:DateTime) : List<Aula>
+}
+class "IBaseRepository"<T> {
+}
+"IBaseRepository" "<Aula>" <|-- IAulaRepository
+@enduml

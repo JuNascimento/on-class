@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnClass.Validations;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace OnClass.DTO
@@ -19,6 +20,7 @@ namespace OnClass.DTO
 
         [Required] 
         [JsonPropertyName("data_nascimento")]
+        [AgeCheck]
         public DateTime DataNascimento { get; set; }
     }
 }

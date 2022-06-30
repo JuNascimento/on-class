@@ -1,0 +1,8 @@
+@startuml
+class VideoChat {
+    + <<async>> SendMessage(user:string, message:string) : Task
+}
+class "Hub`1"<T> {
+}
+"Hub`1" "<IVideoChat>" <|-- VideoChat
+@enduml

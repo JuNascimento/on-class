@@ -1,0 +1,8 @@
+@startuml
+interface IFileHelperService {
+    + DeleteFile(documentoId:long) : Task
+    + GetSingleFileAsync(documentoId:long) : Task<(string, byte[])>
+    + SaveFileAsync(fileDTO:FileDTO) : Task<string>
+    + GetDocumentoAula(aulaId:long) : Task<DocumentoAulaDTO>
+}
+@enduml

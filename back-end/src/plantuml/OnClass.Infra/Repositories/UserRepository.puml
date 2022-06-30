@@ -1,0 +1,13 @@
+@startuml
+class UserRepository {
+    + UserRepository(context:ApplicationContext)
+    + UserRepository()
+    + <<async>> VerificaUserNameDisponivel(username:string) : Task<bool>
+    + <<async>> GetByUserName(username:string) : Task<User>
+    + <<async>> GetInfoByUserId(id:long) : Task<dynamic>
+}
+class "BaseRepository"<T> {
+}
+"BaseRepository" "<User>" <|-- UserRepository
+IUserRepository <|-- UserRepository
+@enduml

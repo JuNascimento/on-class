@@ -1,0 +1,22 @@
+@startuml
+class AulaDTO {
+    + Id : long? <<get>> <<set>>
+    + Uuid : string? <<get>> <<set>>
+}
+class BuscarAulaDTO {
+}
+class AulaEstudanteDTO {
+    + EstudanteId : long? <<get>> <<set>>
+    + AulaId : long? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+AulaDTO --> "InstrutorDTO" InstrutorBasicDTO
+AulaDTO --> "DisciplinaDTO" DisciplinaDTO
+AulaDTO --> "DataInicio" DateTime
+AulaDTO --> "DataFim" DateTime
+BuscarAulaDTO --> "IdInstrutores<long?>" "List`1"
+BuscarAulaDTO --> "IdDisciplinas<long?>" "List`1"
+BuscarAulaDTO --> "DataInicio" DateTime
+BuscarAulaDTO --> "DataFim" DateTime
+@enduml

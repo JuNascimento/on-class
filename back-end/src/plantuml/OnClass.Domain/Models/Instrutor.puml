@@ -1,0 +1,9 @@
+@startuml
+class Instrutor {
+    + NomeCompleto : string? <<get>> <<set>>
+    + Cpf : string? <<get>> <<set>>
+    + UserId : long <<get>> <<set>>
+}
+BaseModel <|-- Instrutor
+Instrutor --> "DataNascimento" DateTime
+@enduml

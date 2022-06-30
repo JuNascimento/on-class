@@ -1,0 +1,11 @@
+@startuml
+class ChatHubProperties {
+    + GroupName : string <<get>> <<set>>
+    + UserName : string <<get>> <<set>>
+    + Message : string <<get>> <<set>>
+}
+class ChatMessage {
+    + UserName : string <<get>> <<set>>
+    + Message : string <<get>> <<set>>
+}
+@enduml

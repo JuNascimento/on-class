@@ -4,10 +4,10 @@ namespace OnClass.Service.Data.Interfaces
 {
     public interface IAulaService
     {
-        Task<AulaDTO> CriarAula(AulaDTO aulaDTO);
-        Task<AulaDTO> EditarAula(AulaDTO aulaDTO);
-        Task<List<AulaDTO>> GetAulas();
-        Task<AulaDTO> InscricaoAula(AulaEstudanteDTO aulaEstudanteDTO);
-        List<AulaDTO> PesquisarAula(BuscarAulaDTO buscarAulaDTO);
+        public Task<AulaDTO> CriarAula(AulaDTO aulaDTO);
+        public Task<AulaDTO> EditarAula(AulaDTO aulaDTO);
+        public Task<List<AulaDTO>> GetAulas();
+        public Task<AulaDTO> InscricaoAula(AulaEstudanteDTO aulaEstudanteDTO);
+        public Task<List<AulaDTO>> PesquisarAula(BuscarAulaDTO buscarAulaDTO);
     }
 }
