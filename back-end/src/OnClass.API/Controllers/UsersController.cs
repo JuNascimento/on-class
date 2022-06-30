@@ -32,7 +32,7 @@ namespace OnClass.API.Controllers
             catch (DuplicatedEntryException e)
             {
                 estudanteDTO.Password = string.Empty;
-                return UnprocessableEntity(new { message = e.Message, estudanteDTO });
+                return UnprocessableEntity(new { errors = e.Message, estudanteDTO });
             }
         }
 
@@ -49,7 +49,7 @@ namespace OnClass.API.Controllers
             catch (DuplicatedEntryException e)
             {
                 instrutorDTO.Password = string.Empty;
-                return UnprocessableEntity(new { message = e.Message, instrutorDTO });
+                return UnprocessableEntity(new { errors = e.Message, instrutorDTO });
             }
         }
     }
