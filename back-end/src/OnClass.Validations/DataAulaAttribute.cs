@@ -19,7 +19,6 @@ namespace OnClass.Validations
 
             if (date.Between(MinDate, MaxDate) && date.ValidarHoraDia())
             {
-
                 return ValidationResult.Success;
             }
             return new ValidationResult(GetErrorMessage());
