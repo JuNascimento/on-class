@@ -29,6 +29,17 @@ namespace OnClass.API.Controllers
             return Ok(result);
         }
 
+        // GET: Aulas/GetAulasFiltradas
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<object>> GetAulasFiltradas()
+        {
+            var result = await _aulaService.GetAulas();
+            var futuras = result.Where(e => e.DataInicio >= DateTime.Now);
+            var passadas = result.Where(e => e.DataInicio < DateTime.Now);
+            return Ok(new { futuras , passadas });
+        }
+
         // GET: Aulas/GetAulas/5
         [HttpGet("{aulaId}")]
         [Authorize]
