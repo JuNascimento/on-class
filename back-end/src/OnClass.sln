@@ -26,7 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.Helpers", "OnClass.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.Test.Unit", "OnClass.Test.Unit\OnClass.Test.Unit.csproj", "{065B71C5-154B-4F02-8AFF-19A4EA5AC797}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnClass.Validations", "OnClass.Validations\OnClass.Validations.csproj", "{9D3B445C-959A-4562-ABE2-EE4C98EEB2BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnClass.Validations", "OnClass.Validations\OnClass.Validations.csproj", "{9D3B445C-959A-4562-ABE2-EE4C98EEB2BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnClass.Extensions", "OnClass.Extensions\OnClass.Extensions.csproj", "{7987CE30-3E3B-4472-9CE0-EB14A2EC6252}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +76,10 @@ Global
 		{9D3B445C-959A-4562-ABE2-EE4C98EEB2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D3B445C-959A-4562-ABE2-EE4C98EEB2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D3B445C-959A-4562-ABE2-EE4C98EEB2BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7987CE30-3E3B-4472-9CE0-EB14A2EC6252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7987CE30-3E3B-4472-9CE0-EB14A2EC6252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7987CE30-3E3B-4472-9CE0-EB14A2EC6252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7987CE30-3E3B-4472-9CE0-EB14A2EC6252}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

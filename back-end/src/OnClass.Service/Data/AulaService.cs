@@ -27,40 +27,57 @@ namespace OnClass.Service.Data
             };
             await _uow.FrequenciaAulaRepository.Create(frequenciaAula);
             var aulaDB = await _uow.AulaRepository.Get(aulaEstudanteDTO.AulaId.Value);
-            return _mapper.Map<AulaDTO>(aulaDB);
+            return await BuildAulaDTO(aulaDB);
         }
 
         public async Task<AulaDTO> CriarAula(AulaDTO aulaDTO)
         {
-            var instrutorDB = await _uow.InstrutorRepository.GetInstrutorByUserId(aulaDTO.InstrutorDTO.Id.Value);
             var aula = _mapper.Map<Aula>(aulaDTO);
-            aula.InstrutorId = instrutorDB.Id;
+            aula.DataFim = aula.DataInicio.AddHours(1);
             aula.Uuid = Guid.NewGuid().ToString();
             var aulaDB = await _uow.AulaRepository.Create(aula);
-            var aulaDTONovo = _mapper.Map<AulaDTO>(aulaDB);
-            aulaDTONovo.InstrutorDTO = aulaDTO.InstrutorDTO;
-            aulaDTONovo.DisciplinaDTO = aulaDTO.DisciplinaDTO;
-            return aulaDTONovo;
+            
+            return await BuildAulaDTO(aulaDB);
         }
 
         public async Task<AulaDTO> EditarAula(AulaDTO aulaDTO)
         {
             var aula = _mapper.Map<Aula>(aulaDTO);
             var aulaDB = await _uow.AulaRepository.Update(aula.Id, aula);
-            return _mapper.Map<AulaDTO>(aulaDB);
+            return await BuildAulaDTO(aulaDB);
         }
 
         public async Task<List<AulaDTO>> GetAulas()
         {
+            var aulasDTO = new List<AulaDTO>();
             var aulasDB = await _uow.AulaRepository.Get();
-            return _mapper.Map<List<AulaDTO>>(aulasDB);
+            foreach (var aula in aulasDB)
+            {
+                aulasDTO.Add(await BuildAulaDTO(aula));
+            }
+            return aulasDTO;
         }
 
-        public List<AulaDTO> PesquisarAula(BuscarAulaDTO buscarAulaDTO)
+        private async Task<AulaDTO> BuildAulaDTO(Aula aula)
         {
-            List<Aula> aulasDB = _uow.AulaRepository.BuscarAulas(buscarAulaDTO.IdInstrutores, buscarAulaDTO.IdDisciplinas,
+            var aulaDTO = _mapper.Map<AulaDTO>(aula);
+            var instrutorDB = await _uow.InstrutorRepository.Get(aula.InstrutorId);
+            var disciplinaDB = await _uow.DisciplinaRepository.Get(aula.DisciplinaId);
+            aulaDTO.InstrutorDTO = _mapper.Map<InstrutorBasicDTO>(instrutorDB);
+            aulaDTO.DisciplinaDTO = _mapper.Map<DisciplinaDTO>(disciplinaDB);
+            return aulaDTO;
+        }
+
+        public async Task<List<AulaDTO>> PesquisarAula(BuscarAulaDTO buscarAulaDTO)
+        {
+            var aulasDTO = new List<AulaDTO>();
+            var aulasDB = _uow.AulaRepository.BuscarAulas(buscarAulaDTO.IdInstrutores, buscarAulaDTO.IdDisciplinas,
                 buscarAulaDTO.DataInicio, buscarAulaDTO.DataFim);
-            return _mapper.Map<List<AulaDTO>>(aulasDB);
+            foreach (var aula in aulasDB)
+            {
+                aulasDTO.Add(await BuildAulaDTO(aula));
+            }
+            return aulasDTO;
         }
     }
 }
