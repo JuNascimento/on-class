@@ -69,8 +69,9 @@ const StudentPanel: React.FC = () => {
     getClassesAvaliable()
   }, [])
 
-  const goToClass = () => {
-    window.location.href = `http://localhost:3000/student/class`
+  const goToClass = (classObject: any) => {
+    sessionStorage.setItem('studentCurrentClass', JSON.stringify(classObject))
+    window.location.href = `http://localhost:3000/teacher/class`
   }
 
   const handleNotImplementedError = () => {
@@ -100,7 +101,7 @@ const StudentPanel: React.FC = () => {
             <LoginButton
               isDisabled={false}
               onClick={() =>
-                value === 0 ? goToClass() : handleNotImplementedError()
+                value === 0 ? goToClass(key) : handleNotImplementedError()
               }
             >
               {value === 0 ? 'Entrar na aula' : 'Editar aula'}

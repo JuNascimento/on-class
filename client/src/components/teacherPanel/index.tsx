@@ -78,7 +78,8 @@ const TeacherPanel: React.FC = () => {
     getClassesAvaliable()
   }, [])
 
-  const goToClass = () => {
+  const goToClass = (classObject: any) => {
+    sessionStorage.setItem('teacherCurrentClass', JSON.stringify(classObject))
     window.location.href = `http://localhost:3000/teacher/class`
   }
 
@@ -87,38 +88,37 @@ const TeacherPanel: React.FC = () => {
   }
 
   const showNextClasses = () => {
-    const teachersId = classes.map((key: ClassType) => {
-      return key.instrutor.id
-    })
     const user = getSessionStorage('teacher')
     const roleId = user.instrutor_id
 
-    return classes.map((key: any, value) => {
-      if (teachersId.includes(roleId)) {
-        return (
-          <Class
-            key={`next-class-${value}`}
-            shouldFocous={value === 0 ? true : false}
-            nextClasses={true}
+    const teacherNextClasses = classes.filter((value: any) => {
+      return value.instrutor.id === roleId
+    })
+
+    return teacherNextClasses.map((key: any, value) => {
+      return (
+        <Class
+          key={`next-class-${value}`}
+          shouldFocous={value === 0}
+          nextClasses={true}
+        >
+          <ClassInfo>
+            {new Date(key.data_inicio).toLocaleDateString()}, &thinsp;
+            {new Date(key.data_inicio).toTimeString().slice(0, 5)}
+          </ClassInfo>
+          <ClassInfo>Disciplina: {key.disciplina.id}</ClassInfo>
+          <ClassInfo>Professor(a): {key.instrutor.id}</ClassInfo>
+          <ClassInfo>Material de apoio: nenhum</ClassInfo>
+          <LoginButton
+            isDisabled={false}
+            onClick={() =>
+              value === 0 ? goToClass(key) : handleNotImplementedError()
+            }
           >
-            <ClassInfo>
-              {new Date(key.data_inicio).toLocaleDateString()}, &thinsp;
-              {new Date(key.data_inicio).toTimeString().slice(0, 5)}
-            </ClassInfo>
-            <ClassInfo>Disciplina: {key.disciplina.id}</ClassInfo>
-            <ClassInfo>Professor(a): {key.instrutor.id}</ClassInfo>
-            <ClassInfo>Material de apoio: nenhum</ClassInfo>
-            <LoginButton
-              isDisabled={false}
-              onClick={() =>
-                value === 0 ? goToClass() : handleNotImplementedError()
-              }
-            >
-              {value === 0 ? 'Entrar na aula' : 'Editar aula'}
-            </LoginButton>
-          </Class>
-        )
-      }
+            {value === 0 ? 'Entrar na aula' : 'Editar aula'}
+          </LoginButton>
+        </Class>
+      )
     })
   }
 
@@ -147,7 +147,7 @@ const TeacherPanel: React.FC = () => {
             <SubtitleLabel>Próximas aulas</SubtitleLabel>
           </Subtitle>
           <Classes>
-            {classes.length > 0 ? (
+            {showNextClasses().length > 0 ? (
               showNextClasses()
             ) : (
               <p>Não tem aulas agendadas</p>
