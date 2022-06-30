@@ -8,11 +8,13 @@ namespace OnClass.Validations
         protected override ValidationResult IsValid(
         object value, ValidationContext validationContext)
         {
+            var dataAtual = DateTime.Now.Date;
             var date = (DateTime)value;
-            var MaxDate = DateTime.Now.AddYears(-90);
+            var MinDate = dataAtual.AddYears(-90);
+
             if (validationContext.ObjectInstance.GetType().FullName.Contains("EstudanteDTO"))
             {
-                var MinDate = DateTime.Now.AddYears(-5).AddDays(-1);
+                var MaxDate = dataAtual.AddYears(-5).AddDays(-1);
                 
                 if(date.Between(MinDate, MaxDate))
                 {
@@ -22,8 +24,7 @@ namespace OnClass.Validations
             }
             if (validationContext.ObjectInstance.GetType().FullName.Contains("InstrutorDTO"))
             {
-                var MinDate = DateTime.Now.AddYears(-18).AddDays(-1);
-                
+                var MaxDate = dataAtual.AddYears(-18);
                 if (date.Between(MinDate, MaxDate))
                 {
                     return ValidationResult.Success;
