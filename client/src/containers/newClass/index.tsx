@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ErrorTip from '../../components/error'
 import { getSessionStorage } from '../../components/helpers'
 import {
   InputFieldsColumn,
@@ -42,6 +43,7 @@ const NewClassContainer: React.FC<NewClassProps> = ({
   })
   const [time, setTime] = useState<HourInterface>({ hour: null, minute: null })
   const [subject, setSubject] = useState({ id: null, disciplina: null })
+  const [dateError, setDateError] = useState(false)
 
   const handleDate = (value: any) => {
     if (value !== '') {
@@ -96,7 +98,7 @@ const NewClassContainer: React.FC<NewClassProps> = ({
     const data = {
       instrutor: {
         id: user.instrutor_id,
-        name: user.nome,
+        nome: user.nome,
       },
       disciplina: {
         id: subject.id,
@@ -105,8 +107,6 @@ const NewClassContainer: React.FC<NewClassProps> = ({
       data_inicio: classStartDate,
       data_fim: classFinishDate,
     }
-
-    console.log('aula criada', data)
 
     const response = await fetch(url, {
       method: 'POST',
@@ -118,6 +118,7 @@ const NewClassContainer: React.FC<NewClassProps> = ({
     })
 
     const responseJson = await response.json()
+    console.log('nova aula', responseJson)
     const newClass = {
       data_fim: responseJson.aulaNova.data_fim,
       data_inicio: responseJson.aulaNova.data_inicio,
@@ -136,6 +137,11 @@ const NewClassContainer: React.FC<NewClassProps> = ({
     if (response.ok) {
       setNewClassModal(false)
       setClasses([...classes, newClass])
+    }
+
+    if (responseJson.errors) {
+      console.log('socorroney')
+      setDateError(true)
     }
   }
 
@@ -193,6 +199,14 @@ const NewClassContainer: React.FC<NewClassProps> = ({
         >
           Criar nova aula
         </LoginButton>
+        {dateError && (
+          <ErrorTip
+            type={'new-class'}
+            messageError={
+              'Data ou hora inválidas. Permitido somente aulas com início entre 7h e 22h'
+            }
+          />
+        )}
       </InputFieldsColumn>
     </>
   )

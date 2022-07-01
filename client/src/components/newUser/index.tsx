@@ -105,7 +105,7 @@ const NewUser: React.FC<Props> = ({
                     showError={showError}
                     onChange={e => setUsername(e.target.value)}
                   />
-                  {!showError && (
+                  {showError && (
                     <ErrorTip
                       type={'new-user'}
                       messageError={'Nome de usuário já existente.'}

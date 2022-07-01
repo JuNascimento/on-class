@@ -56,7 +56,7 @@ const TeacherPanel: React.FC = () => {
 
   useEffect(() => {
     getUserSubjects()
-  }, [])
+  }, [newClassModal])
 
   const getClassesAvaliable = async () => {
     const user = getSessionStorage('teacher')
@@ -106,8 +106,8 @@ const TeacherPanel: React.FC = () => {
             {new Date(key.data_inicio).toLocaleDateString()}, &thinsp;
             {new Date(key.data_inicio).toTimeString().slice(0, 5)}
           </ClassInfo>
-          <ClassInfo>Disciplina: {key.disciplina.id}</ClassInfo>
-          <ClassInfo>Professor(a): {key.instrutor.id}</ClassInfo>
+          <ClassInfo>Disciplina: {key.disciplina.disciplina}</ClassInfo>
+          <ClassInfo>Professor(a): {key.instrutor.nome}</ClassInfo>
           <ClassInfo>Material de apoio: nenhum</ClassInfo>
           <LoginButton
             isDisabled={false}

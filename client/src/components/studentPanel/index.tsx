@@ -21,53 +21,66 @@ interface Subject {
   disciplina: string
 }
 
+interface UserInfoType {
+  estudante_id: number
+  token: string
+}
+
 const StudentPanel: React.FC = () => {
   const [newClassModal, setNewClassModal] = useState(false)
   const [editSubjectsModal, setEditSubjectsModal] = useState(false)
   const [userSubjets, setUserSubjects] = useState([])
   const [classes, setClasses] = useState([])
   const [notImplementedError, setNotImplementedError] = useState(false)
+  const [userInfo, setUserInfo] = useState<UserInfoType>()
+
+  useEffect(() => {
+    const user = getSessionStorage('student')
+    setUserInfo(user)
+  }, [])
 
   const getUserSubjects = async () => {
-    const user = getSessionStorage('student')
-    const roleId = user.estudante_id
-    const url = `http://localhost:25100/Disciplinas/GetDisciplinasPorEstudante/1?estudanteId=${roleId}`
+    if (userInfo) {
+      const roleId = userInfo.estudante_id
+      const url = `http://localhost:25100/Disciplinas/GetDisciplinasPorEstudante/${roleId}`
 
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + user.token,
-        'Content-Type': 'application/json',
-      },
-    })
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + userInfo.token,
+          'Content-Type': 'application/json',
+        },
+      })
 
-    const responseSubjects = await response.json()
-    setUserSubjects(responseSubjects)
+      const responseSubjects = await response.json()
+      setUserSubjects(responseSubjects)
+    }
   }
 
   useEffect(() => {
     getUserSubjects()
-  }, [])
+  }, [userInfo])
 
   const getClassesAvaliable = async () => {
-    const user = getSessionStorage('student')
-    const url = `http://localhost:25100/Aulas/GetAulas`
+    if (userInfo) {
+      const url = `http://localhost:25100/Aulas/GetAulas`
 
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + user.token,
-        'Content-Type': 'application/json',
-      },
-    })
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + userInfo.token,
+          'Content-Type': 'application/json',
+        },
+      })
 
-    const responseClasses = await response.json()
-    setClasses(responseClasses)
+      const responseClasses = await response.json()
+      setClasses(responseClasses)
+    }
   }
 
   useEffect(() => {
     getClassesAvaliable()
-  }, [])
+  }, [userInfo])
 
   const goToClass = (classObject: any) => {
     sessionStorage.setItem('studentCurrentClass', JSON.stringify(classObject))
@@ -95,8 +108,8 @@ const StudentPanel: React.FC = () => {
               {new Date(key.data_inicio).toLocaleDateString()}, &thinsp;
               {new Date(key.data_inicio).toTimeString().slice(0, 5)}
             </ClassInfo>
-            <ClassInfo>Disciplina: {key.disciplina.id}</ClassInfo>
-            <ClassInfo>Professor(a): {key.instrutor.id}</ClassInfo>
+            <ClassInfo>Disciplina: {key.disciplina.disciplina}</ClassInfo>
+            <ClassInfo>Professor(a): {key.instrutor.nome}</ClassInfo>
             <ClassInfo>Material de apoio: nenhum</ClassInfo>
             <LoginButton
               isDisabled={false}
