@@ -55,7 +55,7 @@ namespace OnClass.Service.Data
             {
                 aulasDTO.Add(await BuildAulaDTO(aula));
             }
-            return aulasDTO;
+            return aulasDTO.OrderBy(e => e.DataInicio).ToList();
         }
 
         private async Task<AulaDTO> BuildAulaDTO(Aula aula)
