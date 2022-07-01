@@ -15,7 +15,6 @@ class SignalRClient {
   }
 
   async send(connection: any, user: any, message: any) {
-    console.log('deu ruim aqui?', connection)
     try {
       if (connection) {
         await connection.invoke('SendMessage', user, message)
@@ -23,6 +22,14 @@ class SignalRClient {
     } catch (error) {
       console.error(`[SignalR - Send] ${error}`)
     }
+  }
+
+  async receive(connection: any, user: any, message: any) {
+    console.log('minha conexao', connection)
+    await connection.on('ReceiveMessage', () => {
+      console.log({ user, message })
+      return { user, message }
+    })
   }
 }
 

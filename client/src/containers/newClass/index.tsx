@@ -18,17 +18,6 @@ interface NewClassProps {
   classes: any
 }
 
-interface DateInterface {
-  day: null | string
-  month: null | string
-  year: null | string
-}
-
-interface HourInterface {
-  hour: null | string
-  minute: null | string
-}
-
 const NewClassContainer: React.FC<NewClassProps> = ({
   role,
   setNewClassModal,
@@ -36,36 +25,24 @@ const NewClassContainer: React.FC<NewClassProps> = ({
   setClasses,
   classes,
 }) => {
-  const [date, setDate] = useState<DateInterface>({
-    day: null,
-    month: null,
-    year: null,
-  })
-  const [time, setTime] = useState<HourInterface>({ hour: null, minute: null })
+  const [date, setDate] = useState()
+  const [time, setTime] = useState()
   const [subject, setSubject] = useState({ id: null, disciplina: null })
   const [dateError, setDateError] = useState(false)
 
   const handleDate = (value: any) => {
     if (value !== '') {
-      const startDate = new Date(value).toISOString().slice(0, 10)
-      const year = startDate.split('-')[0]
-      const month = startDate.split('-')[1]
-      const day = startDate.split('-')[2]
-
-      setDate({ ...date, day: day, month: month, year: year })
+      setDate(value)
     } else {
-      setDate({ ...date, day: null, month: null, year: null })
+      setDate(null)
     }
   }
 
   const handleHour = (value: any) => {
     if (value !== '') {
-      const hour = value.split(':')[0]
-      const minute = value.split(':')[1]
-
-      setTime({ ...time, hour: hour, minute: minute })
+      setTime(value)
     } else {
-      setTime({ ...time, hour: null, minute: null })
+      setTime(null)
     }
   }
 
@@ -89,11 +66,7 @@ const NewClassContainer: React.FC<NewClassProps> = ({
     const url = 'http://localhost:25100/Aulas/CriarAula'
     const user = getSessionStorage('teacher')
 
-    const classStartDate = `${date.year}-${date.month}-${date.day}T${time.hour}:${time.minute}:00.000Z`
-    let classFinishDate = ''
-
-    const timeHour = time.hour && parseInt(time.hour) + 1
-    classFinishDate = `${date.year}-${date.month}-${date.day}T${timeHour}:${time.minute}:00.000Z`
+    const classStartDate = `${date}T${time}:00.000`
 
     const data = {
       instrutor: {
@@ -105,7 +78,7 @@ const NewClassContainer: React.FC<NewClassProps> = ({
         disciplina: subject.disciplina,
       },
       data_inicio: classStartDate,
-      data_fim: classFinishDate,
+      data_fim: '2022-07-13T15:51:00.000',
     }
 
     const response = await fetch(url, {
@@ -118,48 +91,44 @@ const NewClassContainer: React.FC<NewClassProps> = ({
     })
 
     const responseJson = await response.json()
-    console.log('nova aula', responseJson)
-    const newClass = {
-      data_fim: responseJson.aulaNova.data_fim,
-      data_inicio: responseJson.aulaNova.data_inicio,
-      disciplina: {
-        id: responseJson.aulaNova.disciplina.id,
-        disciplina: responseJson.aulaNova.disciplina.disciplina,
-      },
-      id: responseJson.aulaNova.id,
-      instrutor: {
-        id: responseJson.aulaNova.instrutor.id,
-        name: responseJson.aulaNova.instrutor.name,
-      },
-      uuid: responseJson.aulaNova.uuid,
-    }
-
     if (response.ok) {
+      const newClass = {
+        data_fim: responseJson.aulaNova.data_fim,
+        data_inicio: responseJson.aulaNova.data_inicio,
+        disciplina: {
+          id: responseJson.aulaNova.disciplina.id,
+          disciplina: responseJson.aulaNova.disciplina.disciplina,
+        },
+        id: responseJson.aulaNova.id,
+        instrutor: {
+          id: responseJson.aulaNova.instrutor.id,
+          name: responseJson.aulaNova.instrutor.name,
+        },
+        uuid: responseJson.aulaNova.uuid,
+      }
+
       setNewClassModal(false)
       setClasses([...classes, newClass])
     }
 
     if (responseJson.errors) {
-      console.log('socorroney')
       setDateError(true)
     }
   }
 
   const shouldDisableButton = () => {
-    return !(
-      subject.id &&
-      subject.id !== '' &&
-      date.day &&
-      date.day !== '' &&
-      date.month &&
-      date.month !== '' &&
-      date.year &&
-      date.year !== '' &&
-      time.hour &&
-      time.hour !== '' &&
-      time.minute &&
-      time.minute !== ''
-    )
+    return !(date && time)
+  }
+
+  const currentDay = new Date().getDate()
+  const currentMonth = new Date().getMonth() + 1
+  let lastMonth = currentMonth + 3
+  if (lastMonth === 13) {
+    lastMonth = 1
+  } else if (lastMonth === 14) {
+    lastMonth = 2
+  } else if (lastMonth === 15) {
+    lastMonth = 3
   }
 
   return (
@@ -202,9 +171,7 @@ const NewClassContainer: React.FC<NewClassProps> = ({
         {dateError && (
           <ErrorTip
             type={'new-class'}
-            messageError={
-              'Data ou hora inválidas. Permitido somente aulas com início entre 7h e 22h'
-            }
+            messageError={`Data ou hora inválidas. Permitido somente aulas com início entre 7h e 22h, até ${currentDay}/${lastMonth}.`}
           />
         )}
       </InputFieldsColumn>

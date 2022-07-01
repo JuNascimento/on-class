@@ -50,22 +50,21 @@ const NewUserContainer: React.FC = () => {
     })
 
     const responseJson = await response.json()
-    console.log(responseJson)
 
     if (responseJson.errors === 'Já existe usuário com esse nome') {
       setErrorWithoutRegister(true)
     }
 
     if (
-      responseJson.errors &&
-      responseJson.errors['DataNascimento'][0] === 'Idade não permitida!'
+      responseJson?.errors?.DataNascimento.length > 0 &&
+      responseJson?.errors?.DataNascimento[0] === 'Idade não permitida!'
     ) {
       setErrorInvalidDate(true)
     }
 
     if (
-      responseJson.errors &&
-      responseJson.errors['Cpf'][0] === 'CPF inválido!'
+      responseJson?.errors?.Cpf.length > 0 &&
+      responseJson?.errors?.Cpf[0] === 'CPF inválido!'
     ) {
       setErrorInvalidCPF(true)
     }

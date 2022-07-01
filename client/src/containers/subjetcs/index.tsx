@@ -97,8 +97,6 @@ const SubjectsContainer: React.FC<Props> = ({ role }) => {
       sessionStorage.primeiro_login = false
       setSessionStorage(role, sessionStorage)
       window.location.href = `http://localhost:3000/${role}/dashboard`
-    } else {
-      console.error('deu erro')
     }
   }
 

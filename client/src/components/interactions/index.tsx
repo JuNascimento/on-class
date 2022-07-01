@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ChatContainer from '../../containers/chat'
+import Chat from '../chat'
 import {
   CameraSvg,
   MicrophoneSvg,
@@ -94,7 +94,7 @@ const ClassInteractions: React.FC<ClassInteractionsProps> = ({
             </InteractionItem>
           </InteractionGroup>
           <InteractionGroup data-testid='icons-group'>
-            <ChatContainer role={role} />
+            <Chat />
             <InteractionItem
               data-testid='icons'
               onClick={() => setNotImplementedError(true)}

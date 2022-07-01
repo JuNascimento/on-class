@@ -9,7 +9,7 @@ interface Props {
 
 const PersonInformation: React.FC<Props> = ({ userInfo, classInfo }) => {
   const personName = userInfo.name
-  const subjectName = classInfo.disciplina && classInfo.disciplina.name
+  const subjectName = classInfo.disciplina && classInfo.disciplina.disciplina
 
   return (
     <PersonInfo data-testid='person-information-container'>

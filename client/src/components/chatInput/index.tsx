@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import Chat from '../chat'
 
 const Button = styled.button`
   font-weight: 300;
@@ -49,19 +50,24 @@ const Input = styled.input`
 interface Props {
   sendMessage: any
   user: any
+  setChat: any
+  chat: any
 }
 
-const ChatInput: React.FC<Props> = ({ sendMessage, user }) => {
+const ChatInput: React.FC<Props> = ({ sendMessage, user, chat, setChat }) => {
   const [message, setMessage] = useState('')
 
   const onSubmit = (e: any) => {
+    console.log('to aqui')
     e.preventDefault()
 
     const isUserProvided = user && user !== ''
     const isMessageProvided = message && message !== ''
 
-    if (isUserProvided && isMessageProvided) {
-      sendMessage()
+    if (isMessageProvided) {
+      setChat([...chat, message])
+      sendMessage(user, message)
+      setMessage('')
     }
   }
 

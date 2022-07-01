@@ -11,6 +11,7 @@ import InteractionContainer from '../interactions'
 import SupportMaterialContainer from '../suportMaterial'
 import VideoContainer from '../video'
 import { getSessionStorage } from '../../components/helpers'
+import ChatContainer from '../chat'
 
 interface Props {
   role: string
@@ -28,7 +29,7 @@ const OnGoingClassContainer: React.FC<Props> = ({ role }) => {
   }
 
   useEffect(() => {
-    getUserInformation()
+    getClassInformation()
   }, [])
 
   const getUserInformation = () => {
@@ -41,31 +42,33 @@ const OnGoingClassContainer: React.FC<Props> = ({ role }) => {
   }
 
   useEffect(() => {
-    getClassInformation()
+    getUserInformation()
   }, [])
 
   return (
     <VideoContainer>
-      <OnGoingClass data-testid='on-going-class-container'>
-        <ClassInfo>
-          <PersonInformation userInfo={userInfo} classInfo={classInfo} />
-          <RemainingClassTime data-testid='remaining-class-time'>
-            Tempo restante: 59:45
-          </RemainingClassTime>
-          <Reactions />
-        </ClassInfo>
-        <ClassContent>
-          <InteractionContainer
-            toggleSupportMaterial={toggleSupportMaterial}
-            setToggleSupportMaterial={setToggleSupportMaterial}
-            role={role}
-          />
-          <SupportMaterialContainer
-            type={role}
-            toggleSupportMaterial={toggleSupportMaterial}
-          />
-        </ClassContent>
-      </OnGoingClass>
+      <ChatContainer role={role}>
+        <OnGoingClass data-testid='on-going-class-container'>
+          <ClassInfo>
+            <PersonInformation userInfo={userInfo} classInfo={classInfo} />
+            <RemainingClassTime data-testid='remaining-class-time'>
+              Tempo restante: 59:45
+            </RemainingClassTime>
+            <Reactions />
+          </ClassInfo>
+          <ClassContent>
+            <InteractionContainer
+              toggleSupportMaterial={toggleSupportMaterial}
+              setToggleSupportMaterial={setToggleSupportMaterial}
+              role={role}
+            />
+            <SupportMaterialContainer
+              type={role}
+              toggleSupportMaterial={toggleSupportMaterial}
+            />
+          </ClassContent>
+        </OnGoingClass>
+      </ChatContainer>
     </VideoContainer>
   )
 }

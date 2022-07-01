@@ -97,7 +97,7 @@ const StudentPanel: React.FC = () => {
     })
 
     return classes.map((key: any, value) => {
-      if (subjectsId.includes(key.id)) {
+      if (subjectsId.includes(key.disciplina.id)) {
         return (
           <Class
             key={`next-class-${value}`}
