@@ -72,7 +72,10 @@ const ChatContainer: React.FC<Props> = ({ children, role }) => {
   const connectChat = async () => {
     const newConnection = signalR.create('http://localhost:25100/chat')
     setConnection(newConnection)
-
+    newConnection.on("ReceiveMessage", (user: any, message: any) => {
+      console.log(`${user} - ${message}`)
+      
+  });
     await newConnection.start()
   }
 

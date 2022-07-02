@@ -488,3 +488,5 @@ back-end/src/.sonarqube/out/9/output-cs/token-type.pb
 client/build/manifest.json
 client/build/robots.txt
 TODOS/ajustes.TODO
+client/package-lock.json
+client/yarn.lock
