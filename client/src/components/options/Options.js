@@ -1,6 +1,15 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
 import VideoContext from '../../context/videoContext'
 import { socket } from '../../containers/video'
+import styled from 'styled-components'
+import { Input, LoginButton } from '../homePage/index.style'
+
+const OptionsContent = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+`
 
 const Options = () => {
   const [idToCall, setIdToCall] = useState('')
@@ -32,69 +41,76 @@ const Options = () => {
   }, [call.isReceivingCall])
 
   return (
-    <div>
-      <button
-        type='primary'
-        tabIndex='0'
-        onClick={() => {
-          console.log('Code copied successfully!')
-          alert(me)
-        }}
-      >
-        Copy code
-      </button>
-      <div style={{ marginBottom: '0.5rem' }}>
-        <input
-          placeholder='Enter code to call'
+    <OptionsContent>
+      <div>
+        <LoginButton
+          isDisabled={false}
+          type='primary'
+          tabIndex='0'
+          onClick={() => {
+            console.log('Code copied successfully!')
+            alert(me)
+          }}
+        >
+          Copiar código
+        </LoginButton>
+        <Input
+          placeholder='Digite o código'
           size='large'
           value={idToCall}
           onChange={e => setIdToCall(e.target.value)}
-          style={{ marginRight: '0.5rem', marginBottom: '0.5rem' }}
         />
 
         {callAccepted && !callEnded ? (
-          <button variant='contained' onClick={leaveCall} tabIndex='0'>
-            &nbsp; Hang up
-          </button>
+          <LoginButton
+            variant='contained'
+            onClick={leaveCall}
+            tabIndex='0'
+            isDisabled={false}
+          >
+            &nbsp; Desligar
+          </LoginButton>
         ) : (
-          <button
+          <LoginButton
             type='primary'
             onClick={() => {
               callUser(idToCall)
             }}
             tabIndex='0'
+            isDisabled={false}
           >
-            Call
-          </button>
+            Ligar
+          </LoginButton>
         )}
       </div>
 
       {call.isReceivingCall && !callAccepted && (
         <div>
-          <button
+          <LoginButton
             variant='contained'
-            color='#29bb89'
             onClick={() => {
               answerCall()
               Audio.current.pause()
             }}
             tabIndex='0'
+            isDisabled={false}
           >
-            Answer
-          </button>
-          <button
+            Atender
+          </LoginButton>
+          <LoginButton
             variant='contained'
             onClick={() => {
               setIsModalVisible(false)
               Audio.current.pause()
             }}
             tabIndex='0'
+            isDisabled={false}
           >
-            Decline
-          </button>
+            Recusar
+          </LoginButton>
         </div>
       )}
-    </div>
+    </OptionsContent>
   )
 }
 

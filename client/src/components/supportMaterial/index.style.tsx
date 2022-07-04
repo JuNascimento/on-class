@@ -45,7 +45,6 @@ export const Tab = styled.div<TabProps>`
 
 export const Content = styled.div`
   height: 100%;
-  border: 1px solid red;
 `
 
 export const Subtitle = styled.h3`

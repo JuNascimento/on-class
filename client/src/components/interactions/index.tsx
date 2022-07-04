@@ -48,7 +48,6 @@ const ClassInteractions: React.FC<ClassInteractionsProps> = ({
 
   return (
     <>
-      <Options />
       <Interaction data-testid='interaction-container'>
         <Video />
         {role === 'student' && (
@@ -93,6 +92,7 @@ const ClassInteractions: React.FC<ClassInteractionsProps> = ({
               <FullScreenSvg />
             </InteractionItem>
           </InteractionGroup>
+          <Options />
           <InteractionGroup data-testid='icons-group'>
             <Chat />
             <InteractionItem
